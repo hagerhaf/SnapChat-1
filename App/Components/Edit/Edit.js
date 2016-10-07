@@ -3,7 +3,8 @@ import { Text, View, TouchableHighlight, Image } from 'react-native'
 import { editStyles as styles } from './editStyles'
 
 const Edit = ({
-  backPressed
+  backPressed,
+  onSendPressed
   }) => (
   // Render the image here.
   <Image source={require('../../../images/testpic.jpg')} style={styles.container}>
@@ -60,18 +61,17 @@ const Edit = ({
 
         {/* Send */}
         <View style={styles.flex} />
-        <View>
-          <TouchableHighlight>
+          <TouchableHighlight onPress={onSendPressed}>
             <Text style={styles.headerButton} > / S / </Text>
           </TouchableHighlight>
         </View>
-      </View>
     </View>
   </Image>
 )
 
 Edit.propTypes = {
-  backPressed: PropTypes.func.isRequired
+  backPressed: PropTypes.func.isRequired,
+  onSendPressed: PropTypes.func.isRequired
 }
 
 export default Edit
