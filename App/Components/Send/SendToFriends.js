@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-import {View, Text, ListView} from 'react-native'
+import {View, Text, ListView, ScrollView} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
-const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends}) => {
+const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends}) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -17,15 +17,34 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
         renderSeparator={seperatorFriends}
 
       />
+      <View style={styles.heading}>
+        <View style={styles.listToSend}>
+          <ScrollView horizontal >
+            {displaySelectedFriends(selectedFriends)}
+          </ScrollView>
+        </View>
+        <Text style={[styles.titleBottom, styles.title]}> -></Text>
+      </View>
     </View>
   )
+}
+
+const displaySelectedFriends = (selectedFriends) => {
+  if (selectedFriends) {
+    return selectedFriends.map((e, i) => {
+      console.log(e)
+      return <Text key={`${e.name}-${i}`}>{e.name}, </Text>
+    })
+  }
+  return null
 }
 
 SendToFriends.propTypes = {
   friends: PropTypes.object,
   renderSendUserRow: PropTypes.func.isRequired,
   onSelectFriend: PropTypes.func.isRequired,
-  seperatorFriends: PropTypes.func.isRequired
+  seperatorFriends: PropTypes.func.isRequired,
+  selectedFriends: PropTypes.array
 }
 
 export default SendToFriends

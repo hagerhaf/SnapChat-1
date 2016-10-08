@@ -46,9 +46,18 @@ class SendContainer extends Component {
         onSelectFriend={this.selectFriend}
         renderSendUserRow={SendRow}
         seperatorFriends={seperatorFriends}
+        selectedFriends={findSelectedFriends(this.state.friends)}
       />
     )
   }
+}
+
+function findSelectedFriends (friends) {
+  return friends.map((e) => {
+    if (e.highLighted) {
+      return e
+    }
+  }).filter(n => n !== undefined)
 }
 
 SendContainer.propTypes = {
@@ -66,6 +75,42 @@ const mockAPICall = (cb) => {
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 const friends = [
+  {
+    name: 'lachlan',
+    highLighted: false
+  },
+  {
+    name: 'ryan',
+    highLighted: false
+  },
+  {
+    name: 'nathan',
+    highLighted: false
+  },
+  {
+    name: 'tim',
+    highLighted: false
+  },
+  {
+    name: 'remdogga',
+    highLighted: false
+  },
+  {
+    name: 'hot_chick_69',
+    highLighted: false
+  },
+  {
+    name: 'side_chick_01',
+    highLighted: false
+  },
+  {
+    name: 'side_chick_02',
+    highLighted: false
+  },
+  {
+    name: 'obama',
+    highLighted: false
+  },
   {
     name: 'lachlan',
     highLighted: false

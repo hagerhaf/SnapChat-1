@@ -14,13 +14,20 @@ export const sendStyles = StyleSheet.create({
   },
   heading: {
     backgroundColor: '#3cb2e2',
-    padding: 13
+    padding: 13,
+    flexDirection: 'row'
   },
   title: {
     fontFamily: 'Avenir-Heavy',
     alignSelf: 'center',
     color: 'white',
     fontSize: 20
+  },
+  titleBottom: {
+    // alignSelf: 'flex-start'
+  },
+  listToSend: {
+    flex: 1
   },
   lastRecieved: {
     fontSize: 10,
@@ -36,7 +43,7 @@ export const sendStyles = StyleSheet.create({
   },
   ImagePosition: {
     // marginLeft: 'Auto'
-    marginRight:10
+    marginRight: 10
   },
   userRow: {
     padding: 10,
