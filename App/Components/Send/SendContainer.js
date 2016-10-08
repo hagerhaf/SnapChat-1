@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {View, Text, ListView} from 'react-native'
 import SendToFriends from './SendToFriends'
-import SendRow from './SendRow'
+import SendRow, {seperatorFriends} from './SendRow'
 
 class SendContainer extends Component {
   constructor (props) {
@@ -45,6 +45,7 @@ class SendContainer extends Component {
         friends={this.state.friendsDataSource}
         onSelectFriend={this.selectFriend}
         renderSendUserRow={SendRow}
+        seperatorFriends={seperatorFriends}
       />
     )
   }

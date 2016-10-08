@@ -28,22 +28,41 @@ export const sendStyles = StyleSheet.create({
   },
   imageIcon: {
     height: 30,
-    width: 48,
-    paddingLeft: 3,
-    paddingTop: 3
+    width: 30
   },
   imageStatus: {
     height: 27,
     width: 27
   },
+  ImagePosition: {
+    // marginLeft: 'Auto'
+    marginRight:10
+  },
   userRow: {
     padding: 10,
+    paddingLeft: 18,
     flex: 1,
-    flexDirection: 'row',
-    borderBottomColor: 'rgb(176, 174, 172)',
-    borderBottomWidth: 0.23
+    flexDirection: 'row'
   },
-  userRowInfo: {
-    flexDirection: 'column'
+  userRowHighlighted: {
+    padding: 10,
+    paddingLeft: 18,
+    flexDirection: 'row',
+    backgroundColor: '#e7e7e7'
+  },
+  highlighted: {
+    fontWeight: 'bold',
+    paddingTop: 5,
+    fontSize: 18,
+    flex: 1
+  },
+  nonHighlighted: {
+    flex: 1,
+    paddingTop: 5,
+    fontSize: 18
+  },
+  seperator: {
+    height: 0.25,
+    backgroundColor: '#e7e7e7'
   }
 })

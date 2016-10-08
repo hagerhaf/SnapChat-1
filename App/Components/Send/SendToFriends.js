@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import {View, Text, ListView} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
-const SendToFriends = ({friends, renderSendUserRow, onSelectFriend}) => {
+const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends}) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -14,6 +14,8 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend}) => {
         renderRow={function (data, sectionId, rowId, highlightRow) {
           return renderSendUserRow(data, sectionId, rowId, highlightRow, onSelectFriend)
         }}
+        renderSeparator={seperatorFriends}
+
       />
     </View>
   )
@@ -22,7 +24,8 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend}) => {
 SendToFriends.propTypes = {
   friends: PropTypes.object,
   renderSendUserRow: PropTypes.func.isRequired,
-  onSelectFriend: PropTypes.func.isRequired
+  onSelectFriend: PropTypes.func.isRequired,
+  seperatorFriends: PropTypes.func.isRequired
 }
 
 export default SendToFriends
