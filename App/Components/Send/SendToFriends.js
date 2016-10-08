@@ -1,12 +1,19 @@
 import React, {PropTypes} from 'react'
-import {View, Text, ListView, ScrollView, Image} from 'react-native'
+import {View, Text, ListView, ScrollView, Image, TouchableOpacity} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
-const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends}) => {
+const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends, onBackPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-        <Text style={styles.title}>Send To...</Text>
+      <TouchableOpacity onPress={onBackPress}>
+          <Text style={styles.title}>
+          {'< '}
+          </Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>
+          {'Send To...'}
+        </Text>
       </View>
       <ListView
         enableEmptySections
@@ -46,7 +53,8 @@ SendToFriends.propTypes = {
   renderSendUserRow: PropTypes.func.isRequired,
   onSelectFriend: PropTypes.func.isRequired,
   seperatorFriends: PropTypes.func.isRequired,
-  selectedFriends: PropTypes.array
+  selectedFriends: PropTypes.array,
+  onBackPress: PropTypes.func.isRequired
 }
 
 export default SendToFriends

@@ -12,6 +12,7 @@ class SendContainer extends Component {
     }
 
     this.selectFriend = this.selectFriend.bind(this)
+    this.pressBack = this.pressBack.bind(this)
   }
 
   componentDidMount () {
@@ -39,6 +40,10 @@ class SendContainer extends Component {
     })
   }
 
+  pressBack () {
+    this.props.navigator.pop()
+  }
+
   render () {
     return (
       <SendToFriends
@@ -47,6 +52,7 @@ class SendContainer extends Component {
         renderSendUserRow={SendRow}
         seperatorFriends={seperatorFriends}
         selectedFriends={findSelectedFriends(this.state.friends)}
+        onBackPress={this.pressBack}
       />
     )
   }

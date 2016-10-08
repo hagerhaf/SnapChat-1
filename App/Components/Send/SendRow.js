@@ -21,7 +21,6 @@ const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSe
     <TouchableOpacity
       onPress={function () {
         onSelectFriend(rowId)
-        // highlightRow(sectionId, rowId)
       }}
       key={rowId}
         >
