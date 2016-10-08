@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {View, Text, ListView, ScrollView} from 'react-native'
+import {View, Text, ListView, ScrollView, Image} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
 const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends}) => {
@@ -17,13 +17,15 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
         renderSeparator={seperatorFriends}
 
       />
-      <View style={styles.heading}>
+      <View style={[styles.heading, styles.headingBottom]}>
         <View style={styles.listToSend}>
           <ScrollView horizontal >
             {displaySelectedFriends(selectedFriends)}
           </ScrollView>
         </View>
-        <Text style={[styles.titleBottom, styles.title]}> -></Text>
+        <View style={styles.ImagePosition}>
+          <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.imageIconSend} />
+        </View>
       </View>
     </View>
   )
@@ -33,7 +35,7 @@ const displaySelectedFriends = (selectedFriends) => {
   if (selectedFriends) {
     return selectedFriends.map((e, i) => {
       console.log(e)
-      return <Text key={`${e.name}-${i}`}>{e.name}, </Text>
+      return <Text style={styles.displayFriends} key={`${e.name}-${i}`}>{e.name}, </Text>
     })
   }
   return null

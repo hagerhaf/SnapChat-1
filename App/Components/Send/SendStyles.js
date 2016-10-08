@@ -17,6 +17,9 @@ export const sendStyles = StyleSheet.create({
     padding: 13,
     flexDirection: 'row'
   },
+  headingBottom: {
+    padding: 9
+  },
   title: {
     fontFamily: 'Avenir-Heavy',
     alignSelf: 'center',
@@ -27,7 +30,12 @@ export const sendStyles = StyleSheet.create({
     // alignSelf: 'flex-start'
   },
   listToSend: {
-    flex: 1
+    flex: 1,
+    padding: 10
+  },
+  displayFriends: {
+    color: 'white',
+    fontWeight: 'bold'
   },
   lastRecieved: {
     fontSize: 10,
@@ -36,6 +44,10 @@ export const sendStyles = StyleSheet.create({
   imageIcon: {
     height: 30,
     width: 30
+  },
+  imageIconSend: {
+    height: 35,
+    width: 35
   },
   imageStatus: {
     height: 27,
