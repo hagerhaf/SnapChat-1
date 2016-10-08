@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Text, View, TouchableOpacity, Image} from 'react-native'
+import {Text, View, TouchableWithoutFeedback, Image} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
 const seperatorFriends = (sectionID, rowID, adjacentRowHighlighted) => {
@@ -18,7 +18,7 @@ seperatorFriends.propTypes = {
 
 const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
   return (
-    <TouchableOpacity
+    <TouchableWithoutFeedback
       onPress={function () {
         onSelectFriend(rowId)
       }}
@@ -32,7 +32,7 @@ const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSe
             style={styles.imageIcon} />
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   )
 }
 
