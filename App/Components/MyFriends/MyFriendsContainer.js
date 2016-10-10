@@ -107,15 +107,67 @@ var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !
 // Mock Data
 const friends = [
     {
-        name: 'lachlan',
+        name: 'Lachlan Dee',
         highLighted: false
     },
     {
-        name: 'ryan',
+        name: 'Adam Villela',
+        highLighted: false
+    },
+    {
+        name: 'Ben Paul',
+        highLighted: false
+    },
+    {
+        name: 'Brody Ricardi',
+        highLighted: false
+    },
+    {
+        name: 'Claire Gorinas',
+        highLighted: false
+    },
+    {
+        name: 'Emily Thompson',
+        highLighted: false
+    },
+    {
+        name: 'Josh Grover',
+        highLighted: false
+    },
+    {
+        name: 'Jack Crisp',
+        highLighted: false
+    },
+    {
+        name: 'Harry Mitchell',
+        highLighted: false
+    },
+    {
+        name: 'Luke Wentworth',
+        highLighted: false
+    },
+    {
+        name: 'Tom Deery',
+        highLighted: false
+    },
+    {
+        name: 'Kane Michelini',
+        highLighted: false
+    },
+    {
+        name: 'Georgia Castricum',
+        highLighted: false
+    },
+    {
+        name: 'Jake Musson',
         highLighted: false
     },
     {
         name: 'nathan',
+        highLighted: false
+    },
+    {
+        name: 'Anthony LaSpina',
         highLighted: false
     },
     {
@@ -127,67 +179,27 @@ const friends = [
         highLighted: false
     },
     {
-        name: 'bricky',
+        name: 'Nick Howell',
         highLighted: false
     },
     {
-        name: 'joshgrover',
+        name: 'Henry Mahoney',
         highLighted: false
     },
     {
-        name: 'tomdeery',
+        name: 'Talia Rinaldo',
         highLighted: false
     },
     {
-        name: 'hot_chick_69',
+        name: 'Michael Wilson',
         highLighted: false
     },
     {
-        name: 'side_chick_01',
+        name: 'Lochie Brick',
         highLighted: false
     },
     {
-        name: 'side_chick_02',
-        highLighted: false
-    },
-    {
-        name: 'obama',
-        highLighted: false
-    },
-    {
-        name: 'lachlan',
-        highLighted: false
-    },
-    {
-        name: 'ryan',
-        highLighted: false
-    },
-    {
-        name: 'nathan',
-        highLighted: false
-    },
-    {
-        name: 'tim',
-        highLighted: false
-    },
-    {
-        name: 'remdogga',
-        highLighted: false
-    },
-    {
-        name: 'hot_chick_69',
-        highLighted: false
-    },
-    {
-        name: 'side_chick_01',
-        highLighted: false
-    },
-    {
-        name: 'side_chick_02',
-        highLighted: false
-    },
-    {
-        name: 'obama',
+        name: 'Rebecca Kirk',
         highLighted: false
     }
 ]

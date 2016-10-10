@@ -74,5 +74,13 @@ export const myFriendsStyles = StyleSheet.create({
     width: 30,
     marginLeft: 15,
     marginTop: 7
+  },
+  subHeading: {
+    color: '#944E9C',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginLeft: 15,
+    marginTop: 10,
+    paddingBottom: 5
   }
 })

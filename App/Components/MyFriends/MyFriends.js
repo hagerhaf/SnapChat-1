@@ -27,6 +27,7 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
            />
        </View>
 
+      <Text style={styles.subHeading}>MY FRIENDS</Text>
       <ListView
           enableEmptySections
           dataSource={friends}
