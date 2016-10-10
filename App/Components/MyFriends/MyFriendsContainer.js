@@ -11,7 +11,8 @@ class MyFriendsContainer extends Component {
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
       friends: friends,
-      searchText: ""
+      searchText: "",
+      rawData: sortedFriends
     }
 
     this.selectFriend = this.selectFriend.bind(this)
@@ -38,10 +39,11 @@ class MyFriendsContainer extends Component {
     let searchText = event.nativeEvent.text;
     this.setState({searchText});
 
-    let filteredData = this.filterFriends(searchText, this.state.friendsDataSource);
+    let filteredData = this.filterFriends(searchText, this.state.rawData);
     this.setState({
       friendsDataSource: friendsDataSource.cloneWithRows(filteredData)
     });
+
     // MyFriends.fetch(friends, {
     //     context: this,
     //         asArray: true,
@@ -58,10 +60,7 @@ class MyFriendsContainer extends Component {
   filterFriends(searchText, friends) {
     let text = searchText.toLowerCase();
 
-    // ---- NEED TO CHANGE ----
-    var data = friends._dataBlob.s1;
-
-    return filter(data, (f) => {
+    return filter(friends, (f) => {
         let friend = f.name.toLowerCase();
         return friend.search(text) !== -1;
     });

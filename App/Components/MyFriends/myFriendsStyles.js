@@ -61,6 +61,7 @@ export const myFriendsStyles = StyleSheet.create({
   searchBar: {
     paddingLeft: 30,
     fontSize: 18,
+    height: 10,
     flex: .1,
     borderWidth: 9,
     borderColor: '#e4e4e4'
