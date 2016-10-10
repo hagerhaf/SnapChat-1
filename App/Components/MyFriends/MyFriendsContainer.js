@@ -63,7 +63,7 @@ export default MyFriendsContainer
 
 // Will change to retrieve firebase info when we discover how
 const mockAPICall = (cb) => {
-    setTimeout(() => cb(null, friends), 300)
+    setTimeout(() => cb(null, sortedFriends), 300)
 }
 
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -143,3 +143,9 @@ const friends = [
         highLighted: false
     }
 ]
+
+var sortedFriends = friends.sort((a,b) => {
+    var temp = a.name.localeCompare(b.name);
+    console.log(temp);
+    return temp;
+})
