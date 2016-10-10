@@ -5,7 +5,7 @@ import { discoverStyles as styles } from './discoverStyles'
 const DiscoverItem = ({ title, image }) => (
   <View style={styles.discoverItem} >
     <Text style={styles.itemTitle}>
-      { title }
+      {title}
     </Text>
     <Image style={styles.itemImage} source={{uri: image}} />
   </View>

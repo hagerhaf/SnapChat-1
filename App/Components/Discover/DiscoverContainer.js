@@ -18,7 +18,7 @@ class DiscoverContainer extends Component {
   componentDidMount () {
     this.getDiscoverData()
       .then((data) => {
-        this.setState({ discoverData: data.articles }, () => console.log(this.state))
+        this.setState({ discoverData: data.articles })
         this.toggleSpinner()
       })
       .catch((error) => {
@@ -33,7 +33,8 @@ class DiscoverContainer extends Component {
 
   getDiscoverData () {
     this.toggleSpinner()
-    return fetch('https://newsapi.org/v1/articles?source=techcrunch&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
+    return fetch('https://newsapi.org/v1/articles' +
+    '?source=techcrunch&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
       .then((response) => response.json())
   }
 

@@ -3,23 +3,20 @@ import { View, ScrollView } from 'react-native'
 import { discoverStyles as styles } from './discoverStyles'
 import DiscoverItem from './DiscoverItem'
 
-const Discover = ({ children, discoverData }) => {
-  console.log(discoverData)
-  return (
-    <View style={styles.container}>
-      {children}
-      <View style={styles.discoverItems}>
-        <ScrollView
-          showsVerticalScrollIndicator
-          automaticallyAdjustContentInsets={false}
-          horizontal={false}
-        >
-          {discoverData.map(createThumbRow)}
-        </ScrollView>
-      </View>
+const Discover = ({ children, discoverData }) => (
+  <View style={styles.container}>
+    {children}
+    <View style={styles.discoverItems}>
+      <ScrollView
+        showsVerticalScrollIndicator
+        automaticallyAdjustContentInsets={false}
+        horizontal={false}
+      >
+        {discoverData.map(createThumbRow)}
+      </ScrollView>
     </View>
-  )
-}
+  </View>
+)
 
 const createThumbRow = (item, i) => (
   <DiscoverItem

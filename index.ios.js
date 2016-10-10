@@ -19,7 +19,7 @@ class SnapChat extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     }
     // TODO: can check here if user is logged in
     this.onLogin = this.onLogin.bind(this)
@@ -35,7 +35,7 @@ class SnapChat extends Component {
         <NavigatorIOS
           navigationBarHidden
           style={{flex: 1}}
-          initialRoute={{component: Landing, passProps: { loginSuccess: this.onLogin }}}
+          initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
         />
       )
     }
