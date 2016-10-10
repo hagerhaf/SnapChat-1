@@ -4,10 +4,11 @@ import { editStyles as styles } from './editStyles'
 
 const Edit = ({
   backPressed,
-  onSendPressed
+  onSendPressed,
+  uri
   }) => (
   // Render the image here.
-  <Image source={require('../../../images/testpic.jpg')} style={styles.container}>
+  <Image source={{uri: uri}} style={styles.container}>
 
     {/* Top Navigation */}
     <View style={styles.header}>
@@ -71,7 +72,8 @@ const Edit = ({
 
 Edit.propTypes = {
   backPressed: PropTypes.func.isRequired,
-  onSendPressed: PropTypes.func.isRequired
+  onSendPressed: PropTypes.func.isRequired,
+  uri: PropTypes.string.isRequired
 }
 
 export default Edit

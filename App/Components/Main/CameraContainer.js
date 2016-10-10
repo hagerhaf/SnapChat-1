@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Camera from 'react-native-camera'
 import { mainStyles as styles } from './mainStyles'
 import EditContainer from "../Edit/EditContainer";
+import ManageMemory from '../Memories/ManageMemory'
 import { Text, View, Image, TouchableHighlight } from 'react-native'
 
 const FLASH_LOOKUP = {'auto': 'on', 'on': 'off', 'off': 'auto'}
@@ -32,15 +33,16 @@ class CameraContainer extends Component {
     })
   }
 
-  // Saves user photo to the camera roll.
+  // Take photo and send to EditContainer.
   takePicture () {
     this.camera.capture()
-    .then((data) => console.log(data))
+    .then((data) =>
+        this.props.navigator.push({
+          component: EditContainer,
+          title: 'Edit Container',
+          passProps: { uri: data['path'] }
+    }))
     .catch(err => console.log(err))
-    this.props.navigator.push({
-      title: 'EditContainer',
-      component: EditContainer
-    })
   }
 
   render () {
@@ -64,6 +66,7 @@ class CameraContainer extends Component {
         {/* Camera view must be camera to allow for it to take up entire screen. */}
         <Camera ref={(cam) => { this.camera = cam }}
                 style={styles.preview}
+                captureTarget={Camera.constants.CaptureTarget.disk}
                 aspect={Camera.constants.Aspect.fill}
                 flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
                   (this.state.flash === 'on' ? Camera.constants.FlashMode.on : Camera.constants.FlashMode.off)}

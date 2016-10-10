@@ -25,12 +25,14 @@ class EditContainer extends Component {
     return <Edit
       backPressed={this.backPressed}
       onSendPressed={this.send}
+      uri={this.props.uri}
     />
   }
 }
 
 EditContainer.propTypes = {
-  navigator: PropTypes.object
+  navigator: PropTypes.object,
+  uri: PropTypes.string
 }
 
 export default EditContainer
