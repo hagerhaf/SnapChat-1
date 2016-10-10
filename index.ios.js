@@ -19,7 +19,7 @@ class SnapChat extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: true
     }
     // TODO: can check here if user is logged in
     this.onLogin = this.onLogin.bind(this)
