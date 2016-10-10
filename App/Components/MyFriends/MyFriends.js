@@ -18,11 +18,14 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
 
     {/*Body*/}
     <View>
-       <TextInput
-        style={styles.searchBar}
-        onChange={setSearchText}
-        placeholder='Search'
-       />
+       <View style={styles.searchBox}>
+           <Image style={styles.searchIcon} source={require('../../../images/search.png')} />
+           <TextInput
+            style={styles.searchBar}
+            onChange={setSearchText}
+            placeholder='Search'
+           />
+       </View>
 
       <ListView
           enableEmptySections

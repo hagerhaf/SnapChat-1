@@ -59,11 +59,20 @@ export const myFriendsStyles = StyleSheet.create({
     backgroundColor: '#e7e7e7'
   },
   searchBar: {
-    paddingLeft: 30,
+    paddingLeft: 15,
     fontSize: 18,
-    height: 10,
-    flex: .1,
-    borderWidth: 9,
-    borderColor: '#e4e4e4'
+    height: 44,
+    flex: 1
+  },
+  searchBox: {
+    borderBottomColor: '#e8e8e8',
+    borderBottomWidth: 1,
+    flexDirection: 'row'
+  },
+  searchIcon: {
+    height: 30,
+    width: 30,
+    marginLeft: 15,
+    marginTop: 7
   }
 })
