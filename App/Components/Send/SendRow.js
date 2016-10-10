@@ -37,8 +37,8 @@ const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSe
 }
 
 function requireCheckBox (highLighted) {
-  if (highLighted) return require('../../../images/sendTo/checkboxTicked.png')
-  else return require('../../../images/sendTo/checkbox.png')
+  if (highLighted) return require('../../../images/send.png')
+  else return require('../../../images/send.png')
 }
 
 renderSendRow.propTypes = {
