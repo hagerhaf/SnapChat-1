@@ -28,7 +28,8 @@ export const myFriendsStyles = StyleSheet.create({
   },
   ImagePosition: {
     // marginLeft: 'Auto'
-    marginRight: 10
+    marginLeft: 0,
+    paddingRight: 20
   },
   userRow: {
     padding: 10,

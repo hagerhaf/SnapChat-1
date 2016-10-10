@@ -25,20 +25,15 @@ const renderFriendRow = ({name, highLighted}, sectionId, rowId, highlightRow, on
             key={rowId}
         >
             <View style={!highLighted ? styles.userRow : styles.userRowHighlighted}>
-                <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
                 <View style={styles.ImagePosition}>
                     <Image
-                        source={requireCheckBox(highLighted)}
+                        source={require('../../../images/friend_icon.png')}
                         style={styles.imageIcon} />
                 </View>
+                <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
-}
-
-function requireCheckBox (highLighted) {
-    if (highLighted) return require('../../../images/send.png')
-    else return require('../../../images/send.png')
 }
 
 renderFriendRow.propTypes = {
