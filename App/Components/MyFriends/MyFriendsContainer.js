@@ -145,7 +145,5 @@ const friends = [
 ]
 
 var sortedFriends = friends.sort((a,b) => {
-    var temp = a.name.localeCompare(b.name);
-    console.log(temp);
-    return temp;
+    return a.name.localeCompare(b.name);
 })
