@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react'
-import { Text, View, TouchableHighlight, Image } from 'react-native'
+import { Text, View, TouchableHighlight, Image, TextInput } from 'react-native'
 import { editStyles as styles } from './editStyles'
 
 const Edit = ({
   backPressed,
   onSendPressed,
+  onTextPressed,
+  textVisible,
   uri
   }) => (
   // Render the image here.
@@ -28,7 +30,7 @@ const Edit = ({
         </TouchableHighlight>
 
         {/* Add text */}
-        <TouchableHighlight>
+        <TouchableHighlight onPress={onTextPressed}>
           <Text style={styles.headerButton} > / T / </Text>
         </TouchableHighlight>
 
@@ -38,6 +40,11 @@ const Edit = ({
         </TouchableHighlight>
       </View>
     </View>
+
+
+    <TextInput
+        style={{height: textVisible ? 40 : 0, textAlign: 'center', borderWidth: textVisible ? 1 : 0}}
+    />
 
     {/* Bottom navigation */}
     <View style={styles.footer}>
@@ -73,6 +80,8 @@ const Edit = ({
 Edit.propTypes = {
   backPressed: PropTypes.func.isRequired,
   onSendPressed: PropTypes.func.isRequired,
+  onTextPressed: PropTypes.func.isRequired,
+  textVisible: PropTypes.bool.isRequired,
   uri: PropTypes.string.isRequired
 }
 

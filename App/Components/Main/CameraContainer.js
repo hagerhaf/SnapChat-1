@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Camera from 'react-native-camera'
 import { mainStyles as styles } from './mainStyles'
 import EditContainer from "../Edit/EditContainer";
-import ManageMemory from '../Memories/ManageMemory'
-import { Text, View, Image, TouchableHighlight } from 'react-native'
+import { Text, View, Image, TouchableHighlight, CameraRoll } from 'react-native'
 
 const FLASH_LOOKUP = {'auto': 'on', 'on': 'off', 'off': 'auto'}
 
