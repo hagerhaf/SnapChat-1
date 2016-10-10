@@ -21,5 +21,40 @@ export const myFriendsStyles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     flex: 1
+  },
+  imageIcon: {
+    height: 30,
+    width: 30
+  },
+  ImagePosition: {
+    // marginLeft: 'Auto'
+    marginRight: 10
+  },
+  userRow: {
+    padding: 10,
+    paddingLeft: 18,
+    flex: 1,
+    flexDirection: 'row'
+  },
+  userRowHighlighted: {
+    padding: 10,
+    paddingLeft: 18,
+    flexDirection: 'row',
+    backgroundColor: '#e7e7e7'
+  },
+  highlighted: {
+    fontWeight: 'bold',
+    paddingTop: 5,
+    fontSize: 18,
+    flex: 1
+  },
+  nonHighlighted: {
+    flex: 1,
+    paddingTop: 5,
+    fontSize: 18
+  },
+  seperator: {
+    height: 0.25,
+    backgroundColor: '#e7e7e7'
   }
 })

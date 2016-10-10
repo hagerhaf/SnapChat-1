@@ -6,7 +6,7 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-      <TouchableOpacity onPress={onBackPress}>
+        <TouchableOpacity onPress={onBackPress}>
           <Text style={styles.title}>
           {'< '}
           </Text>
