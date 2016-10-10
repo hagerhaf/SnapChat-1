@@ -44,21 +44,36 @@ class CameraContainer extends Component {
   }
 
   render () {
+    var flashIcon;
+    switch (this.state.flash) {
+      case 'auto': {
+        flashIcon = require('../../../images/main-camera/flash-auto-icon.png');
+        break;
+      }
+      case 'on': {
+        flashIcon = require('../../../images/main-camera/flash-on-icon.png');
+        break;
+      }
+      case 'off': {
+        flashIcon = require('../../../images/main-camera/flash-off-icon.png');
+        break;
+      }
+    }
     return (
       <View style={styles.container}>
         {/* Camera view must be camera to allow for it to take up entire screen. */}
         <Camera ref={(cam) => { this.camera = cam }}
                 style={styles.preview}
                 aspect={Camera.constants.Aspect.fill}
-                flashMode={this.state.flashText === 'auto' ? Camera.constants.FlashMode.auto :
-                  (this.state.flashText === 'on' ? Camera.constants.FlashMode.on : Camera.constants.FlashMode.off)}
+                flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
+                  (this.state.flash === 'on' ? Camera.constants.FlashMode.on : Camera.constants.FlashMode.off)}
                 type={this.state.frontCamera ? 'front' : 'back'}
         >
           {/* Header */}
           <View style={styles.header}>
             <TouchableHighlight onPress={this.flashTogglePressed}>
               <Image
-                source={require('../../../images/main-camera/flash-icon.png')}
+                source={flashIcon}
                 style={styles.flashIcon}
               />
             </TouchableHighlight>
