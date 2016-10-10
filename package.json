@@ -9,6 +9,7 @@
   "dependencies": {
     "@nitrog7/react-native-camera": "^0.3.9",
     "firebase": "^3.4.0",
+    "lodash": "^4.16.4",
     "react": "^15.3.2",
     "react-icon": "^1.0.0",
     "react-icons": "^2.2.1",

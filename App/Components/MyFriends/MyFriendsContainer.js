@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {View, Text, ListView} from 'react-native'
 import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
+import {filter} from 'lodash'
 
 class MyFriendsContainer extends Component {
   constructor (props) {
@@ -9,11 +10,13 @@ class MyFriendsContainer extends Component {
 
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
-      friends: friends
+      friends: friends,
+      searchText: ""
     }
 
     this.selectFriend = this.selectFriend.bind(this)
     this.backButtonPressed = this.backButtonPressed.bind(this)
+    this.setSearchText = this.setSearchText.bind(this)
   }
 
   componentDidMount () {
@@ -29,6 +32,39 @@ class MyFriendsContainer extends Component {
 
   backButtonPressed () {
     this.props.navigator.pop()
+  }
+
+  setSearchText(event) {
+    let searchText = event.nativeEvent.text;
+    this.setState({searchText});
+
+    let filteredData = this.filterFriends(searchText, this.state.friendsDataSource);
+    this.setState({
+      friendsDataSource: friendsDataSource.cloneWithRows(filteredData)
+    });
+    // MyFriends.fetch(friends, {
+    //     context: this,
+    //         asArray: true,
+    //         then(data){
+    //         let filteredData = this.filterFriends(searchText, data);
+    //         this.setState({
+    //             friendsDataSource: friendsDataSource.cloneWithRows(filteredData),
+    //             rawData: data,
+    //         });
+    //     }
+    // });
+  }
+
+  filterFriends(searchText, friends) {
+    let text = searchText.toLowerCase();
+
+    // ---- NEED TO CHANGE ----
+    var data = friends._dataBlob.s1;
+
+    return filter(data, (f) => {
+        let friend = f.name.toLowerCase();
+        return friend.search(text) !== -1;
+    });
   }
 
   // Will be called when the friend is clicked. Need to display change to display individual user popup
@@ -54,6 +90,7 @@ class MyFriendsContainer extends Component {
             onSelectFriend={this.selectFriend}
             renderMyFriendsRow={FriendRow}
             seperatorFriends={seperatorFriends}
+            setSearchText={this.setSearchText}
         />
     )
   }
@@ -88,6 +125,18 @@ const friends = [
     },
     {
         name: 'remdogga',
+        highLighted: false
+    },
+    {
+        name: 'bricky',
+        highLighted: false
+    },
+    {
+        name: 'joshgrover',
+        highLighted: false
+    },
+    {
+        name: 'tomdeery',
         highLighted: false
     },
     {

@@ -57,5 +57,12 @@ export const myFriendsStyles = StyleSheet.create({
   seperator: {
     height: 0.25,
     backgroundColor: '#e7e7e7'
+  },
+  searchBar: {
+    paddingLeft: 30,
+    fontSize: 18,
+    flex: .1,
+    borderWidth: 9,
+    borderColor: '#e4e4e4'
   }
 })

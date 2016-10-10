@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
-import { View, Text, TouchableHighlight, Image, ListView } from 'react-native'
+import { View, Text, TouchableHighlight, TextInput, Image, ListView } from 'react-native'
 import { myFriendsStyles as styles } from './myFriendsStyles'
 import FriendRow, {seperatorFriends} from './FriendRow'
 
-const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFriend, seperatorFriends}) => (
+const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFriend, seperatorFriends, setSearchText}) => (
   <View style={styles.container}>
     {/* Header */}
     <View style={styles.header}>
@@ -17,6 +17,13 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
     </View>
 
     {/*Body*/}
+    <View>
+       <TextInput
+        style={styles.searchBar}
+        onChange={setSearchText}
+        placeholder='Search'
+       />
+
       <ListView
           enableEmptySections
           dataSource={friends}
@@ -25,6 +32,7 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
           }}
           renderSeparator={seperatorFriends}
       />
+    </View>
 
 
   </View>
