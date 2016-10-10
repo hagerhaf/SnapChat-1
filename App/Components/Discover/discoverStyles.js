@@ -32,5 +32,15 @@ export const discoverStyles = StyleSheet.create({
     height: 150,
     alignSelf: 'center',
     marginTop: 10
+  },
+  webViewContainer: {
+    flex: 1,
+    paddingTop: 15
+  },
+  webViewTopBar: {
+    height: 35,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

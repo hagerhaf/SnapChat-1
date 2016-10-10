@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ScrollView, WebView } from 'react-native'
+import { View, ScrollView, WebView, TouchableOpacity, Text } from 'react-native'
 import { discoverStyles as styles } from './discoverStyles'
 import DiscoverItem from './DiscoverItem'
 
@@ -13,11 +13,21 @@ class Discover extends Component {
 
     this.createThumbRow = this.createThumbRow.bind(this)
     this.openWebView = this.openWebView.bind(this)
+    this.onBack = this.onBack.bind(this)
   }
 
   openWebView (url) {
     console.log(url)
     this.setState({ webViewUri: url })
+  }
+
+  onNavigationStateChange (navState) {
+    this.setState({ canGoBack: navState.canGoBack })
+  }
+
+  onBack () {
+    console.log('pressed')
+    this.setState({ webViewUri: '' })
   }
 
   createThumbRow (item, i) {
@@ -35,7 +45,21 @@ class Discover extends Component {
   render () {
     if (this.state.webViewUri.length > 0) {
       return (
-        <WebView source={{uri: this.state.webViewUri}} />
+        <View style={styles.webViewContainer}>
+          <View style={styles.webViewTopBar}>
+            <TouchableOpacity
+              onPress={this.onBack}
+              >
+              <Text>Back to Discover</Text>
+            </TouchableOpacity>
+          </View>
+          <WebView
+            ref={(webWiew) => this.webWiew = webWiew}
+            style={{flex: 1}}
+            source={{uri: this.state.webViewUri}}
+            onNavigationStateChange={this.onNavigationStateChange.bind(this)}
+          />
+        </View>
       )
     }
 
