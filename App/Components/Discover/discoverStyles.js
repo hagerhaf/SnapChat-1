@@ -42,5 +42,20 @@ export const discoverStyles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  backContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backArrow: {
+    height: 20,
+    width: 20
+  },
+  backText: {
+    fontWeight: 'bold',
+    fontFamily: 'Avenir-Medium',
+    color: 'purple'
   }
 })

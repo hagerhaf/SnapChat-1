@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ScrollView, WebView, TouchableOpacity, Text } from 'react-native'
+import { View, ScrollView, WebView, TouchableOpacity, Text, Image } from 'react-native'
 import { discoverStyles as styles } from './discoverStyles'
 import DiscoverItem from './DiscoverItem'
 
@@ -50,7 +50,15 @@ class Discover extends Component {
             <TouchableOpacity
               onPress={this.onBack}
               >
-              <Text>Back to Discover</Text>
+              <View style={styles.backContainer}>
+                <Image
+                  source={require('../../../images/back_arrow.png')}
+                  style={styles.backArrow}
+                />
+                <Text style={styles.backText}>
+                  Back to Discover Articles
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
           <WebView
