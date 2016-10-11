@@ -13,60 +13,63 @@ class DiscoverContainer extends Component {
       loading: false
     }
 
-    this.getUser = this.getUser.bind(this)
+    this.getUserDOB = this.getUserDOB.bind(this)
     this.getDiscoverData = this.getDiscoverData.bind(this)
     this.toggleSpinner = this.toggleSpinner.bind(this)
+    this.calculateAge = this.calculateAge.bind(this)
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     this.toggleSpinner()
-    this.getUser()
+    await this.getUserDOB()
+    await this.getDiscoverData().then((data) => {
+      this.toggleSpinner()
+      this.setState({ discoverData : data.articles })
+    })
   }
 
-  // suuupper retarded way of getting the user with additional attributes, not sure how to query FB properly FB docs are confusing lol
-  async getUser () {
+  async getUserDOB () {
     try {
       const user = await AsyncStorage.getItem('user')
-      const userId = await AsyncStorage.getItem('userId')
-      const { email } = JSON.parse(user)
-
-      const ref = firebase.database().ref('users')
-      ref.once('value')
-        .then(function(snapshot) {
-          const users = snapshot.val()
-
-          for (let userKey in users) {
-            if (users[userKey].username.toLowerCase() === email) {
-              // set state doesnt work here of course, need to find another way
-              this.setState({ usersBirthday: users[userKey].birthday }, () => console.log(this.state))
-            }
-          }
-
-          this.getDiscoverData()
-            .then((data) => {
-              this.setState({ discoverData: data.articles })
-              this.toggleSpinner()
-            })
-            .catch((error) => {
-              this.toggleSpinner()
-              console.log(error)
-            })
-        })
-
+      this.setState({ userDOB: JSON.parse(user).birthday })
     } catch (error) {
       console.log('Error getting user object', error)
     }
-
   }
 
   toggleSpinner () {
     return this.setState({ loading: !this.state.loading })
   }
 
-  getDiscoverData () {
+  getDiscoverData (DOB = this.state.userDOB) {
+    const usersAge = this.calculateAge(DOB)
+    if (usersAge < 25) {
+
+      return fetch('https://newsapi.org/v1/articles?' +
+      'source=buzzfeed&sortBy=top&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
+        .then((response) => response.json())
+        .catch((error) => console.log('error retreiving discover data', error))
+    }
+    else if (usersAge >= 25 && usersAge <= 40) {
+
+      return fetch('https://newsapi.org/v1/articles' +
+      '?source=techcrunch&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
+        .then((response) => response.json())
+        .catch((error) => console.log('error retreiving discover data', error))
+    }
+
     return fetch('https://newsapi.org/v1/articles' +
-    '?source=techcrunch&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
+    '?source=abc-news-au&sortBy=toph&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
       .then((response) => response.json())
+      .catch((error) => console.log('error retreiving discover data', error))
+  }
+
+  calculateAge (dateString) {
+    const date = dateString.replace(/"/g, '')
+    const birthday = new Date(date)
+    const ageDifMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
   render () {
