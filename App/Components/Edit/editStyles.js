@@ -74,4 +74,16 @@ export const editStyles = StyleSheet.create({
     width: 35,
     marginLeft: 10
   },
+  container2: {
+    padding: 20,
+  },
+  instructions: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  sketch: {
+    height: 200, // Height needed; Default: 200px
+    marginBottom: 55
+  },
 })

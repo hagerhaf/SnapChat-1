@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { CameraRoll } from 'react-native'
 import Edit from './Edit'
 import SendContianer from '../Send/SendContainer'
 
@@ -9,16 +10,16 @@ class EditContainer extends Component {
     this.state = {
       textVisible: false,
       timer: '3',
-      selectedItem: undefined,
-      results: {
-        items: []
-      }
+      encodedSignature: null
     }
 
     this.backPressed = this.backPressed.bind(this)
     this.send = this.send.bind(this)
     this.textPressed = this.textPressed.bind(this)
     this.onTimerValueChange = this.onTimerValueChange.bind(this)
+    this.onReset = this.onReset.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.onUpdate = this.onUpdate.bind(this)
   }
 
   onTimerValueChange(value : string) {
@@ -42,6 +43,33 @@ class EditContainer extends Component {
     this.setState({textVisible: !this.state.textVisible});
   }
 
+  /**
+   * Do extra things after the sketch reset
+   */
+  onReset() {
+    console.log('The drawing has been cleared!');
+  }
+
+  /**
+   * The Sketch component provides a 'saveImage' function (promise),
+   * so that you can save the drawing in the device and get an object
+   * once the promise is resolved, containing the path of the image.
+   */
+  onSave() {
+    // this.sketch.saveImage(this.state.encodedSignature)
+    //     .then((data) => console.log(data))
+    //     .catch((error) => console.log(error));
+    CameraRoll.saveToCameraRoll(this.props.uri, 'photo')
+  }
+
+  /**
+   * On every update (touch up from the drawing),
+   * you'll receive the base64 representation of the drawing as a callback.
+   */
+  onUpdate(base64Image) {
+    this.setState({ encodedSignature: base64Image });
+  }
+
   render () {
     return <Edit
       backPressed={this.backPressed}
@@ -51,6 +79,9 @@ class EditContainer extends Component {
       uri={this.props.uri}
       timer={this.state.timer}
       onTimerValueChange={this.onTimerValueChange}
+      onReset={this.onReset}
+      onUpdate={this.onUpdate}
+      onSave={this.onSave}
     />
   }
 }

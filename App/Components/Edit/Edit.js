@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import { Text, View, TouchableHighlight, Image, TextInput } from 'react-native'
+import { Text, View, TouchableHighlight, Image, TextInput, TouchableOpacity } from 'react-native'
+import Sketch from 'react-native-sketch';
 import { editStyles as styles } from './editStyles'
 
 const Edit = ({
@@ -9,7 +10,10 @@ const Edit = ({
   textVisible,
   uri,
   timer,
-  onTimerValueChange
+  onTimerValueChange,
+  onReset,
+  onUpdate,
+  onSave
   }) => (
   // Render the image here.
   <Image source={{uri: uri}} style={styles.container}>
@@ -49,6 +53,16 @@ const Edit = ({
         style={textVisible ? styles.textShown : styles.textHidden}
     />
 
+    {/*<Sketch*/}
+        {/*resizeMode="contain"*/}
+        {/*strokeColor="#111111"*/}
+        {/*strokeThickness={2}*/}
+        {/*onReset={onReset}*/}
+        {/*onUpdate={onUpdate}*/}
+        {/*ref={(sketch) => { this.sketch = sketch; }}*/}
+        {/*style={styles.sketch}*/}
+    {/*/>*/}
+
     {/* Bottom navigation */}
     <View style={styles.footer}>
       <View style={styles.header}>
@@ -60,7 +74,7 @@ const Edit = ({
           </TouchableHighlight>
 
           {/* Save snap */}
-          <TouchableHighlight>
+          <TouchableHighlight onPress={onSave}>
             <Image source={require('../../../images/edit/save.png')} style={styles.icon}/>
           </TouchableHighlight>
 
@@ -87,7 +101,13 @@ Edit.propTypes = {
   textVisible: PropTypes.bool.isRequired,
   uri: PropTypes.string.isRequired,
   timer: PropTypes.string.isRequired,
-  onTimerValueChange: PropTypes.func.isRequired
+  onTimerValueChange: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
 }
 
 export default Edit
+
+
+
