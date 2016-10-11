@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, Text, TouchableHighlight, TextInput, Image, ListView } from 'react-native'
 import { AddByUsernameStyles as styles } from './AddByUsernameStyles'
 
-const AddByUsername = ({backButtonPressed, searchUsername, addFriendsPressed}) => (
+const AddByUsername = ({backButtonPressed, searchUsername}) => (
 
     <View style={styles.container}>
         {/* Header */}

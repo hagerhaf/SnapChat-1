@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, Text, TouchableHighlight, Image, ScrollView } from 'react-native'
 import { addFriendsStyles as styles } from './addFriendsStyles'
 
-const AddFriends = ({backButtonPressed, addByUsernamePressed}) => (
+const AddFriends = ({backButtonPressed, addByUsernamePressed, addByAddressBookPressed}) => (
   <View style={styles.container}>
     {/* Header */}
     <View style={styles.header}>
@@ -16,7 +16,7 @@ const AddFriends = ({backButtonPressed, addByUsernamePressed}) => (
     </View>
     <ScrollView>
       <Row field='Add by Username' action={addByUsernamePressed} />
-      <Row field='Add from Address Book' action={addByUsernamePressed}/>
+      <Row field='Add from Address Book' action={addByAddressBookPressed}/>
       <Row field='Add by Snapcode'action={addByUsernamePressed} />
       <Row field='Add Nearby' action={addByUsernamePressed}/>
       <Row field='Share username' action={addByUsernamePressed}/>
