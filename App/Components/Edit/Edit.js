@@ -7,7 +7,9 @@ const Edit = ({
   onSendPressed,
   onTextPressed,
   textVisible,
-  uri
+  uri,
+  timer,
+  onTimerValueChange
   }) => (
   // Render the image here.
   <Image source={{uri: uri}} style={styles.container}>
@@ -17,7 +19,7 @@ const Edit = ({
       {/* Back button */}
       <View style={styles.flex}>
         <TouchableHighlight onPress={backPressed}>
-          <Text style={styles.headerButton}> / B / </Text>
+          <Image source={require('../../../images/edit/back.png')} style={styles.backIcon}/>
         </TouchableHighlight>
       </View>
       <View style={styles.flex} />
@@ -26,24 +28,25 @@ const Edit = ({
       <View style={styles.triple}>
         {/* Add sticker */}
         <TouchableHighlight>
-          <Text style={styles.headerButton} > / S / </Text>
+          <Image source={require('../../../images/edit/emoticon.png')} style={styles.icon}/>
         </TouchableHighlight>
 
         {/* Add text */}
         <TouchableHighlight onPress={onTextPressed}>
-          <Text style={styles.headerButton} > / T / </Text>
+          <Image source={require('../../../images/edit/text.png')} style={styles.textIcon}/>
         </TouchableHighlight>
 
         {/* Draw */}
         <TouchableHighlight>
-          <Text style={styles.headerButton} > / D / </Text>
+          <Image source={require('../../../images/edit/draw.png')} style={styles.drawIcon}/>
         </TouchableHighlight>
       </View>
     </View>
 
 
+    {/* Dependent on button click */}
     <TextInput
-        style={{height: textVisible ? 40 : 0, textAlign: 'center', borderWidth: textVisible ? 1 : 0}}
+        style={textVisible ? styles.textShown : styles.textHidden}
     />
 
     {/* Bottom navigation */}
@@ -53,24 +56,24 @@ const Edit = ({
         <View style={styles.triple}>
           {/* Change time */}
           <TouchableHighlight>
-            <Text style={styles.headerButton} > / T / </Text>
+            <Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon}/>
           </TouchableHighlight>
 
           {/* Save snap */}
           <TouchableHighlight>
-            <Text style={styles.headerButton} > / S / </Text>
+            <Image source={require('../../../images/edit/save.png')} style={styles.icon}/>
           </TouchableHighlight>
 
           {/* Add to story */}
           <TouchableHighlight>
-            <Text style={styles.headerButton} > / S / </Text>
+            <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon}/>
           </TouchableHighlight>
         </View>
 
         {/* Send */}
         <View style={styles.flex} />
           <TouchableHighlight onPress={onSendPressed}>
-            <Text style={styles.headerButton} > / S / </Text>
+            <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.sendIcon}/>
           </TouchableHighlight>
         </View>
     </View>
@@ -82,7 +85,9 @@ Edit.propTypes = {
   onSendPressed: PropTypes.func.isRequired,
   onTextPressed: PropTypes.func.isRequired,
   textVisible: PropTypes.bool.isRequired,
-  uri: PropTypes.string.isRequired
+  uri: PropTypes.string.isRequired,
+  timer: PropTypes.string.isRequired,
+  onTimerValueChange: PropTypes.func.isRequired
 }
 
 export default Edit

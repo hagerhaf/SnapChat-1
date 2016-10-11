@@ -7,12 +7,24 @@ class EditContainer extends Component {
     super(props)
 
     this.state = {
-      textVisible: false
+      textVisible: false,
+      timer: '3',
+      selectedItem: undefined,
+      results: {
+        items: []
+      }
     }
 
     this.backPressed = this.backPressed.bind(this)
     this.send = this.send.bind(this)
     this.textPressed = this.textPressed.bind(this)
+    this.onTimerValueChange = this.onTimerValueChange.bind(this)
+  }
+
+  onTimerValueChange(value : string) {
+    this.setState({
+      timer: value
+    });
   }
 
   backPressed () {
@@ -37,6 +49,8 @@ class EditContainer extends Component {
       onTextPressed={this.textPressed}
       textVisible={this.state.textVisible}
       uri={this.props.uri}
+      timer={this.state.timer}
+      onTimerValueChange={this.onTimerValueChange}
     />
   }
 }
