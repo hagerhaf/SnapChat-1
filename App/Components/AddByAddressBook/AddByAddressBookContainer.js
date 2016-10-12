@@ -16,7 +16,7 @@ class AddByAddressBookContainer extends Component {
             rawData: sortedFriends
         }
 
-        this.selectFriend = this.selectFriend.bind(this)
+        this.addFriend = this.addFriend.bind(this)
         this.setSearchText = this.setSearchText.bind(this)
         this.backButtonPressed = this.backButtonPressed.bind(this)
     }
@@ -59,26 +59,18 @@ class AddByAddressBookContainer extends Component {
         });
     }
 
-    // Will be called when the friend is clicked. Need to display change to display individual user popup
-    selectFriend (rowId) {
-        var newFriends = []
-        newFriends = this.state.friends.slice()
-        newFriends[rowId] = {
-            name: newFriends[rowId].name,
-            highLighted: !newFriends[rowId].highLighted
-        }
-        console.log(this.state.friends)
-        this.setState({
-            friends: newFriends,
-            friendsDataSource: this.state.friendsDataSource.cloneWithRows(newFriends)
-        })
+    // Will be called when the Add button is called on a user.
+    // Need to perform call to db to add a given user
+    // Then remove their name from the friendsDataSource to remove row
+    addFriend (rowId) {
+        console.log("Adding Friend")
     }
 
     render () {
         return (
             <AddByAddressBook
                 friends={this.state.friendsDataSource}
-                onSelectFriend={this.selectFriend}
+                onSelectFriend={this.addFriend}
                 setSearchText={this.setSearchText}
                 backButtonPressed={this.backButtonPressed}
                 renderMyFriendsRow={FriendRow}
