@@ -17,19 +17,25 @@ const AddByAddressBook = ({backButtonPressed, friends, renderMyFriendsRow, onSel
         </View>
 
         {/*Body*/}
-        <View>
-            <View style={styles.searchBox}>
-                <Image style={styles.searchIcon} source={require('../../../images/search.png')} />
-                <TextInput
-                    style={styles.searchBar}
-                    onChange={setSearchText}
-                    placeholder='Search'
-                />
-            </View>
 
-            <Text style={styles.subHeading}>SNAPCHATTERS IN YOUR CONTACTS</Text>
-
+        <View style={styles.searchBox}>
+            <Image style={styles.searchIcon} source={require('../../../images/search.png')} />
+            <TextInput
+                style={styles.searchBar}
+                onChange={setSearchText}
+                placeholder='Search'
+            />
         </View>
+
+        <Text style={styles.subHeading}>SNAPCHATTERS IN YOUR CONTACTS</Text>
+        <ListView
+            enableEmptySections
+            dataSource={friends}
+            renderRow={function (data, sectionId, rowId, highlightRow) {
+                return renderMyFriendsRow(data, sectionId, rowId, highlightRow, onSelectFriend)
+            }}
+            renderSeparator={seperatorFriends}
+        />
 
     </View>
 )

@@ -31,6 +31,12 @@ export const myFriendsStyles = StyleSheet.create({
     marginLeft: 0,
     paddingRight: 20
   },
+  friendImage: {
+    height: 30,
+    width: 30,
+    marginLeft: 0,
+    paddingRight: 0
+  },
   userRow: {
     padding: 10,
     paddingLeft: 18,
@@ -82,5 +88,46 @@ export const myFriendsStyles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     paddingBottom: 5
+  },
+  addText: {
+    color: '#944E9C',
+    fontSize: 16,
+    textAlign: 'center',
+    flex: 1,
+    padding: 5
+  },
+  username: {
+    fontSize: 16,
+    paddingBottom: 5
+  },
+  method: {
+    fontSize: 10
+  },
+  userRowInfo: {
+    flexDirection: 'row',
+    borderBottomColor: '#e8e8e8',
+    borderBottomWidth: 1,
+    padding: 15,
+    marginLeft: 5
+  },
+  userNameField: {
+    flexDirection: 'column',
+    flex: 1,
+    marginLeft: 25
+  },
+  addButton: {
+    borderWidth: 2,
+    borderColor: '#e8e8e8',
+    marginRight: 5,
+    padding: 5
+  },
+  addText: {
+    color: '#944E9C',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 2
+  },
+  addButtonLocation: {
+    flex: 1
   }
 })

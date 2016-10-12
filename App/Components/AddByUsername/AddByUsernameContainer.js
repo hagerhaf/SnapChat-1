@@ -16,6 +16,8 @@ class AddByUsernameContainer extends Component {
 
 
     // Call to data source to occur here
+    // How I plan it will work is to search for matches in the database with each key press
+    // and display results in a list if they exist, or none if it doesn't
     searchUsername (event) {
 
     }

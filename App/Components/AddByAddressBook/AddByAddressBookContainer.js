@@ -21,6 +21,10 @@ class AddByAddressBookContainer extends Component {
         this.backButtonPressed = this.backButtonPressed.bind(this)
     }
 
+    // This will contain the call to the database to return a list of users
+    // a list of phone numbers which are contained in the phone will be sent as input
+    // and the matching users will be returned as a list.
+    // friendsDataSource will then be updated to reflect this list
     componentDidMount () {
         mockAPICall((err, res) => {
             if (err) console.log(err)
@@ -98,98 +102,122 @@ var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !
 const friends = [
     {
         name: 'Lachlan Dee',
+        username: 'ldee',
         highLighted: false
     },
     {
         name: 'Adam Villela',
+        username: 'avillela',
         highLighted: false
     },
     {
         name: 'Ben Paul',
+        username: 'bpaul',
         highLighted: false
     },
     {
         name: 'Brody Ricardi',
+        username: 'bricardi',
         highLighted: false
     },
     {
         name: 'Claire Gorinas',
+        username: 'cgorinas',
         highLighted: false
     },
     {
         name: 'Emily Thompson',
+        username: 'ethompson',
         highLighted: false
     },
     {
         name: 'Josh Grover',
+        username: 'jgrover',
         highLighted: false
     },
     {
         name: 'Jack Crisp',
+        username: 'jcrisp',
         highLighted: false
     },
     {
         name: 'Harry Mitchell',
+        username: 'hmitchell',
         highLighted: false
     },
     {
         name: 'Luke Wentworth',
+        username: 'lwentworth',
         highLighted: false
     },
     {
         name: 'Tom Deery',
+        username: 'tdeery',
         highLighted: false
     },
     {
         name: 'Kane Michelini',
+        username: 'kmichelini',
         highLighted: false
     },
     {
         name: 'Georgia Castricum',
+        username: 'gcastricum',
         highLighted: false
     },
     {
         name: 'Jake Musson',
+        username: 'jmusson',
         highLighted: false
     },
     {
         name: 'nathan',
+        username: 'nmalishev',
         highLighted: false
     },
     {
         name: 'Anthony LaSpina',
+        username: 'alaspina',
         highLighted: false
     },
     {
         name: 'tim',
+        username: 'timmyboy',
         highLighted: false
     },
     {
         name: 'remdogga',
+        username: 'remdogg',
         highLighted: false
     },
     {
         name: 'Nick Howell',
+        username: 'nhowell',
         highLighted: false
     },
     {
         name: 'Henry Mahoney',
+        username: 'hmahoney',
         highLighted: false
     },
     {
         name: 'Talia Rinaldo',
+        username: 'talia',
         highLighted: false
     },
     {
         name: 'Michael Wilson',
+        username: 'wilso',
         highLighted: false
     },
     {
         name: 'Lochie Brick',
+        username: 'lbrick',
         highLighted: false
     },
     {
         name: 'Rebecca Kirk',
+        username: 'rkirk',
         highLighted: false
     }
 ]

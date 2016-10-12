@@ -16,23 +16,30 @@ seperatorFriends.propTypes = {
     adjacentRowHighlighted: PropTypes.bool.required
 }
 
-const renderFriendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
+const renderFriendRow = ({name, username}, sectionId, rowId, highlightRow, onSelectFriend) => {
     return (
-        <TouchableWithoutFeedback
-            onPress={function () {
-                onSelectFriend(rowId)
-            }}
-            key={rowId}
-        >
-            <View style={!highLighted ? styles.userRow : styles.userRowHighlighted}>
-                <View style={styles.ImagePosition}>
-                    <Image
-                        source={require('../../../images/friend_icon.png')}
-                        style={styles.imageIcon} />
-                </View>
-                <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
+        <View style={styles.userRowInfo}>
+            <Image style={styles.friendImage} source={require('../../../images/friend_icon.png')} />
+            <View style={styles.userNameField}>
+                <Text style={styles.username}>
+                    {name}
+                </Text>
+                <Text style={styles.method}>
+                    {username}
+                </Text>
             </View>
-        </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+                onPress={function () {
+                    onSelectFriend(rowId)
+                }}
+                key={rowId}
+                style={styles.addButtonLocation}
+            >
+                <View style={styles.addButton}>
+                    <Text style={styles.addText}>+ Add</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        </View>
     )
 }
 
