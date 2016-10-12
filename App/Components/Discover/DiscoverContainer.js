@@ -59,7 +59,7 @@ class DiscoverContainer extends Component {
     }
 
     return fetch('https://newsapi.org/v1/articles' +
-    '?source=abc-news-au&sortBy=toph&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
+    '?source=abc-news-au&sortBy=top&apiKey=3be446bbf3c445ebbf8ea41f58cfaf93')
       .then((response) => response.json())
       .catch((error) => console.log('error retreiving discover data', error))
   }
