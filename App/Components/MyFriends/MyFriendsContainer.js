@@ -4,6 +4,7 @@ import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {filter} from 'lodash'
 
+
 class MyFriendsContainer extends Component {
   constructor (props) {
     super(props)
@@ -68,6 +69,8 @@ class MyFriendsContainer extends Component {
 
   // Will be called when the friend is clicked. Need to display change to display individual user popup
   selectFriend (rowId) {
+
+
     var newFriends = []
     newFriends = this.state.friends.slice()
     newFriends[rowId] = {

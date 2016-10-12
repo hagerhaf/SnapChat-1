@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, Text, TouchableHighlight, TextInput, Image, ListView } from 'react-native'
 import { myFriendsStyles as styles } from './myFriendsStyles'
 
+
 const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFriend, seperatorFriends, setSearchText}) => (
   <View style={styles.container}>
     {/* Header */}
