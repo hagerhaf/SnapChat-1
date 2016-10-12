@@ -17,8 +17,8 @@ class AddByAddressBookContainer extends Component {
         }
 
         this.selectFriend = this.selectFriend.bind(this)
-        this.backButtonPressed = this.backButtonPressed.bind(this)
         this.setSearchText = this.setSearchText.bind(this)
+        this.backButtonPressed = this.backButtonPressed.bind(this)
     }
 
     componentDidMount () {
@@ -73,12 +73,12 @@ class AddByAddressBookContainer extends Component {
     render () {
         return (
             <AddByAddressBook
-                backButtonPressed={this.backButtonPressed}
                 friends={this.state.friendsDataSource}
                 onSelectFriend={this.selectFriend}
+                setSearchText={this.setSearchText}
+                backButtonPressed={this.backButtonPressed}
                 renderMyFriendsRow={FriendRow}
                 seperatorFriends={seperatorFriends}
-                setSearchText={this.setSearchText}
             />
         )
     }

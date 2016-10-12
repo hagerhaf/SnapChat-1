@@ -11,7 +11,7 @@ const AddByAddressBook = ({backButtonPressed, friends, renderMyFriendsRow, onSel
                 <Image style={styles.backArrow} source={require('../../../images/back_arrow.png')} />
             </TouchableHighlight>
             <Text style={styles.headerTitle}>
-                My Friends
+                Address Book
             </Text>
             <Text style={styles.backArrow}></Text>
         </View>

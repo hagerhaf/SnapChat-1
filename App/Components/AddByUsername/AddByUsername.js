@@ -33,6 +33,7 @@ const func = PropTypes.func.isRequired
 
 AddByUsername.propTypes = {
     backButtonPressed: func,
+    searchUsername: func
 }
 
 export default AddByUsername

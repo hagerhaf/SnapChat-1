@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {Text, View, TouchableWithoutFeedback, Image} from 'react-native'
-import {myFriendsStyles as styles} from './myFriendsStyles'
+import {myFriendsStyles as styles} from '../MyFriends/myFriendsStyles'
 
 const seperatorFriends = (sectionID, rowID, adjacentRowHighlighted) => {
     return (<View

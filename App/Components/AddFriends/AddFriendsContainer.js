@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import AddFriends from './AddFriends'
-import AddByUsernameContainer from '../AddByUsername/AddByUsername'
-import AddByAddressBookContainer from '../AddByAddressBook/AddByAddressBook'
+import AddByUsernameContainer from '../AddByUsername/AddByUsernameContainer'
+import AddByAddressBookContainer from '../AddByAddressBook/AddByAddressBookContainer'
 
 class AddFriendsContainer extends Component {
   constructor (props) {
@@ -37,6 +37,10 @@ class AddFriendsContainer extends Component {
         addByAddressBookPressed={this.addByAddressBookPressed}
     />
   }
+}
+
+AddFriendsContainer.propTypes = {
+  navigator: PropTypes.object.isRequired
 }
 
 export default AddFriendsContainer

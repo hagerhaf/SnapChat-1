@@ -16,7 +16,6 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
     </View>
 
     {/*Body*/}
-    <View>
        <View style={styles.searchBox}>
            <Image style={styles.searchIcon} source={require('../../../images/search.png')} />
            <TextInput
@@ -35,7 +34,6 @@ const MyFriends = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFrie
           }}
           renderSeparator={seperatorFriends}
       />
-    </View>
 
 
   </View>

@@ -10,28 +10,33 @@ class AddByUsernameContainer extends Component {
         this.state = {
         }
 
-        this.backButtonPressed = this.backButtonPressed.bind(this)
         this.searchUsername = this.searchUsername.bind(this)
+        this.backButtonPressed = this.backButtonPressed.bind(this)
     }
 
-    backButtonPressed () {
-        this.props.navigator.pop()
-    }
 
     // Call to data source to occur here
     searchUsername (event) {
 
     }
 
+    backButtonPressed () {
+        this.props.navigator.pop()
+    }
+
     render () {
         return (
             <AddByUsername
-                backButtonPressed={this.backButtonPressed}
                 searchUsername={this.searchUsername}
+                backButtonPressed={this.backButtonPressed}
             />
         )
     }
 
+}
+
+AddByUsernameContainer.propTypes = {
+    navigator: PropTypes.object.isRequired
 }
 
 export default AddByUsernameContainer
