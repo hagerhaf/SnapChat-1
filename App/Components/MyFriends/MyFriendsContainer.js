@@ -4,8 +4,7 @@ import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {} from './myFriendsUtils'
 import {filter} from 'lodash'
-
-import * as firebase from 'firebase'
+import database from '../FireBase/FireBase'
 
 
 class MyFriendsContainer extends Component {
@@ -139,7 +138,6 @@ const mockAPICall = (cb) => {
 }
 
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-var database = firebase.database();
 
 // Mock Data
 const friends = [

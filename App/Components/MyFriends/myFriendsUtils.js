@@ -1,1 +1,1 @@
-import * as firebase from 'firebase'
+import database from '../FireBase/FireBase'
