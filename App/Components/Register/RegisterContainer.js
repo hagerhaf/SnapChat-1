@@ -117,6 +117,7 @@ class RegisterContainer extends Component {
   async saveUser (user) {
     try {
       await AsyncStorage.setItem('userId', JSON.stringify(user.uid))
+      await AsyncStorage.setItem('user', JSON.stringify(user))
     } catch (error) {
       console.log('Error saving user to local storage: ', error)
     }

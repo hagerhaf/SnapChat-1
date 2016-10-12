@@ -35,7 +35,7 @@ class SnapChat extends Component {
         <NavigatorIOS
           navigationBarHidden
           style={{flex: 1}}
-          initialRoute={{component: Landing, passProps: { loginSuccess: this.onLogin }}}
+          initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
         />
       )
     }

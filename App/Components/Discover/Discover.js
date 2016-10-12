@@ -1,34 +1,101 @@
-import React, { PropTypes } from 'react'
-import { View, ScrollView } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, ScrollView, WebView, TouchableOpacity, Text, Image } from 'react-native'
 import { discoverStyles as styles } from './discoverStyles'
 import DiscoverItem from './DiscoverItem'
 
-const Discover = ({ children, discoverData }) => {
-  console.log(discoverData)
-  return (
-    <View style={styles.container}>
-      {children}
-      <View style={styles.discoverItems}>
-        <ScrollView
-          showsVerticalScrollIndicator
-          automaticallyAdjustContentInsets={false}
-          horizontal={false}
-        >
-          {discoverData.map(createThumbRow)}
-        </ScrollView>
+class Discover extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      webViewUri: ''
+    }
+
+    this.createThumbRow = this.createThumbRow.bind(this)
+    this.openWebView = this.openWebView.bind(this)
+    this.onBack = this.onBack.bind(this)
+  }
+
+  openWebView (url) {
+    console.log(url)
+    this.setState({ webViewUri: url })
+  }
+
+  onNavigationStateChange (navState) {
+    this.setState({ canGoBack: navState.canGoBack })
+  }
+
+  onBack () {
+    console.log('pressed')
+    this.setState({ webViewUri: '' })
+  }
+
+  createThumbRow (item, i) {
+    return (
+      <DiscoverItem
+        key={i}
+        title={item.title}
+        image={item.urlToImage}
+        open={this.openWebView}
+        url={item.url}
+      />
+    )
+  }
+
+  render () {
+    if (this.state.webViewUri.length > 0) {
+      return (
+        <View style={styles.webViewContainer}>
+          <View style={styles.webViewTopBar}>
+            <TouchableOpacity
+              onPress={this.onBack}
+              >
+              <View style={styles.backContainer}>
+                <Image
+                  source={require('../../../images/back_arrow.png')}
+                  style={styles.backArrow}
+                />
+                <Text style={styles.backText}>
+                  Back to Discover Articles
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <WebView
+            ref={(webWiew) => this.webWiew = webWiew}
+            style={{flex: 1}}
+            source={{uri: this.state.webViewUri}}
+            onNavigationStateChange={this.onNavigationStateChange.bind(this)}
+          />
+        </View>
+      )
+    }
+
+    return (
+      <View style={styles.container}>
+        {this.props.children}
+        <View style={styles.discoverItems}>
+          <ScrollView
+            showsVerticalScrollIndicator
+            automaticallyAdjustContentInsets={false}
+            horizontal={false}
+          >
+            {this.props.discoverData.map(this.createThumbRow)}
+          </ScrollView>
+        </View>
       </View>
-    </View>
-  )
+    )
+  }
 }
 
-const createThumbRow = (item, i) => (
-  <DiscoverItem
-    key={i}
-    title={item.title}
-    author={item.author}
-    image={item.urlToImage}
-  />
-)
+//
+// const Discover = ({ children, discoverData }) => (
+//
+// )
+//
+// const createThumbRow = (item, i) => (
+//
+// )
 
 Discover.propTypes = {
   children: PropTypes.object,

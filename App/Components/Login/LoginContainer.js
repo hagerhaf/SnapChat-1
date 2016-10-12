@@ -3,6 +3,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Login from './Login'
 import { AsyncStorage } from 'react-native'
 import { login } from './loginUtils'
+import * as firebase from 'firebase'
 
 class LoginContainer extends Component {
   constructor (props) {
@@ -21,7 +22,8 @@ class LoginContainer extends Component {
     this.updatePassword = this.updatePassword.bind(this)
     this.updateUsername = this.updateUsername.bind(this)
     this.toggleSpinner = this.toggleSpinner.bind(this)
-    this.saveUser = this.saveUser.bind(this)
+    this.saveUserId = this.saveUserId.bind(this)
+    this.saveUserObject = this.saveUserObject.bind(this)
   }
 
   backButtonPressed () {
@@ -56,7 +58,7 @@ class LoginContainer extends Component {
 
     login(username.toLowerCase(), password)
       .then((success) => {
-        this.saveUser(success)
+        this.saveUserId(success)
         this.props.loginSuccess(success)
       })
       .catch((error) => {
@@ -74,9 +76,25 @@ class LoginContainer extends Component {
       })
   }
 
-  async saveUser (user) {
+  async saveUserId (user) {
     try {
       await AsyncStorage.setItem('userId', JSON.stringify(user.uid))
+      this.saveUserObject(user.uid)
+    } catch (error) {
+      console.log('Error saving user to local storage: ', error)
+    }
+  }
+
+  async saveUserObject (userId) {
+    try {
+      let currentUser
+      const ref = await firebase.database()
+                          .ref('users/' + userId)
+                          .once('value')
+                          .then((snapshot) => {
+                            currentUser = snapshot.val()
+                          })
+      await AsyncStorage.setItem('user', JSON.stringify(currentUser))
     } catch (error) {
       console.log('Error saving user to local storage: ', error)
     }
