@@ -4,7 +4,7 @@ import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {} from './myFriendsUtils'
 import {filter} from 'lodash'
-import database from '../FireBase/FireBase'
+import database, {authentication} from '../FireBase/FireBase'
 
 
 class MyFriendsContainer extends Component {
@@ -42,23 +42,32 @@ class MyFriendsContainer extends Component {
   retrieveFriends () {
 
       var friends = [];
-      var friendsRef = database.ref('users');
+      // var userId = authentication.currentUser.uid;
+      // console.log(userId);
+      var friendsRef = database.ref('users/');
 
-      friendsRef.on('value', (snap) => {
-          // Retrieve all friends under user/id
-          snap.forEach((child) => {
-              friends.push({
-                  firstname: snap.val().firstname,
-                  lastname: snap.val().lastname,
-                  username: snap.val().username,
-                  key: snap.key
-              });
-          });
-          // Set state to reflect list
-          this.setState({
-              friendsDataSource: friendsDataSource.cloneWithRows(friends)
-          });
-      });
+      
+      // friendsRef.once('value').then(function(snap) {
+      //     console.log("INSIDE ONCE");
+      //     console.log(snap);
+      // });
+
+      // friendsRef.once('value', (snap) => {
+      //     console.log("HERE");
+      //     // Retrieve all friends under user/id
+      //     snap.forEach((child) => {
+      //         friends.push({
+      //             firstname: snap.val().firstname,
+      //             lastname: snap.val().lastname,
+      //             username: snap.val().username,
+      //             key: snap.key
+      //         });
+      //     });
+      //     // Set state to reflect list
+      //     this.setState({
+      //         friendsDataSource: friendsDataSource.cloneWithRows(friends)
+      //     });
+      // });
 
       // TESTING
       console.log(friends);
