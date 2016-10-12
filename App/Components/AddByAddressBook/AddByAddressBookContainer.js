@@ -4,6 +4,9 @@ import AddByAddressBook from './AddByAddressBook'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {filter} from 'lodash'
 
+// Cant get to work atm
+import AddressBook from 'react-native-contacts'
+
 class AddByAddressBookContainer extends Component {
 
     constructor (props) {
@@ -29,6 +32,7 @@ class AddByAddressBookContainer extends Component {
         mockAPICall((err, res) => {
             if (err) console.log(err)
             else {
+
                 this.setState({
                     friendsDataSource: friendsDataSource.cloneWithRows(res)
                 })
