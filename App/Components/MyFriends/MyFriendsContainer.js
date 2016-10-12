@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import {View, Text, ListView} from 'react-native'
 import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
+import {} from './myFriendsUtils'
 import {filter} from 'lodash'
+
+import * as firebase from 'firebase'
 
 
 class MyFriendsContainer extends Component {
@@ -19,9 +22,13 @@ class MyFriendsContainer extends Component {
     this.selectFriend = this.selectFriend.bind(this)
     this.backButtonPressed = this.backButtonPressed.bind(this)
     this.setSearchText = this.setSearchText.bind(this)
+    this.retrieveFriends = this.retrieveFriends.bind(this)
   }
 
   componentDidMount () {
+
+    this.retrieveFriends();
+
     mockAPICall((err, res) => {
         if (err) console.log(err)
         else {
@@ -30,6 +37,32 @@ class MyFriendsContainer extends Component {
             })
         }
     })
+  }
+
+  // Call to fire base to retrieve data from backend
+  retrieveFriends () {
+
+      var friends = [];
+      var friendsRef = database.ref('users');
+
+      friendsRef.on('value', (snap) => {
+          // Retrieve all friends under user/id
+          snap.forEach((child) => {
+              friends.push({
+                  firstname: snap.val().firstname,
+                  lastname: snap.val().lastname,
+                  username: snap.val().username,
+                  key: snap.key
+              });
+          });
+          // Set state to reflect list
+          this.setState({
+              friendsDataSource: friendsDataSource.cloneWithRows(friends)
+          });
+      });
+
+      // TESTING
+      console.log(friends);
   }
 
   backButtonPressed () {
@@ -106,6 +139,7 @@ const mockAPICall = (cb) => {
 }
 
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+var database = firebase.database();
 
 // Mock Data
 const friends = [
