@@ -27,10 +27,10 @@ class ChatContainer extends React.Component {
   }
 
   backToChat () {
-    this.props.navigator.replace({
-      title: 'chat',
-      component: ChatContainer
-    })
+    // this.props.navigator.replace({
+    //   title: 'chat',
+    //   component: ChatContainer
+    // })
     // this.props.navigator.replace(ChatContainer)
     this.props.navigator.pop()
   }

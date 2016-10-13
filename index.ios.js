@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AppRegistry, NavigatorIOS } from 'react-native'
 import Landing from './App/Components/Landing/Landing'
 import MainContainer from './App/Components/Main/MainContainer'
-// import * as firebase from 'firebase'
+import * as firebase from 'firebase'
 // import database from 'App/Components/FireBase/FireBase'
 
 class SnapChat extends Component {
@@ -10,9 +10,8 @@ class SnapChat extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: (firebase.auth().currentUser !== null)
     }
-    // TODO: can check here if user is logged in
     this.onLogin = this.onLogin.bind(this)
   }
 
@@ -20,20 +19,33 @@ class SnapChat extends Component {
     this.setState({isLoggedIn: true})
   }
 
+  componentWillMount () {
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      this.setState({
+        loggedIn: (firebaseUser !== null)
+      })
+
+      if (firebaseUser) {
+        console.log('Logged IN', firebaseUser)
+      } else {
+        console.log('Not logged in')
+      }
+    })
+  }
+
   render () {
-    if (!this.state.isLoggedIn) {
-      return (
-        <NavigatorIOS
-          navigationBarHidden
-          style={{flex: 1}}
-          initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
-        />
-      )
+    if (this.state.isLoggedIn) {
+      return (<MainContainer />)
     }
     return (
-      <MainContainer />
-    )
+      <NavigatorIOS
+        navigationBarHidden
+        style={{flex: 1}}
+        initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
+        />
+        )
   }
 }
+export default SnapChat
 
 AppRegistry.registerComponent('SnapChat', () => SnapChat)

@@ -45,10 +45,10 @@ const Settings = ({
   </View>
 )
 
-const SectionRow = ({field}) => {
+const SectionRow = ({field, func}) => {
   return (
     <View style={styles.listField}>
-      <TouchableHighlight>
+      <TouchableHighlight onPress={func}>
         <Text>
           {field}
         </Text>
@@ -59,7 +59,7 @@ const SectionRow = ({field}) => {
 
 const createSectionRow = (settingsObject, i) => {
   return (
-    <SectionRow key={i} field={settingsObject.field} />
+    <SectionRow key={i} field={settingsObject.field} func={settingsObject.func} />
   )
 }
 
