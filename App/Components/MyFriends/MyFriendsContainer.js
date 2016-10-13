@@ -104,21 +104,10 @@ class MyFriendsContainer extends Component {
     });
   }
 
+
   // Will be called when the friend is clicked. Need to display change to display individual user popup
   selectFriend (rowId) {
 
-
-    var newFriends = []
-    newFriends = this.state.friends.slice()
-    newFriends[rowId] = {
-        name: newFriends[rowId].name,
-        highLighted: !newFriends[rowId].highLighted
-    }
-    console.log(this.state.friends)
-    this.setState({
-        friends: newFriends,
-        friendsDataSource: this.state.friendsDataSource.cloneWithRows(newFriends)
-    })
   }
 
   render () {
@@ -144,106 +133,12 @@ const mockAPICall = (cb) => {
 
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
-// Mock Data
 const friends = [
-    {
-        name: 'Lachlan Dee',
-        highLighted: false
-    },
-    {
-        name: 'Adam Villela',
-        highLighted: false
-    },
-    {
-        name: 'Ben Paul',
-        highLighted: false
-    },
-    {
-        name: 'Brody Ricardi',
-        highLighted: false
-    },
-    {
-        name: 'Claire Gorinas',
-        highLighted: false
-    },
-    {
-        name: 'Emily Thompson',
-        highLighted: false
-    },
-    {
-        name: 'Josh Grover',
-        highLighted: false
-    },
-    {
-        name: 'Jack Crisp',
-        highLighted: false
-    },
-    {
-        name: 'Harry Mitchell',
-        highLighted: false
-    },
-    {
-        name: 'Luke Wentworth',
-        highLighted: false
-    },
-    {
-        name: 'Tom Deery',
-        highLighted: false
-    },
-    {
-        name: 'Kane Michelini',
-        highLighted: false
-    },
-    {
-        name: 'Georgia Castricum',
-        highLighted: false
-    },
-    {
-        name: 'Jake Musson',
-        highLighted: false
-    },
-    {
-        name: 'nathan',
-        highLighted: false
-    },
-    {
-        name: 'Anthony LaSpina',
-        highLighted: false
-    },
-    {
-        name: 'tim',
-        highLighted: false
-    },
-    {
-        name: 'remdogga',
-        highLighted: false
-    },
-    {
-        name: 'Nick Howell',
-        highLighted: false
-    },
-    {
-        name: 'Henry Mahoney',
-        highLighted: false
-    },
-    {
-        name: 'Talia Rinaldo',
-        highLighted: false
-    },
-    {
-        name: 'Michael Wilson',
-        highLighted: false
-    },
-    {
-        name: 'Lochie Brick',
-        highLighted: false
-    },
-    {
-        name: 'Rebecca Kirk',
-        highLighted: false
-    }
+    {"name": "ryan"},
+    {"name": "tom"}
 ]
 
 var sortedFriends = friends.sort((a,b) => {
     return a.name.localeCompare(b.name);
 })
+
