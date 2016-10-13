@@ -28,7 +28,10 @@ class MeContainer extends Component {
   addFriendsPressed () {
     this.props.navigator.push({
       title: 'AddFriendsContainer',
-      component: AddFriendsContainer
+      component: AddFriendsContainer,
+      passProps: {
+        navigator: this.props.navigator
+      }
     })
   }
 

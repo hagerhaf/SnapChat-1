@@ -8,7 +8,8 @@ class MainContainer extends Component {
   }
   render () {
     return (
-      <NavigatorIOS // Can potentially change this to just Navigator to customise the animation
+      <NavigatorIOS
+        title='SwipeableUI'
         navigationBarHidden
         style={{flex: 1}}
         initialRoute={{component: SwipeableUI, title: 'SwipeableUI'}}
