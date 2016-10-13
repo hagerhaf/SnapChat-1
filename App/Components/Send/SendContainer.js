@@ -2,13 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import {View, Text, ListView} from 'react-native'
 import SendToFriends from './SendToFriends'
 import SendRow, {seperatorFriends} from './SendRow'
+import database, {authentication} from '../FireBase/FireBase'
 
 class SendContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
-      friends: friends
+      friends: []
     }
 
     this.selectFriend = this.selectFriend.bind(this)
@@ -16,14 +17,7 @@ class SendContainer extends Component {
   }
 
   componentDidMount () {
-    mockAPICall((err, res) => {
-      if (err) console.log(err)
-      else {
-        this.setState({
-          friendsDataSource: friendsDataSource.cloneWithRows(res)
-        })
-      }
-    })
+    this.retrieveFriends();
   }
 
   selectFriend (rowId) {
@@ -38,6 +32,42 @@ class SendContainer extends Component {
       friends: newFriends,
       friendsDataSource: this.state.friendsDataSource.cloneWithRows(newFriends)
     })
+  }
+
+  // Retrieves a list of friends from the fire base depending on the logged in UserID
+  retrieveFriends () {
+    // Retrieve UserID and create a reference point in fire base
+    var friends = [];
+    var appScope = this;      // Can't use 'this.state' inside on() as the scope refers to the promise
+    var userId = authentication.currentUser.uid;
+    var friendsRef = database.ref("userObjects/friends/" + userId + "/list");
+    // Iterate through results and push to array
+    friendsRef.on("value", function(snapshot) {
+      snapshot.forEach((child) => {
+        friends.push({
+          name: child.val().firstname + ' ' + child.val().lastname,
+          username: child.val().username,
+          birthday: child.val().birthday,
+          highlight: child.val().highlighted
+        });
+      });
+      // Update state so ListView reflects the users friends
+      // Note: Must occur inside on() as it is asynchronous and wont update properly outside
+      appScope.setState({
+        friendsDataSource: friendsDataSource.cloneWithRows(appScope.sortFriends(friends)),
+        friends: appScope.sortFriends(friends)
+      });
+    }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }
+
+  // Sorts a list of friends on their firstname
+  sortFriends(friends) {
+    var sorted = friends.sort((a,b) => {
+      return a.firstname.localeCompare(b.name);
+    });
+    return sorted;
   }
 
   pressBack () {
@@ -59,11 +89,13 @@ class SendContainer extends Component {
 }
 
 function findSelectedFriends (friends) {
-  return friends.map((e) => {
-    if (e.highLighted) {
-      return e
-    }
-  }).filter(n => n !== undefined)
+  if (friends != null) {
+    return friends.map((e) => {
+      if (e.highLighted) {
+        return e
+      }
+    }).filter(n => n !== undefined)
+  }
 }
 
 SendContainer.propTypes = {
