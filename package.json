@@ -16,7 +16,7 @@
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-scrollable-tab-view": "^0.5.5",
-    "react-native-swiper": "^1.4.11",
+    "react-native-swiper": "^1.5.1",
     "rn-camera-roll": "0.0.5"
   },
   "devDependencies": {
