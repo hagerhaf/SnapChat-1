@@ -24,6 +24,8 @@ class MyFriendsContainer extends Component {
     this.retrieveFriends = this.retrieveFriends.bind(this)
   }
 
+  // Function called when component is first loaded
+  // Will call function to retrieve friends from fire base then load into friendsDataSource
   componentDidMount () {
 
     this.retrieveFriends();
@@ -38,15 +40,21 @@ class MyFriendsContainer extends Component {
     })
   }
 
-  // Call to fire base to retrieve data from backend
+  // Call to fire base to retrieve friends data from backend
   retrieveFriends () {
 
       var friends = [];
       // var userId = authentication.currentUser.uid;
       // console.log(userId);
-      var friendsRef = database.ref('users/');
+      var friendsRef = database.ref("users");
 
-      
+      friendsRef.on("value", function(snapshot) {
+          console.log(snapshot.val());
+      }, function(errorObject) {
+          console.log("The read failed: " + errorObject.code);
+      });
+
+
       // friendsRef.once('value').then(function(snap) {
       //     console.log("INSIDE ONCE");
       //     console.log(snap);
