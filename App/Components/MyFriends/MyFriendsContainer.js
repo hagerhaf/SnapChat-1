@@ -33,52 +33,40 @@ class MyFriendsContainer extends Component {
     mockAPICall((err, res) => {
         if (err) console.log(err)
         else {
-            this.setState({
-                friendsDataSource: friendsDataSource.cloneWithRows(res)
-            })
+            console.log("OLD SORTED LIST");
+            console.log(res);
+            // this.setState({
+            //     friendsDataSource: friendsDataSource.cloneWithRows(res)
+            // })
         }
     })
   }
 
-  // Call to fire base to retrieve friends data from backend
+  // Retrieves a list of friends from the fire base depending on the logged in UserID
   retrieveFriends () {
-
+      // Retrieve UserID and create a reference point in fire base
       var friends = [];
-      // var userId = authentication.currentUser.uid;
-      // console.log(userId);
-      var friendsRef = database.ref("users");
-
+      var appScope = this;      // Can't use 'this.state' inside on() as the scope refers to the promise
+      var userId = authentication.currentUser.uid;
+      var friendsRef = database.ref("userObjects/friends/" + userId + "/list");
+      // Iterate through results and push to array
       friendsRef.on("value", function(snapshot) {
-          console.log(snapshot.val());
+          snapshot.forEach((child) => {
+              friends.push({
+                  firstname: child.val().firstname,
+                  lastname: child.val().lastname,
+                  username: child.val().username,
+                  birthday: child.val().birthday
+              });
+          });
+          // Update state so ListView reflects the users friends
+          // Note: Must occur inside on() as it is asynchronous and wont update properly outside
+          appScope.setState({
+              friendsDataSource: friendsDataSource.cloneWithRows(friends)
+          });
       }, function(errorObject) {
           console.log("The read failed: " + errorObject.code);
       });
-
-
-      // friendsRef.once('value').then(function(snap) {
-      //     console.log("INSIDE ONCE");
-      //     console.log(snap);
-      // });
-
-      // friendsRef.once('value', (snap) => {
-      //     console.log("HERE");
-      //     // Retrieve all friends under user/id
-      //     snap.forEach((child) => {
-      //         friends.push({
-      //             firstname: snap.val().firstname,
-      //             lastname: snap.val().lastname,
-      //             username: snap.val().username,
-      //             key: snap.key
-      //         });
-      //     });
-      //     // Set state to reflect list
-      //     this.setState({
-      //         friendsDataSource: friendsDataSource.cloneWithRows(friends)
-      //     });
-      // });
-
-      // TESTING
-      console.log(friends);
   }
 
   backButtonPressed () {

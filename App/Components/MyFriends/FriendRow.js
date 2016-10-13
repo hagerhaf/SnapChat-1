@@ -16,7 +16,7 @@ seperatorFriends.propTypes = {
     adjacentRowHighlighted: PropTypes.bool.required
 }
 
-const renderFriendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
+const renderFriendRow = ({firstname, lastname, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
     return (
         <TouchableWithoutFeedback
             onPress={function () {
@@ -30,7 +30,7 @@ const renderFriendRow = ({name, highLighted}, sectionId, rowId, highlightRow, on
                         source={require('../../../images/friend_icon.png')}
                         style={styles.imageIcon} />
                 </View>
-                <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
+                <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{firstname} {lastname}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
