@@ -22,6 +22,7 @@ class MyFriendsContainer extends Component {
     this.backButtonPressed = this.backButtonPressed.bind(this)
     this.setSearchText = this.setSearchText.bind(this)
     this.retrieveFriends = this.retrieveFriends.bind(this)
+    this.sortFriends = this.sortFriends.bind(this)
   }
 
   // Function called when component is first loaded
@@ -29,17 +30,7 @@ class MyFriendsContainer extends Component {
   componentDidMount () {
 
     this.retrieveFriends();
-
-    mockAPICall((err, res) => {
-        if (err) console.log(err)
-        else {
-            console.log("OLD SORTED LIST");
-            console.log(res);
-            // this.setState({
-            //     friendsDataSource: friendsDataSource.cloneWithRows(res)
-            // })
-        }
-    })
+    console.log(this.sortFriends(friends));
   }
 
   // Retrieves a list of friends from the fire base depending on the logged in UserID
@@ -104,6 +95,13 @@ class MyFriendsContainer extends Component {
     });
   }
 
+  sortFriends(friends) {
+      var sorted = friends.sort((a,b) => {
+          return a.name.localeCompare(b.name);
+      });
+      return sorted;
+  }
+
 
   // Will be called when the friend is clicked. Need to display change to display individual user popup
   selectFriend (rowId) {
@@ -135,7 +133,8 @@ var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !
 
 const friends = [
     {"name": "ryan"},
-    {"name": "tom"}
+    {"name": "tom"},
+    {"name": "adam"}
 ]
 
 var sortedFriends = friends.sort((a,b) => {
