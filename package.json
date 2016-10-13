@@ -19,6 +19,7 @@
     "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-popup": "^0.5.2",
     "react-native-scrollable-tab-view": "^0.5.5",
+    "react-native-sketch": "^0.2.4",
     "react-native-swiper": "^1.5.1",
     "rn-camera-roll": "0.0.5"
   },
