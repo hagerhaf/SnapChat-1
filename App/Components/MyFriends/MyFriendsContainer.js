@@ -8,14 +8,14 @@ import database, {authentication} from '../FireBase/FireBase'
 
 
 class MyFriendsContainer extends Component {
+
   constructor (props) {
     super(props)
 
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
-      friends: friends,
       searchText: "",
-      rawData: sortedFriends
+      rawData: []
     }
 
     this.selectFriend = this.selectFriend.bind(this)
@@ -28,9 +28,7 @@ class MyFriendsContainer extends Component {
   // Function called when component is first loaded
   // Will call function to retrieve friends from fire base then load into friendsDataSource
   componentDidMount () {
-
     this.retrieveFriends();
-    console.log(this.sortFriends(friends));
   }
 
   // Retrieves a list of friends from the fire base depending on the logged in UserID
@@ -53,7 +51,8 @@ class MyFriendsContainer extends Component {
           // Update state so ListView reflects the users friends
           // Note: Must occur inside on() as it is asynchronous and wont update properly outside
           appScope.setState({
-              friendsDataSource: friendsDataSource.cloneWithRows(friends)
+              friendsDataSource: friendsDataSource.cloneWithRows(appScope.sortFriends(friends)),
+              rawData: appScope.sortFriends(friends)
           });
       }, function(errorObject) {
           console.log("The read failed: " + errorObject.code);
@@ -64,46 +63,38 @@ class MyFriendsContainer extends Component {
     this.props.navigator.pop()
   }
 
+  // Called with every key change in the search bar. Will then continue to call filter on original data
   setSearchText(event) {
     let searchText = event.nativeEvent.text;
     this.setState({searchText});
-
+    // Filter results and update state
     let filteredData = this.filterFriends(searchText, this.state.rawData);
     this.setState({
       friendsDataSource: friendsDataSource.cloneWithRows(filteredData)
     });
-
-    // MyFriends.fetch(friends, {
-    //     context: this,
-    //         asArray: true,
-    //         then(data){
-    //         let filteredData = this.filterFriends(searchText, data);
-    //         this.setState({
-    //             friendsDataSource: friendsDataSource.cloneWithRows(filteredData),
-    //             rawData: data,
-    //         });
-    //     }
-    // });
   }
 
+  // Called by setSearchText. Filters original data and returns result
   filterFriends(searchText, friends) {
     let text = searchText.toLowerCase();
 
     return filter(friends, (f) => {
-        let friend = f.name.toLowerCase();
-        return friend.search(text) !== -1;
+        let friendFirst = f.firstname.toLowerCase();
+        let friendLast = f.lastname.toLowerCase();
+        return ((friendFirst.search(text) !== -1) || (friendLast.search(text) !== -1));
     });
   }
 
+  // Sorts a list of friends on their firstname
   sortFriends(friends) {
       var sorted = friends.sort((a,b) => {
-          return a.name.localeCompare(b.name);
+          return a.firstname.localeCompare(b.name);
       });
       return sorted;
   }
 
-
-  // Will be called when the friend is clicked. Need to display change to display individual user popup
+  // Will be called when the friend is clicked. Need to display change to display popup allowing access to
+  // chat and snap pages for this user
   selectFriend (rowId) {
 
   }
@@ -124,20 +115,6 @@ class MyFriendsContainer extends Component {
 
 export default MyFriendsContainer
 
-// Will change to retrieve firebase info when we discover how
-const mockAPICall = (cb) => {
-    setTimeout(() => cb(null, sortedFriends), 300)
-}
-
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
-const friends = [
-    {"name": "ryan"},
-    {"name": "tom"},
-    {"name": "adam"}
-]
-
-var sortedFriends = friends.sort((a,b) => {
-    return a.name.localeCompare(b.name);
-})
 
