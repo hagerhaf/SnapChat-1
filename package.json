@@ -9,12 +9,15 @@
   "dependencies": {
     "@nitrog7/react-native-camera": "^0.3.9",
     "firebase": "^3.4.0",
+    "lodash": "^4.16.4",
     "react": "^15.3.2",
     "react-icon": "^1.0.0",
     "react-icons": "^2.2.1",
     "react-native": "^0.34.1",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-contacts": "^0.5.1",
     "react-native-loading-spinner-overlay": "^0.3.0",
+    "react-native-popup": "^0.5.2",
     "react-native-scrollable-tab-view": "^0.5.5",
     "react-native-swiper": "^1.5.1",
     "rn-camera-roll": "0.0.5"

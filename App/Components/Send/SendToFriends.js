@@ -6,7 +6,7 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
-      <TouchableOpacity onPress={onBackPress}>
+        <TouchableOpacity onPress={onBackPress}>
           <Text style={styles.title}>
           {'< '}
           </Text>
@@ -31,7 +31,7 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
           </ScrollView>
         </View>
         <View style={styles.ImagePosition}>
-          <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.imageIconSend} />
+          <Image source={require('../../../images/send.png')} style={styles.imageIconSend} />
         </View>
       </View>
     </View>

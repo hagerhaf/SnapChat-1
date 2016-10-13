@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, Text, TouchableHighlight, Image, ScrollView } from 'react-native'
 import { addFriendsStyles as styles } from './addFriendsStyles'
 
-const AddFriends = ({backButtonPressed}) => (
+const AddFriends = ({backButtonPressed, addByUsernamePressed, addByAddressBookPressed}) => (
   <View style={styles.container}>
     {/* Header */}
     <View style={styles.header}>
@@ -15,23 +15,25 @@ const AddFriends = ({backButtonPressed}) => (
       <Text style={styles.backArrow} />
     </View>
     <ScrollView>
-      <Row field='Add by Username' />
-      <Row field='Add from Address Book' />
-      <Row field='Add by Snapcode' />
-      <Row field='Add Nearby' />
-      <Row field='Share username' />
+      <Row field='Add by Username' action={addByUsernamePressed} />
+      <Row field='Add from Address Book' action={addByAddressBookPressed}/>
+      <Row field='Add by Snapcode'action={addByUsernamePressed} />
+      <Row field='Add Nearby' action={addByUsernamePressed}/>
+      <Row field='Share username' action={addByUsernamePressed}/>
     </ScrollView>
   </View>
 )
 
-const Row = ({field}) => {
+const Row = ({field, action}) => {
   return (
-    <View style={styles.fieldInfo}>
-      <Text style={styles.fieldTitle}>
-        {field}
-      </Text>
-      <Image style={styles.addedMeImg} source={require('../../../images/forward_arrow.png')} />
-    </View>
+      <TouchableHighlight onPress={action} underlayColor='#F5F5F5'>
+        <View style={styles.fieldInfo}>
+          <Text style={styles.fieldTitle}>
+            {field}
+          </Text>
+          <Image style={styles.addedMeImg} source={require('../../../images/forward_arrow.png')} />
+        </View>
+      </TouchableHighlight>
   )
 }
 
