@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import {View, Text, ListView} from 'react-native'
 import AddByUsername from './AddByUsername'
 
 class AddByUsernameContainer extends Component {

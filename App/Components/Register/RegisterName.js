@@ -8,6 +8,7 @@ const RegisterName = ({
   signupButtonPressed,
   updateFirstname,
   updateLastname,
+  updateUsername,
   hasValidInput
 }) => (
   <View style={styles.container}>
@@ -16,7 +17,7 @@ const RegisterName = ({
       <Text style={styles.registerHeader}>What's your name?</Text>
     </View>
     <View style={styles.formContainer}>
-      {inputFields(updateFirstname, updateLastname)}
+      {inputFields(updateFirstname, updateLastname, updateUsername)}
       {signupButton(hasValidInput, signupButtonPressed)}
     </View>
   </View>
@@ -34,9 +35,16 @@ RegisterName.propTypes = {
 
 export default RegisterName
 
-function inputFields (updateFirstname, updateLastname) {
+function inputFields (updateFirstname, updateLastname, updateUsername) {
   return (
     <View>
+      <Text style={styles.inputLabel}>
+        Username
+      </Text>
+      <TextInput
+        style={styles.formInput}
+        onChangeText={updateUsername}
+      />
 
       <Text style={styles.inputLabel}>
         First Name
@@ -53,7 +61,6 @@ function inputFields (updateFirstname, updateLastname) {
         style={styles.formInput}
         onChangeText={updateLastname}
       />
-
     </View>
   )
 }

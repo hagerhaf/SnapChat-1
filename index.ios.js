@@ -3,7 +3,6 @@ import { AppRegistry, NavigatorIOS } from 'react-native'
 import Landing from './App/Components/Landing/Landing'
 import MainContainer from './App/Components/Main/MainContainer'
 import * as firebase from 'firebase'
-// import database from 'App/Components/FireBase/FireBase'
 
 class SnapChat extends Component {
   constructor (props) {
@@ -42,8 +41,8 @@ class SnapChat extends Component {
         navigationBarHidden
         style={{flex: 1}}
         initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
-        />
-        )
+      />
+    )
   }
 }
 export default SnapChat

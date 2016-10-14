@@ -3,10 +3,10 @@ import { Text, View, TextInput, TouchableHighlight } from 'react-native'
 import { backArrow } from '../Login/Login'
 import { registerStyles as styles } from './registerStyles'
 
-const RegisterUsername = ({
+const RegisterEmail = ({
   backButtonPressed,
   continueButtonPressed,
-  updateUsername,
+  updateEmail,
   hasValidInput
 }) => (
   <View style={styles.container}>
@@ -17,7 +17,7 @@ const RegisterUsername = ({
     </View>
 
     <View style={styles.formContainer}>
-      {inputFields(updateUsername)}
+      {inputFields(updateEmail)}
       {continueButton(hasValidInput, continueButtonPressed)}
     </View>
 
@@ -26,16 +26,16 @@ const RegisterUsername = ({
 
 const func = PropTypes.func
 
-RegisterUsername.propTypes = {
+RegisterEmail.propTypes = {
   backButtonPressed: func.isRequired,
   continueButtonPressed: func.isRequired,
-  updateUsername: func.isRequired,
+  updateEmail: func.isRequired,
   hasValidInput: PropTypes.bool
 }
 
-export default RegisterUsername
+export default RegisterEmail
 
-function inputFields (updateUsername) {
+function inputFields (updateEmail) {
   return (
     <View>
       <Text style={styles.inputLabel}>
@@ -43,7 +43,7 @@ function inputFields (updateUsername) {
       </Text>
       <TextInput
         style={styles.formInput}
-        onChangeText={updateUsername}
+        onChangeText={updateEmail}
       />
     </View>
   )

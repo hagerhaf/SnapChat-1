@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native'
 import * as firebase from 'firebase'
 import RegisterName from './RegisterName'
 import RegisterBirthday from './RegisterBirthday'
-import RegisterUsername from './RegisterUsername'
+import RegisterEmail from './RegisterEmail'
 import RegisterPassword from './RegisterPassword'
 
 class RegisterContainer extends Component {
@@ -15,11 +15,13 @@ class RegisterContainer extends Component {
       firstname: '',
       lastname: '',
       username: '',
+      email: '',
+      birthday: new Date(),
       password: '',
       loading: false,
-      birthday: new Date(),
       isNameInputValid: false,
       isBirthdayInputValid: false,
+      isEmailValid: false,
       isUsernameInputValid: false,
       isPasswordInputValid: false,
       nameComplete: false,
@@ -31,6 +33,7 @@ class RegisterContainer extends Component {
     this.updateFirstname = this.updateFirstname.bind(this)
     this.updateLastname = this.updateLastname.bind(this)
     this.updateBirthday = this.updateBirthday.bind(this)
+    this.updateEmail = this.updateEmail.bind(this)
     this.updateUsername = this.updateUsername.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
 
@@ -70,6 +73,14 @@ class RegisterContainer extends Component {
     this.setState({ birthday: updateBirthday, isBirthdayInputValid: true })
   }
 
+  updateEmail (updatedEmail) {
+    if (updatedEmail) {
+      this.setState({ email: updatedEmail, isEmailValid: true })
+    } else {
+      this.setState({ email: updatedEmail, isEmailValid: false })
+    }
+  }
+
   updateUsername (updatedUsername) {
     if (updatedUsername) {
       this.setState({ username: updatedUsername, isUsernameValid: true })
@@ -100,8 +111,8 @@ class RegisterContainer extends Component {
 
   finishRegistration () {
     this.toggleSpinner()
-    const { username, password } = this.state
-    firebase.auth().createUserWithEmailAndPassword(username, password)
+    const { email, password } = this.state
+    firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.saveUser(user)
         this.updateUserDetails(user)
@@ -124,10 +135,11 @@ class RegisterContainer extends Component {
   }
 
   updateUserDetails (user) {
-    const { username, firstname, lastname, birthday } = this.state
+    const { firstname, lastname, username, email, birthday } = this.state
     const userId = user.uid
     firebase.database().ref('users/' + userId).set({
       username,
+      email,
       firstname,
       lastname,
       birthday: JSON.stringify(birthday)
@@ -146,6 +158,7 @@ class RegisterContainer extends Component {
           signupButtonPressed={this.goToRegisterBirthday}
           updateFirstname={this.updateFirstname}
           updateLastname={this.updateLastname}
+          updateUsername={this.updateUsername}
           hasValidInput={this.state.isNameInputValid}
         />
       )
@@ -161,11 +174,11 @@ class RegisterContainer extends Component {
       )
     } else if (this.state.birthdayComplete && !this.state.usernameComplete) {
       return (
-        <RegisterUsername
+        <RegisterEmail
           backButtonPressed={this.backButtonPressed}
-          updateUsername={this.updateUsername}
+          updateEmail={this.updateEmail}
           continueButtonPressed={this.goToRegisterPassword}
-          hasValidInput={this.state.isUsernameValid}
+          hasValidInput={this.state.isEmailValid}
         />
       )
     } else if (this.state.usernameComplete) {
