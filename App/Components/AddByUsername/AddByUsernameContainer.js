@@ -1,20 +1,23 @@
 import React, { Component, PropTypes } from 'react'
+import { AsyncStorage } from 'react-native'
 import AddByUsername from './AddByUsername'
 import database from '../FireBase/FireBase'
 
-
 class AddByUsernameContainer extends Component {
   constructor (props) {
-      super(props)
+    super(props)
 
-      this.state = {
-        loading: false,
-        searchQuery: ''
-      }
+    this.state = {
+      loading: false,
+      addSuccess: false,
+      addFriendLoading: false,
+      searchQuery: ''
+    }
 
-      this.searchUsername = this.searchUsername.bind(this)
-      this.backButtonPressed = this.backButtonPressed.bind(this)
-      this.submitRequest = this.submitRequest.bind(this)
+    this.searchUsername = this.searchUsername.bind(this)
+    this.backButtonPressed = this.backButtonPressed.bind(this)
+    this.submitRequest = this.submitRequest.bind(this)
+    this.addFriendPressed = this.addFriendPressed.bind(this)
   }
 
   searchUsername (queryString) {
@@ -35,20 +38,38 @@ class AddByUsernameContainer extends Component {
       })
   }
 
+  async addFriendPressed (friend, friendId) {
+    this.setState({ addFriendLoading: true })
+    try {
+      let userId = await AsyncStorage.getItem('userId')
+      userId = userId.replace(/"/g, '')
+      database.ref('userObjects')
+              .child('friends')
+              .child(userId)
+              .child('list')
+              .update({ [friendId]: friend }, (error) => {
+                if (error) console.log('Error updating friends list', error)
+                this.setState({ addFriendLoading : false, addSuccess: true })
+              })
+
+    } catch (error) {
+      console.log('Error retreiving user Id', error)
+    }
+  }
+
   backButtonPressed () {
     this.props.navigator.pop()
-    const friendsRef = database.ref('users').once
   }
 
   render () {
     return (
-      <AddByUsername
-          searchUsername={this.searchUsername}
-          backButtonPressed={this.backButtonPressed}
-          submitRequest={this.submitRequest}
-          friendObject={this.state.queriedUser}
-          loading={this.state.loading}
-      />
+      <AddByUsername searchUsername={this.searchUsername}
+                     backButtonPressed={this.backButtonPressed}
+                     submitRequest={this.submitRequest}
+                     friendObject={this.state.queriedUser}
+                     addFriendPressed={this.addFriendPressed}
+                     addFriendLoading={this.state.addFriendLoading}
+                     loading={this.state.loading} />
     )
   }
 }

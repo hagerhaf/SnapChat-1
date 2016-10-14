@@ -7,60 +7,67 @@ import { AddByUsernameStyles as styles } from './AddByUsernameStyles'
    searchUsername,
    submitRequest,
    friendObject,
+   addFriendPressed,
+   addFriendLoading,
    loading
  }) => (
   <View style={styles.container}>
-    {/* Header */}
     <View style={styles.header}>
-        <TouchableHighlight onPress={backButtonPressed} underlayColor='#F5F5F5'>
-            <Image style={styles.backArrow} source={require('../../../images/back_arrow.png')} />
-        </TouchableHighlight>
-        <Text style={styles.headerTitle}>
-            Add Username
-        </Text>
-        <Text style={styles.backArrow} />
+      <TouchableHighlight onPress={backButtonPressed}
+                          underlayColor='#F5F5F5' >
+
+        <Image source={require('../../../images/back_arrow.png')}
+               style={styles.backArrow} />
+
+      </TouchableHighlight>
+      <Text style={styles.headerTitle}>
+          Add Username
+      </Text>
     </View>
 
-    {/* Body */}
     <View style={styles.searchBox}>
-        <Image style={styles.searchIcon} source={require('../../../images/search.png')} />
-        <TextInput
-          style={styles.searchBar}
-          onChangeText={searchUsername}
-          onSubmitEditing={submitRequest}
-          placeholder='Search'
-        />
+      <Image source={require('../../../images/search.png')}
+             style={styles.searchIcon} />
+      <TextInput style={styles.searchBar}
+                 onChangeText={searchUsername}
+                 onSubmitEditing={submitRequest}
+                 placeholder='Search' />
     </View>
-    {loading && <ActivityIndicator animating size='large' style={{'marginTop': 10}} />}
+    {loading && <ActivityIndicator animating
+                                    size='large'
+                                    style={{'marginTop': 10}} />}
 
-    {friendObject && friendCard(friendObject)}
+    {friendObject && friendCard(friendObject, addFriendPressed, addFriendLoading)}
   </View>
 )
 
-function friendCard (friendObject) {
+function friendCard (friendObject, addFriendPressed, addFriendLoading) {
+  const friend = friendObject[Object.keys(friendObject)[0]]
+  const friendId = Object.keys(friendObject)[0]
+
+  if (addFriendLoading) {
+    return (
+      <View style={styles.addFriendContainer}>
+        <ActivityIndicator animating size='large' style={{'padding': 30}} />
+      </View>
+    )
+  }
   return (
-    <View>
-      <Text>
-        firstname
-      </Text>
-      <Text>
-        lastname
-      </Text>
-      <View>
-        <Text>
-          Add Friend
+    <View style={styles.addFriendContainer}>
+      <View style={styles.addFriendDetails}>
+        <Image style={styles.backArrow} source={require('../../../images/friend_icon.png')} />
+        <Text style={styles.addFriendText}>
+          {friend.firstname}
+        </Text>
+        <Text style={styles.addFriendText}>
+          {friend.lastname}
         </Text>
       </View>
-    </View>
-  )
-}
-
-function friendNotFound () {
-  return (
-    <View>
-      <Text>
-        Friend not found
-      </Text>
+      <TouchableHighlight style={styles.addFriendButtonContainer} onPress={addFriendPressed.bind(null, friend, friendId)}>
+        <Text style={styles.addFriendButton}>
+          Add Friend
+        </Text>
+      </TouchableHighlight>
     </View>
   )
 }
