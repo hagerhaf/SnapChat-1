@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import {View, Text, ListView} from 'react-native'
+import React, { Component } from 'react'
+import { ListView } from 'react-native'
 import MyFriends from './MyFriends'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {} from './myFriendsUtils'
