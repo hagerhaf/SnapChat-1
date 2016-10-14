@@ -22,28 +22,28 @@ const Edit = ({
     <View style={styles.header}>
       {/* Back button */}
       <View style={styles.flex}>
-        <TouchableHighlight onPress={backPressed}>
+        <TouchableOpacity onPress={backPressed}>
           <Image source={require('../../../images/edit/back.png')} style={styles.backIcon}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View style={styles.flex} />
 
       {/* Editing buttons */}
       <View style={styles.triple}>
         {/* Add sticker */}
-        <TouchableHighlight>
+        <TouchableOpacity>
           <Image source={require('../../../images/edit/emoticon.png')} style={styles.icon}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         {/* Add text */}
-        <TouchableHighlight onPress={onTextPressed}>
+        <TouchableOpacity onPress={onTextPressed}>
           <Image source={require('../../../images/edit/text.png')} style={styles.textIcon}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         {/* Draw */}
-        <TouchableHighlight>
+        <TouchableOpacity>
           <Image source={require('../../../images/edit/draw.png')} style={styles.drawIcon}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
 
@@ -69,26 +69,26 @@ const Edit = ({
         {/* Editing buttons */}
         <View style={styles.triple}>
           {/* Change time */}
-          <TouchableHighlight>
+          <TouchableOpacity>
             <Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           {/* Save snap */}
-          <TouchableHighlight onPress={onSave}>
+          <TouchableOpacity onPress={onSave}>
             <Image source={require('../../../images/edit/save.png')} style={styles.icon}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           {/* Add to story */}
-          <TouchableHighlight>
+          <TouchableOpacity>
             <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
 
         {/* Send */}
         <View style={styles.flex} />
-          <TouchableHighlight onPress={onSendPressed}>
+          <TouchableOpacity onPress={onSendPressed}>
             <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.sendIcon}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
     </View>
   </Image>

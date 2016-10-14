@@ -7,6 +7,7 @@ import database, {authentication} from '../FireBase/FireBase'
 class SendContainer extends Component {
   constructor (props) {
     super(props)
+    let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
       friends: []
@@ -43,6 +44,7 @@ class SendContainer extends Component {
     var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
     // Iterate through results and push to array
     friendsRef.on('value', function (snapshot) {
+      console.log(snapshot.val())
       snapshot.forEach((child) => {
         friends.push({
           name: child.val().firstname + ' ' + child.val().lastname,
@@ -54,7 +56,7 @@ class SendContainer extends Component {
       // Update state so ListView reflects the users friends
       // Note: Must occur inside on() as it is asynchronous and wont update properly outside
       appScope.setState({
-        friendsDataSource: friendsDataSource.cloneWithRows(friends),
+        friendsDataSource: appScope.state.friendsDataSource.cloneWithRows(friends),
         friends: friends
       })
     }, function (errorObject) {
@@ -97,86 +99,3 @@ SendContainer.propTypes = {
 }
 
 export default SendContainer
-
-// mock data
-
-const mockAPICall = (cb) => {
-  setTimeout(() => cb(null, friends), 300)
-}
-
-var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-
-const friends = [
-  {
-    name: 'lachlan',
-    highLighted: false
-  },
-  {
-    name: 'ryan',
-    highLighted: false
-  },
-  {
-    name: 'nathan',
-    highLighted: false
-  },
-  {
-    name: 'tim',
-    highLighted: false
-  },
-  {
-    name: 'remdogga',
-    highLighted: false
-  },
-  {
-    name: 'hot_chick_69',
-    highLighted: false
-  },
-  {
-    name: 'side_chick_01',
-    highLighted: false
-  },
-  {
-    name: 'side_chick_02',
-    highLighted: false
-  },
-  {
-    name: 'obama',
-    highLighted: false
-  },
-  {
-    name: 'lachlan',
-    highLighted: false
-  },
-  {
-    name: 'ryan',
-    highLighted: false
-  },
-  {
-    name: 'nathan',
-    highLighted: false
-  },
-  {
-    name: 'tim',
-    highLighted: false
-  },
-  {
-    name: 'remdogga',
-    highLighted: false
-  },
-  {
-    name: 'hot_chick_69',
-    highLighted: false
-  },
-  {
-    name: 'side_chick_01',
-    highLighted: false
-  },
-  {
-    name: 'side_chick_02',
-    highLighted: false
-  },
-  {
-    name: 'obama',
-    highLighted: false
-  }
-]
