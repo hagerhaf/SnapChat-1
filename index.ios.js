@@ -22,14 +22,8 @@ class SnapChat extends Component {
   componentWillMount () {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       this.setState({
-        loggedIn: (firebaseUser !== null)
+        isLoggedIn: (firebaseUser !== null)
       })
-
-      if (firebaseUser) {
-        console.log('Logged IN', firebaseUser)
-      } else {
-        console.log('Not logged in')
-      }
     })
   }
 
