@@ -69,6 +69,7 @@ class AddByUsernameContainer extends Component {
                      friendObject={this.state.queriedUser}
                      addFriendPressed={this.addFriendPressed}
                      addFriendLoading={this.state.addFriendLoading}
+                     addSuccess={this.state.addSuccess}
                      loading={this.state.loading} />
     )
   }
