@@ -9,12 +9,10 @@ class SnapChat extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: (firebase.auth().currentUser !== null)
     }
     this.onLogin = this.onLogin.bind(this)
   }
-
-  // (firebase.auth().currentUser !== null)
 
   onLogin () {
     this.setState({isLoggedIn: true})
