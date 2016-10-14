@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Camera from 'react-native-camera'
 import { mainStyles as styles } from './mainStyles'
-import EditContainer from "../Edit/EditContainer";
+import EditContainer from '../Edit/EditContainer'
 import { Text, View, Image, TouchableHighlight, CameraRoll } from 'react-native'
 
 const FLASH_LOOKUP = {'auto': 'on', 'on': 'off', 'off': 'auto'}
@@ -40,36 +40,36 @@ class CameraContainer extends Component {
           component: EditContainer,
           title: 'Edit Container',
           passProps: { uri: data['path'] }
-    }))
+        }))
     .catch(err => console.log(err))
   }
 
   render () {
-    var flashIcon;
+    var flashIcon
     switch (this.state.flash) {
       case 'auto': {
-        flashIcon = require('../../../images/main-camera/flash-auto-icon.png');
-        break;
+        flashIcon = require('../../../images/main-camera/flash-auto-icon.png')
+        break
       }
       case 'on': {
-        flashIcon = require('../../../images/main-camera/flash-on-icon.png');
-        break;
+        flashIcon = require('../../../images/main-camera/flash-on-icon.png')
+        break
       }
       case 'off': {
-        flashIcon = require('../../../images/main-camera/flash-off-icon.png');
-        break;
+        flashIcon = require('../../../images/main-camera/flash-off-icon.png')
+        break
       }
     }
     return (
       <View style={styles.container}>
         {/* Camera view must be camera to allow for it to take up entire screen. */}
         <Camera ref={(cam) => { this.camera = cam }}
-                style={styles.preview}
-                captureTarget={Camera.constants.CaptureTarget.disk}
-                aspect={Camera.constants.Aspect.fill}
-                flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
+          style={styles.preview}
+          captureTarget={Camera.constants.CaptureTarget.disk}
+          aspect={Camera.constants.Aspect.fill}
+          flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
                   (this.state.flash === 'on' ? Camera.constants.FlashMode.on : Camera.constants.FlashMode.off)}
-                type={this.state.frontCamera ? 'front' : 'back'}
+          type={this.state.frontCamera ? 'front' : 'back'}
         >
           {/* Header */}
           <View style={styles.header}>

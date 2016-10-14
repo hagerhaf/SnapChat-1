@@ -16,10 +16,10 @@ const AddFriends = ({backButtonPressed, addByUsernamePressed, addByAddressBookPr
     </View>
     <ScrollView>
       <Row field='Add by Username' action={addByUsernamePressed} />
-      <Row field='Add from Address Book' action={addByAddressBookPressed}/>
+      <Row field='Add from Address Book' action={addByAddressBookPressed} />
       <Row field='Add by Snapcode'action={addByUsernamePressed} />
-      <Row field='Add Nearby' action={addByUsernamePressed}/>
-      <Row field='Share username' action={addByUsernamePressed}/>
+      <Row field='Add Nearby' action={addByUsernamePressed} />
+      <Row field='Share username' action={addByUsernamePressed} />
     </ScrollView>
   </View>
 )
