@@ -32,10 +32,13 @@ class EditContainer extends Component {
     this.props.navigator.pop()
   }
 
-  send () {
+  send (imageUri) {
     this.props.navigator.push({
       title: 'sendToFriends',
-      component: SendContianer
+      component: SendContianer,
+      passProps: {
+        imageUri
+      }
     })
   }
 

@@ -3,18 +3,22 @@ import {View, Text, ListView} from 'react-native'
 import SendToFriends from './SendToFriends'
 import SendRow, {seperatorFriends} from './SendRow'
 import database, {authentication} from '../FireBase/FireBase'
+import sendSnapToUser from './SendHelpers'
 
 class SendContainer extends Component {
   constructor (props) {
     super(props)
+    console.log(props)
     let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
-      friends: []
+      friends: [],
+      imageUri: this.props.imageUri
     }
 
     this.selectFriend = this.selectFriend.bind(this)
     this.pressBack = this.pressBack.bind(this)
+    this.send = this.send.bind(this)
   }
 
   componentDidMount () {
@@ -35,6 +39,14 @@ class SendContainer extends Component {
     })
   }
 
+  send () {
+    // find selected friends
+
+    //then send them photo
+
+    sendSnapToUser(this.props.imageUri, authentication.currentUser.uid, this.state.friends[0].key)
+  }
+
   // Retrieves a list of friends from the fire base depending on the logged in UserID
   retrieveFriends () {
     // Retrieve UserID and create a reference point in fire base
@@ -50,7 +62,8 @@ class SendContainer extends Component {
           name: child.val().firstname + ' ' + child.val().lastname,
           username: child.val().username,
           birthday: child.val().birthday,
-          highlight: child.val().highlighted
+          highlight: child.val().highlighted,
+          key: child.key
         })
       })
       // Update state so ListView reflects the users friends
@@ -63,8 +76,6 @@ class SendContainer extends Component {
       console.log('The read failed: ' + errorObject.code)
     })
   }
-
-
 
   pressBack () {
     this.props.navigator.pop()
@@ -79,6 +90,7 @@ class SendContainer extends Component {
         seperatorFriends={seperatorFriends}
         selectedFriends={findSelectedFriends(this.state.friends)}
         onBackPress={this.pressBack}
+        onSendPressed={this.send}
       />
     )
   }
@@ -95,7 +107,7 @@ function findSelectedFriends (friends) {
 }
 
 SendContainer.propTypes = {
-
+  imageUri: PropTypes.string.isRequired
 }
 
 export default SendContainer

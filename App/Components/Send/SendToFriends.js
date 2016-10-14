@@ -2,13 +2,13 @@ import React, {PropTypes} from 'react'
 import {View, Text, ListView, ScrollView, Image, TouchableOpacity} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
-const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends, onBackPress}) => {
+const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFriends, selectedFriends, onBackPress, onSendPressed}) => {
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
         <TouchableOpacity onPress={onBackPress}>
           <Text style={styles.title}>
-          {'< '}
+            {'< '}
           </Text>
         </TouchableOpacity>
         <Text style={styles.title}>
@@ -31,7 +31,9 @@ const SendToFriends = ({friends, renderSendUserRow, onSelectFriend, seperatorFri
           </ScrollView>
         </View>
         <View style={styles.ImagePosition}>
-          <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.imageIconSend} />
+          <TouchableOpacity onPress={onSendPressed}>
+            <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.imageIconSend} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -54,7 +56,8 @@ SendToFriends.propTypes = {
   onSelectFriend: PropTypes.func.isRequired,
   seperatorFriends: PropTypes.func.isRequired,
   selectedFriends: PropTypes.array,
-  onBackPress: PropTypes.func.isRequired
+  onBackPress: PropTypes.func.isRequired,
+  onSendPressed: PropTypes.func.isRequired
 }
 
 export default SendToFriends
