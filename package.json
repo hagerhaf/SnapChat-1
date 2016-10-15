@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@nitrog7/react-native-camera": "^0.3.9",
+    "deepcopy": "^0.6.3",
     "firebase": "^3.4.0",
     "lodash": "^4.16.4",
     "react": "^15.3.2",
@@ -22,7 +23,8 @@
     "react-native-scrollable-tab-view": "^0.5.5",
     "react-native-sketch": "^0.2.4",
     "react-native-swiper": "^1.5.1",
-    "rn-camera-roll": "0.0.5"
+    "rn-camera-roll": "0.0.5",
+    "timediff": "^1.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

@@ -44,7 +44,7 @@ export function saveToStory ({imageUri, timer}) {
   return new Promise(function (resolve, reject) {
     let currentUid = firebase.auth().currentUser.uid
     // db ref
-    let dbSnapStoryRef = firebase.database().ref().child('stories')
+    let dbSnapStoryRef = firebase.database().ref().child('stories/' + currentUid)
 
     // Create a storage reference
     var storageRef = firebase.storage().ref()
@@ -59,9 +59,8 @@ export function saveToStory ({imageUri, timer}) {
         )
         .then((snapshot) => {
           let snapObject = {}
-          snapObject[currentUid] = {}
           let imageNameUrl = imageName.replace('.jpg', '')
-          snapObject[currentUid][imageNameUrl] = {
+          snapObject[imageNameUrl] = {
             timer,
             date: Date.now(),
             imageName
