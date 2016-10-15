@@ -3,10 +3,24 @@ import Story from './Story'
 import DiscoverContainer from '../Discover/DiscoverContainer'
 import { ListView } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
+import getUsers, {getStory} from './StoryHelpers'
 
 class StoriesContainer extends Component {
   constructor (props) {
     super(props)
+
+    this.state = {
+      stories: [],
+      friends: []
+    }
+  }
+
+  componentWillMount () {
+    getUsers(function (user) {
+      getStory(user, function (err, story) {
+        console.log(story)
+      })
+    })
   }
 
   render () {
@@ -15,8 +29,8 @@ class StoriesContainer extends Component {
         style={{marginTop: 30}}
         renderTabBar={renderTab}
         tabBarTextStyle={{fontFamily: 'Avenir-Heavy', fontSize: 18}}
-        tabBarActiveTextColor='purple'
-        tabBarInactiveTextColor='gray'
+        tabBarActiveTextColor="purple"
+        tabBarInactiveTextColor="gray"
       >
         {/* Snaps container lists all your saved memories (photos you've taken) and adds to ability to resend */}
         <Story stories={storyDataSource.cloneWithRows(stories)} tabLabel="Stories" />

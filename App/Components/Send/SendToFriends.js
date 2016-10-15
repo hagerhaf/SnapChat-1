@@ -46,10 +46,11 @@ const SendToFriends = (
   }
 
   function headingResults (hasSent, sendError) {
+    if (hasSent) {
+      return styles.headingColorSuccess
+    }
     if (sendError) {
       return styles.headingColorError
-    } else if (hasSent) {
-      return styles.headingColorSuccess
     }
   }
 

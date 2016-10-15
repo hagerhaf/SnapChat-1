@@ -49,7 +49,7 @@ class SendContainer extends Component {
     Promise.all(
     this.state.friends.map((friendObject) => {
       if (friendObject.highLighted) {
-        return sendSnapToUser(this.props.imageUri, authentication.currentUser.uid, friendObject.key)
+        return sendSnapToUser({imageUri: this.props.imageUri, timer: this.props.timer}, authentication.currentUser.uid, friendObject.key)
       }
     })
     )
@@ -68,6 +68,7 @@ class SendContainer extends Component {
       }, 1500)
     })
     .catch((err) => {
+      if (err) console.log(err)
       this.setState({
         isSending: false,
         hasSent: true,
@@ -75,12 +76,11 @@ class SendContainer extends Component {
       })
 
       setTimeout(() => {
-        this.props.navigator.popToTop()
         this.setState({
           hasSent: false,
           sendError: false
         })
-      }, 1500)
+      }, 2500)
     })
   }
 
@@ -146,7 +146,8 @@ function findSelectedFriends (friends) {
 }
 
 SendContainer.propTypes = {
-  imageUri: PropTypes.string.isRequired
+  imageUri: PropTypes.string.isRequired,
+  timer: PropTypes.string.isRequired
 }
 
 export default SendContainer

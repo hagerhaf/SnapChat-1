@@ -12,7 +12,8 @@ class EditContainer extends Component {
       textVisible: false,
       timer: '3',
       encodedSignature: null,
-      onStorySaving: false
+      onStorySaving: false,
+      storySaved: false
     }
 
     this.backPressed = this.backPressed.bind(this)
@@ -40,7 +41,8 @@ class EditContainer extends Component {
       title: 'sendToFriends',
       component: SendContianer,
       passProps: {
-        imageUri
+        imageUri,
+        timer: this.state.timer
       }
     })
   }
@@ -76,15 +78,16 @@ class EditContainer extends Component {
     this.setState({ encodedSignature: base64Image })
   }
 
-  onStorySave (imageUri) {
+  onStorySave (imageUri, timer) {
     this.setState({
       onStorySaving: true
     })
-    saveToStory(imageUri)
+    saveToStory({imageUri, timer})
       .then((res) => {
         console.log(res)
         this.setState({
-          onStorySaving: false
+          onStorySaving: false,
+          storySaved: true
         })
       })
       .catch((err) => {
@@ -106,6 +109,7 @@ class EditContainer extends Component {
       onSave={this.onSave}
       onPressedSaveToStory={this.onStorySave}
       onStorySaving={this.state.onStorySaving}
+      storySaved={this.state.storySaved}
     />
   }
 }
