@@ -26,7 +26,7 @@ class ChatContainer extends React.Component {
   getFriends () {
     // copied over from myFriendsContainer
     const friends = []
-    const appScope = this
+    const component = this
     const userId = authentication.currentUser.uid
     const friendsRef = database.ref('userObjects/friends/' + userId + '/list')
     friendsRef.on('value', (snapshot) => {
@@ -35,7 +35,7 @@ class ChatContainer extends React.Component {
         friend.uid = key
         friends.push(friend)
       })
-      appScope.setState({
+      component.setState({
         dataSource: friendsDataSource.cloneWithRows(friends),
         friendsList: friends,
         loading: false

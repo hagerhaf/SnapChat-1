@@ -13,16 +13,13 @@ class ChatToUser extends Component {
   }
 
   componentDidMount () {
-    // const component = this
-    // const userId = authentication.currentUser.uid
-    // const newMessages = []
-    // database.ref(`userObjects/messages/${userId}/received/${this.props.uid}`)
-    //   .on('value', (snapshot) => {
-    //     snapshot.forEach((child) => {
-    //       newMessages.push(child.val())
-    //       component.setState({messages: messages.cloneWithRows(newMessages)})
-    //     })
-    //   })
+    const userId = authentication.currentUser.uid
+    const newMessages = []
+    const chatRef = database.ref(`userObjects/messages/${userId}/received/${this.props.uid}`)
+    chatRef.on('value', (snapshot) => {
+      newMessages.push(snapshot.val())
+      this.setState({ messages: messages.cloneWithRows(newMessages) })
+    })
   }
 
   render () {
@@ -70,7 +67,13 @@ const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 export default ChatToUser
 
 const renderUserMessage = (userMessage, i) => {
-  console.log(userMessage)
+  if (!userMessage) {
+    return (
+      <View>
+        <Text>No messages sent yet!</Text>
+      </View>
+    )
+  }
   if (userMessage.from) {
     return (
       <View>
