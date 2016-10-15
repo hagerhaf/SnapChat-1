@@ -5,7 +5,6 @@ import StoryRow from './StoryRow'
 import timediff from 'timediff'
 
 const Stories = ({stories, onPressStory}) => {
-  console.log('stories', stories)
   var dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2
   })
@@ -13,7 +12,6 @@ const Stories = ({stories, onPressStory}) => {
 
   const createStoryRow = ({username, stories}, sectionId, rowId) => {
   // time dif
-    console.log(username, stories)
     if (stories) {
       let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHms'))
 

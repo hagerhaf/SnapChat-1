@@ -38,7 +38,6 @@ class StoriesContainer extends Component {
           }
           return nfriend
         })
-        console.log(newFriendsWStory)
         appThis.setState({
           friendsStories: newFriendsWStory
         })
@@ -47,7 +46,6 @@ class StoriesContainer extends Component {
   }
 
   pressStory (stories) {
-    console.log('stories for user', stories)
 
     this.props.navigator.push({
       component: ViewImage,
@@ -60,7 +58,6 @@ class StoriesContainer extends Component {
   }
 
   render () {
-    console.log('state rerender')
     return (
       <ScrollableTabView
         style={{marginTop: 30}}

@@ -2,12 +2,13 @@ import React, {PropTypes} from 'react'
 import {Image, View, Text, TouchableWithoutFeedback} from 'react-native'
 import {viewStyles as styles} from './ViewStyles'
 
-export default function ViewSnap ({url, onBackPressed}) {
+export default function ViewSnap ({url, onBackPressed, countDown}) {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onBackPressed}>
         <View style={styles.heading}>
           <Text style={styles.title}> Back </Text>
+          <Text style={styles.title}> {countDown} </Text>
         </View>
       </TouchableWithoutFeedback>
 
