@@ -2,52 +2,58 @@ import React, { PropTypes } from 'react'
 import { ListView } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
+import database, { authentication } from '../FireBase/FireBase'
 
 class ChatContainer extends React.Component {
   constructor (props) {
     super(props)
+
     this.state = {
+      friendsList: [],
       dataSource: friendsDataSource.cloneWithRows([])
     }
 
     this.openChat = this.openChat.bind(this)
+    this.getFriends = this.getFriends.bind(this)
     this.backToChat = this.backToChat.bind(this)
   }
 
   componentDidMount () {
-    mockAPICall((err, res) => {
-      if (err) {
-        console.log(err)
-      } else {
-        this.setState({
-          dataSource: friendsDataSource.cloneWithRows(res)
-        })
-      }
+    this.getFriends()
+  }
+
+  getFriends () {
+    // copied over from myFriendsContainer
+    const friends = []
+    const appScope = this
+    const userId = authentication.currentUser.uid
+    const friendsRef = database.ref('userObjects/friends/' + userId + '/list')
+    friendsRef.on('value', (snapshot) => {
+      Object.keys(snapshot.val()).forEach((key) => {
+        const friend = snapshot.val()[key]
+        friend.uid = key
+        friends.push(friend)
+      })
+      appScope.setState({
+        dataSource: friendsDataSource.cloneWithRows(friends),
+        friendsList: friends
+      })
+    }, (errorObject) => {
+      console.log('The read failed: ' + errorObject.code)
     })
   }
 
   backToChat () {
-    // this.props.navigator.replace({
-    //   title: 'chat',
-    //   component: ChatContainer
-    // })
-    // this.props.navigator.replace(ChatContainer)
     this.props.navigator.pop()
   }
 
-  openChat (username) {
-    // here we would call API do get data for each user & there messages
-    let newMessages = messages.slice(0)
-    newMessages.push({message: `Hello my name is ${username}`, from: username})
-    newMessages.push({message: 'Hi there i am the user'})
-    newMessages.push({message: 'You are such a dick m8', from: username})
-    newMessages.push({message: `Go fuck yourself ${username}`})
+  openChat (username, uid) {
     this.props.navigator.push({
       title: 'Chat w' + username,
       component: ChatToUser,
       passProps: {
-        username: username,
-        messages: messagesDataSource.cloneWithRows(newMessages),
+        username,
+        uid,
         onBackPress: this.backToChat
       },
       sceneConfig: this.props.navigator.SceneConfigs
@@ -68,66 +74,7 @@ ChatContainer.propTypes = {
   navigator: PropTypes.object.isRequired
 }
 
+const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+const messagesDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+
 export default ChatContainer
-
-// mock data
-import constants from '../../constants'
-
-const mockAPICall = (cb) => {
-  setTimeout(() => cb(null, friends), 300)
-}
-
-var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-
-const friends = [
-  {
-    name: 'lachlan',
-    lastReceived: '5m',
-    receivedStatus: constants.IMAGE_RECEIVED
-  },
-  {
-    name: 'ryan',
-    lastReceived: '16h',
-    receivedStatus: constants.IMAGE_RECEIVED
-  },
-  {
-    name: 'nathan',
-    lastReceived: '10m',
-    receivedStatus: constants.IMAGE_RECEIVED_SEEN
-  },
-  {
-    name: 'tim',
-    lastReceived: '30m',
-    receivedStatus: constants.IMAGE_SENT
-  },
-  {
-    name: 'remdogga',
-    lastReceived: 'just now',
-    receivedStatus: constants.IMAGE_SENT_SEEN
-  },
-  {
-    name: 'hot_chick_69',
-    lastReceived: 'never',
-    receivedStatus: constants.TEXT_SENT
-  },
-  {
-    name: 'side_chick_01',
-    lastReceived: '1m',
-    receivedStatus: constants.TEXT_SENT_SEEN
-  },
-  {
-    name: 'side_chick_02',
-    lastReceived: '3m',
-    receivedStatus: constants.TEXT_RECEIVED
-  },
-  {
-    name: 'obama',
-    lastReceived: '10m',
-    receivedStatus: constants.TEXT_RECEIVED_SEEN
-  }
-]
-
-var messagesDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-var messages = [
-
-]

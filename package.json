@@ -16,6 +16,7 @@
     "react-native": "^0.34.1",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-contacts": "^0.5.1",
+    "react-native-keyboard-spacer": "^0.3.0",
     "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-popup": "^0.5.2",
     "react-native-scrollable-tab-view": "^0.5.5",

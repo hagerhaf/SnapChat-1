@@ -1,38 +1,34 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import { Text, View, TouchableHighlight, Image } from 'react-native'
 import { chatStyles as styles, touchColor } from './chatStyles'
 import constants from '../../constants'
 
-const UserRow = ({username, lastReceived, imageStatus, openChat}) => {
+const UserRow = ({username, uid, lastReceived, imageStatus, openChat}) => {
   return (
-    <TouchableHighlight
-      underlayColor={touchColor}
-      onPress={() => openChat(username)}
+    <TouchableHighlight underlayColor={touchColor}
+                        onPress={() => openChat(username, uid)}
     >
       <View style={styles.userRow}>
         <View style={styles.imageIcon}>
-        {
-          imageStatusToDisplay(imageStatus)
-        }
+        {imageStatusToDisplay(imageStatus)}
         </View>
         <View style={styles.userRowInfo}>
           <Text>{username}</Text>
           <Text style={styles.lastReceived}>Last received: {lastReceived}</Text>
         </View>
       </View>
-      </TouchableHighlight>
+    </TouchableHighlight>
   )
 }
 
 const renderUserRow = (userObject, i, openChat) => {
   return (
-    <UserRow
-      key={i}
-      username={userObject.name}
-      lastReceived={userObject.lastReceived}
-      imageStatus={userObject.receivedStatus}
-      openChat={openChat}
-    />
+    <UserRow key={i}
+             username={userObject.username}
+             uid={userObject.uid}
+             lastReceived={userObject.lastReceived}
+             imageStatus={constants.TEXT_RECEIVED_SEEN}
+             openChat={openChat} />
   )
 }
 
