@@ -5,6 +5,7 @@ import { ListView } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
 import getFriends, {getStory} from './StoryHelpers'
 import deepCopy from 'deepcopy'
+import ViewImage from '../Image/ViewImage'
 
 class StoriesContainer extends Component {
   constructor (props) {
@@ -12,6 +13,8 @@ class StoriesContainer extends Component {
     this.state = {
       friendsStories: []
     }
+
+    this.pressStory = this.pressStory.bind(this)
   }
 
   componentDidMount () {
@@ -43,6 +46,19 @@ class StoriesContainer extends Component {
     })
   }
 
+  pressStory (stories) {
+    console.log('stories for user', stories)
+
+    this.props.navigator.push({
+      component: ViewImage,
+      title: 'Story time',
+      passProps: {
+        stories,
+        navigator: this.props.navigator
+      }
+    })
+  }
+
   render () {
     console.log('state rerender')
     return (
@@ -54,7 +70,11 @@ class StoriesContainer extends Component {
         tabBarInactiveTextColor="gray"
       >
         {/* Snaps container lists all your saved memories (photos you've taken) and adds to ability to resend */}
-        <Story stories={this.state.friendsStories} tabLabel="Stories" />
+        <Story
+          stories={this.state.friendsStories}
+          onPressStory={this.pressStory}
+          tabLabel="Stories"
+        />
         {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
         <DiscoverContainer tabLabel="Discover" />
       </ScrollableTabView>

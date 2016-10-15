@@ -4,12 +4,33 @@ import { storyStyles as styles } from './StoryStyles'
 import StoryRow from './StoryRow'
 import timediff from 'timediff'
 
-const Stories = ({stories}) => {
+const Stories = ({stories, onPressStory}) => {
   console.log('stories', stories)
   var dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2
   })
   const newStories = dataSource.cloneWithRows(stories)
+
+  const createStoryRow = ({username, stories}, sectionId, rowId) => {
+  // time dif
+    console.log(username, stories)
+    if (stories) {
+      let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHms'))
+
+      return (
+        <StoryRow
+          username={username}
+          postedTime={timeString}
+          url={stories[0].url}
+          stories={stories}
+          key={`${sectionId}-${rowId}`}
+          onPressStory={onPressStory}
+    />
+  )
+    }
+    return <View />
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading} />
@@ -26,28 +47,11 @@ const Stories = ({stories}) => {
 }
 
 Stories.propTypes = {
-  stories: PropTypes.array.isRequired
+  stories: PropTypes.array.isRequired,
+  onPressStory: PropTypes.func.isRequired
 }
 
 export default Stories
-
-const createStoryRow = ({username, stories}, sectionId, rowId) => {
-  // time dif
-  console.log(username, stories)
-  if (stories) {
-    let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHms'))
-
-    return (
-      <StoryRow
-        username={username}
-        postedTime={timeString}
-        url={stories[0].url}
-        key={`${sectionId}-${rowId}`}
-    />
-  )
-  }
-  return <View />
-}
 
 function createTime (timeDiffObject) {
   let output = ''

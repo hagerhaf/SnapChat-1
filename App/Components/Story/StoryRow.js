@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {TouchableHighlight, Text, View, Image} from 'react-native'
 import {storyStyles as styles} from './StoryStyles'
 
-const StoryRow = ({username, postedTime, url}) => {
+const StoryRow = ({username, postedTime, url, stories, onPressStory}) => {
   return (
-    <TouchableHighlight>
+    <TouchableHighlight onPress={() => onPressStory(stories)}>
       <View style={styles.storyRow}>
         <View style={styles.storyIcon}>
           <Image
@@ -20,6 +20,14 @@ const StoryRow = ({username, postedTime, url}) => {
       </View>
     </TouchableHighlight>
   )
+}
+
+StoryRow.propTypes = {
+  stories: PropTypes.array.isRequired,
+  onPressStory: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  postedTime: PropTypes.string.isRequired
 }
 
 export default StoryRow

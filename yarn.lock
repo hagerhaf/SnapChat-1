@@ -4049,6 +4049,12 @@ react-static-container@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-static-container/-/react-static-container-1.0.1.tgz#694c0dd68a896b879519afb548399cc1989c9ab0"
 
+react-timeout:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-timeout/-/react-timeout-1.0.0.tgz#100056d81bbea208cbbec6e55e4efc86a61a7df8"
+  dependencies:
+    object-assign "^4.0.1"
+
 react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
