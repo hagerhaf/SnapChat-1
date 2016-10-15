@@ -4,6 +4,7 @@ import SendToFriends from './SendToFriends'
 import SendRow, {seperatorFriends} from './SendRow'
 import database, {authentication} from '../FireBase/FireBase'
 import sendSnapToUser from './SendHelpers'
+import MainContainer from '../Main/MainContainer'
 
 class SendContainer extends Component {
   constructor (props) {
@@ -13,7 +14,10 @@ class SendContainer extends Component {
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
       friends: [],
-      imageUri: this.props.imageUri
+      imageUri: this.props.imageUri,
+      isSending: false,
+      hasSent: false,
+      sendError: false
     }
 
     this.selectFriend = this.selectFriend.bind(this)
@@ -30,7 +34,8 @@ class SendContainer extends Component {
     newFriends = this.state.friends.slice()
     newFriends[rowId] = {
       name: newFriends[rowId].name,
-      highLighted: !newFriends[rowId].highLighted
+      highLighted: !newFriends[rowId].highLighted,
+      key: newFriends[rowId].key
     }
     console.log(this.state.friends)
     this.setState({
@@ -40,11 +45,47 @@ class SendContainer extends Component {
   }
 
   send () {
-    // find selected friends
+    console.log('is sending')
+    this.setState({
+      isSending: true
+    })
+    Promise.all(
+    this.state.friends.map((friendObject) => {
+      console.log(friendObject)
+      if (friendObject.highLighted) {
+        return sendSnapToUser(this.props.imageUri, authentication.currentUser.uid, friendObject.key)
+      }
+    })
+    )
+    .then((res) => {
+      this.setState({
+        isSending: false,
+        hasSent: true,
+        sendError: false
+      })
 
-    //then send them photo
+      setTimeout(() => {
+        this.props.navigator.popToTop()
+        this.setState({
+          hasSent: false
+        })
+      }, 1500)
+    })
+    .catch((err) => {
+      this.setState({
+        isSending: false,
+        hasSent: true,
+        sendError: true
+      })
 
-    sendSnapToUser(this.props.imageUri, authentication.currentUser.uid, this.state.friends[0].key)
+      setTimeout(() => {
+        this.props.navigator.popToTop()
+        this.setState({
+          hasSent: false,
+          sendError: false
+        })
+      }, 1500)
+    })
   }
 
   // Retrieves a list of friends from the fire base depending on the logged in UserID
@@ -62,7 +103,7 @@ class SendContainer extends Component {
           name: child.val().firstname + ' ' + child.val().lastname,
           username: child.val().username,
           birthday: child.val().birthday,
-          highlight: child.val().highlighted,
+          highlight: false,
           key: child.key
         })
       })
@@ -91,6 +132,9 @@ class SendContainer extends Component {
         selectedFriends={findSelectedFriends(this.state.friends)}
         onBackPress={this.pressBack}
         onSendPressed={this.send}
+        isSending={this.state.isSending}
+        hasSent={this.state.hasSent}
+        sendError={this.state.sendError}
       />
     )
   }

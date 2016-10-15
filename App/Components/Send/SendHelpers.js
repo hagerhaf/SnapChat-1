@@ -1,16 +1,28 @@
 import * as firebase from 'firebase'
+import RNFetchBlob from 'react-native-fetch-blob'
+
+/* shit needed for sending */
+const polyfill = RNFetchBlob.polyfill
+window.XMLHttpRequest = polyfill.XMLHttpRequest
+window.Blob = polyfill.Blob
 
 export default function uploadImageToFirebase (imageUri, fromUser, toUser) {
-  console.log(imageUri)
-  console.log(fromUser)
-  console.log(toUser)
+  return new Promise(function (resolve, reject) {
+    // Create a root reference
+    var storageRef = firebase.storage().ref()
 
-  let userFolderRef = firebase.storage().ref().child('userSnaps').child(fromUser)
-  let snapRef = userFolderRef.child('unique_snap_id')
+    // Create a reference to users folder
+    let userFolderRef = storageRef.child('userSnaps').child(toUser)
 
-  snapRef.put().then(function (snapshot) {
-    console.log('uploaded..')
+    let path = imageUri
+    let imageName = imageUri.match(/[^/.]+.jpg/)[0]
+    Blob.build(RNFetchBlob.wrap(path), { type: 'image/jpeg' })
+        .then((blob) => userFolderRef
+                .child(imageName)
+                .put(blob, { contentType: 'image/jpeg' })
+        )
+        .then((snapshot) => { resolve(snapshot) })
+        .catch((err) => { reject(err) })
   })
 }
-
 

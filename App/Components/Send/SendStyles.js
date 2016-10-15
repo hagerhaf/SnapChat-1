@@ -17,6 +17,12 @@ export const sendStyles = StyleSheet.create({
     padding: 13,
     flexDirection: 'row'
   },
+  headingColorError: {
+    backgroundColor: 'rgb(253,109,109)'
+  },
+  headingColorSuccess: {
+    backgroundColor: 'rgb(90,253,111)'
+  },
   headingBottom: {
     padding: 9
   },
