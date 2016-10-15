@@ -9,7 +9,6 @@ import MainContainer from '../Main/MainContainer'
 class SendContainer extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
@@ -37,7 +36,6 @@ class SendContainer extends Component {
       highLighted: !newFriends[rowId].highLighted,
       key: newFriends[rowId].key
     }
-    console.log(this.state.friends)
     this.setState({
       friends: newFriends,
       friendsDataSource: this.state.friendsDataSource.cloneWithRows(newFriends)
@@ -45,13 +43,11 @@ class SendContainer extends Component {
   }
 
   send () {
-    console.log('is sending')
     this.setState({
       isSending: true
     })
     Promise.all(
     this.state.friends.map((friendObject) => {
-      console.log(friendObject)
       if (friendObject.highLighted) {
         return sendSnapToUser(this.props.imageUri, authentication.currentUser.uid, friendObject.key)
       }
@@ -97,7 +93,6 @@ class SendContainer extends Component {
     var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
     // Iterate through results and push to array
     friendsRef.on('value', function (snapshot) {
-      console.log(snapshot.val())
       snapshot.forEach((child) => {
         friends.push({
           name: child.val().firstname + ' ' + child.val().lastname,
