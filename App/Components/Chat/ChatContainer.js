@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { ListView } from 'react-native'
+import { ListView, View, ActivityIndicator } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
 import database, { authentication } from '../FireBase/FireBase'
@@ -9,6 +9,7 @@ class ChatContainer extends React.Component {
     super(props)
 
     this.state = {
+      loading: true,
       friendsList: [],
       dataSource: friendsDataSource.cloneWithRows([])
     }
@@ -36,7 +37,8 @@ class ChatContainer extends React.Component {
       })
       appScope.setState({
         dataSource: friendsDataSource.cloneWithRows(friends),
-        friendsList: friends
+        friendsList: friends,
+        loading: false
       })
     }, (errorObject) => {
       console.log('The read failed: ' + errorObject.code)
@@ -62,10 +64,9 @@ class ChatContainer extends React.Component {
 
   render () {
     return (
-      <Chat
-        friends={this.state.dataSource}
-        openChat={this.openChat}
-      />
+      <Chat friends={this.state.dataSource}
+            openChat={this.openChat}
+            loading={this.state.loading} />
     )
   }
 }

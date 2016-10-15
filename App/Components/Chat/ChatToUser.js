@@ -13,16 +13,16 @@ class ChatToUser extends Component {
   }
 
   componentDidMount () {
-    const component = this
-    const userId = authentication.currentUser.uid
-    const newMessages = []
-    database.ref(`userObjects/messages/${userId}/received/${this.props.uid}`)
-      .on('value', (snapshot) => {
-        snapshot.forEach((child) => {
-          newMessages.push(child.val())
-          component.setState({messages: messages.cloneWithRows(newMessages)})
-        })
-      })
+    // const component = this
+    // const userId = authentication.currentUser.uid
+    // const newMessages = []
+    // database.ref(`userObjects/messages/${userId}/received/${this.props.uid}`)
+    //   .on('value', (snapshot) => {
+    //     snapshot.forEach((child) => {
+    //       newMessages.push(child.val())
+    //       component.setState({messages: messages.cloneWithRows(newMessages)})
+    //     })
+    //   })
   }
 
   render () {
