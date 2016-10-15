@@ -91,6 +91,9 @@ const SendToFriends = (
           return renderSendUserRow(data, sectionId, rowId, highlightRow, onSelectFriend)
         }}
         renderSeparator={seperatorFriends}
+        renderSectionHeader={function () {
+          return <Text style={styles.subHeading}> Friends </Text>
+        }}
 
       />
       <View style={[styles.heading, styles.headingBottom, headingResults(hasSent, sendError)]} >

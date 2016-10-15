@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { CameraRoll } from 'react-native'
 import Edit from './Edit'
 import SendContianer from '../Send/SendContainer'
+import {saveToStory} from '../Send/SendHelpers'
 
 class EditContainer extends Component {
   constructor (props) {
@@ -10,7 +11,8 @@ class EditContainer extends Component {
     this.state = {
       textVisible: false,
       timer: '3',
-      encodedSignature: null
+      encodedSignature: null,
+      onStorySaving: false
     }
 
     this.backPressed = this.backPressed.bind(this)
@@ -20,12 +22,13 @@ class EditContainer extends Component {
     this.onReset = this.onReset.bind(this)
     this.onSave = this.onSave.bind(this)
     this.onUpdate = this.onUpdate.bind(this)
+    this.onStorySave = this.onStorySave.bind(this)
   }
 
-  onTimerValueChange(value : string) {
+  onTimerValueChange (value : string) {
     this.setState({
       timer: value
-    });
+    })
   }
 
   backPressed () {
@@ -43,14 +46,14 @@ class EditContainer extends Component {
   }
 
   textPressed () {
-    this.setState({textVisible: !this.state.textVisible});
+    this.setState({textVisible: !this.state.textVisible})
   }
 
   /**
    * Do extra things after the sketch reset
    */
-  onReset() {
-    console.log('The drawing has been cleared!');
+  onReset () {
+    console.log('The drawing has been cleared!')
   }
 
   /**
@@ -58,7 +61,7 @@ class EditContainer extends Component {
    * so that you can save the drawing in the device and get an object
    * once the promise is resolved, containing the path of the image.
    */
-  onSave() {
+  onSave () {
     // this.sketch.saveImage(this.state.encodedSignature)
     //     .then((data) => console.log(data))
     //     .catch((error) => console.log(error));
@@ -69,8 +72,24 @@ class EditContainer extends Component {
    * On every update (touch up from the drawing),
    * you'll receive the base64 representation of the drawing as a callback.
    */
-  onUpdate(base64Image) {
-    this.setState({ encodedSignature: base64Image });
+  onUpdate (base64Image) {
+    this.setState({ encodedSignature: base64Image })
+  }
+
+  onStorySave (imageUri) {
+    this.setState({
+      onStorySaving: true
+    })
+    saveToStory(imageUri)
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          onStorySaving: false
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
@@ -85,6 +104,8 @@ class EditContainer extends Component {
       onReset={this.onReset}
       onUpdate={this.onUpdate}
       onSave={this.onSave}
+      onPressedSaveToStory={this.onStorySave}
+      onStorySaving={this.state.onStorySaving}
     />
   }
 }

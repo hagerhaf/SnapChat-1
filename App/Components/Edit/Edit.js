@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Text, View, TouchableHighlight, Image, TextInput, TouchableOpacity } from 'react-native'
 import Sketch from 'react-native-sketch'
 import { editStyles as styles } from './editStyles'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const Edit = ({
   backPressed,
@@ -13,11 +14,13 @@ const Edit = ({
   onTimerValueChange,
   onReset,
   onUpdate,
-  onSave
+  onSave,
+  onPressedSaveToStory,
+  onStorySaving
   }) => (
   // Render the image here.
     <Image source={{uri: uri}} style={styles.container}>
-
+      <Spinner visible={onStorySaving} />
       {/* Top Navigation */}
       <View style={styles.header}>
         {/* Back button */}
@@ -61,7 +64,7 @@ const Edit = ({
       {/* ref={(sketch) => { this.sketch = sketch; }}*/}
       {/* style={styles.sketch}*/}
       {/* />*/}
-      
+
       {/* Bottom navigation */}
       <View style={styles.footer}>
         <View style={styles.header}>
@@ -78,7 +81,7 @@ const Edit = ({
             </TouchableOpacity>
 
             {/* Add to story */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => onPressedSaveToStory(uri)}>
               <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon} />
             </TouchableOpacity>
           </View>
@@ -103,7 +106,9 @@ Edit.propTypes = {
   onTimerValueChange: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired
+  onSave: PropTypes.func.isRequired,
+  onPressedSaveToStory: PropTypes.func.isRequired,
+  onStorySaving: PropTypes.bool.isRequired
 }
 
 export default Edit

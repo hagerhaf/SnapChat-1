@@ -26,3 +26,20 @@ export default function uploadImageToFirebase (imageUri, fromUser, toUser) {
   })
 }
 
+export function saveToStory (imageUri) {
+  return new Promise(function (resolve, reject) {
+    // Create a root reference
+    var storageRef = firebase.storage().ref()
+    var snapStoryRef = storageRef.child('stories').child(firebase.auth().currentUser.uid)
+
+    let path = imageUri
+    let imageName = imageUri.match(/[^/.]+.jpg/)[0]
+    Blob.build(RNFetchBlob.wrap(path), { type: 'image/jpeg' })
+        .then((blob) => snapStoryRef
+                .child(imageName)
+                .put(blob, { contentType: 'image/jpeg' })
+        )
+        .then((snapshot) => { resolve(snapshot) })
+        .catch((err) => { reject(err) })
+  })
+}

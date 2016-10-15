@@ -26,6 +26,12 @@ export const sendStyles = StyleSheet.create({
   headingBottom: {
     padding: 9
   },
+  subHeading: {
+    color: '#3cb2e2',
+    fontWeight: 'bold',
+    marginLeft: 15,
+    marginTop: 10
+  },
   title: {
     fontFamily: 'Avenir-Heavy',
     alignSelf: 'center',
