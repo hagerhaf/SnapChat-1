@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import {View, Text, ListView} from 'react-native'
+import {View, Text, ListView, AsyncStorage} from 'react-native'
 import AddByAddressBook from './AddByAddressBook'
 import FriendRow, {seperatorFriends} from './FriendRow'
 import {filter} from 'lodash'
+import database, {authentication} from '../FireBase/FireBase'
 
 // Cant get to work atm
-import AddressBook from 'react-native-contacts'
+var Contacts = require('react-native-contacts');
+
 
 class AddByAddressBookContainer extends Component {
 
@@ -14,9 +16,9 @@ class AddByAddressBookContainer extends Component {
 
         this.state = {
             friendsDataSource: friendsDataSource.cloneWithRows([]),
-            friends: friends,
+            friends: null,
             searchText: "",
-            rawData: sortedFriends
+            rawData: null
         }
 
         this.addFriend = this.addFriend.bind(this)
@@ -24,17 +26,70 @@ class AddByAddressBookContainer extends Component {
         this.backButtonPressed = this.backButtonPressed.bind(this)
     }
 
-    // This will contain the call to the database to return a list of users
-    // a list of phone numbers which are contained in the phone will be sent as input
-    // and the matching users will be returned as a list.
-    // friendsDataSource will then be updated to reflect this list
-    componentDidMount () {
-        mockAPICall((err, res) => {
-            if (err) console.log(err)
-            else {
 
-                this.setState({
-                    friendsDataSource: friendsDataSource.cloneWithRows(res)
+    componentDidMount () {
+
+        Contacts.getAll((err, contacts) => {
+            if(err && err.type === 'permissionDenied'){
+                // x.x
+            } else {
+                // Pull names from contact list.
+                var localNames = [];
+                for (var i=0; i < contacts.length; i++) {
+                    var contact = contacts[i];
+                    localNames.push(contact.givenName + ' ' + contact.familyName)
+                }
+
+                // Query fire base for all users.
+                var appScope = this;
+                var remoteUsers = [];
+                database.ref('users').once('value', function (snapshot) {
+                    var pairs = snapshot.val()
+                    for (var key in pairs) {
+                        var val = pairs[key];
+                        val['id'] = key;
+                        remoteUsers.push(val)
+                    }
+
+                    // Query fire base for current users friends.
+                    var currFriends = []
+                    var userId = authentication.currentUser.uid
+                    var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
+                    friendsRef.on('value', function (snapshot) {
+                        snapshot.forEach((child) => {
+                            currFriends.push(
+                                child.val().username
+                            )
+                        });
+
+                        // Find users who have app, check if already friends.
+                        var toDisplay = [];
+                        for (var i = 0; i < remoteUsers.length; i++) {
+                            var remoteUser = remoteUsers[i];
+                            console.log(typeof remoteUser.username);
+                            var name = remoteUser.firstname + ' ' + remoteUser.lastname;
+
+                            if (localNames.includes(name)) {
+                                toDisplay.push({
+                                    name: name,
+                                    username: remoteUser.username,
+                                    added: currFriends.includes(remoteUser.username)
+                                })
+                            }
+                        }
+
+                        // Update ListView.
+                        appScope.setState({
+                            friendsDataSource: friendsDataSource.cloneWithRows(toDisplay),
+                            friends: toDisplay,
+                            remoteUsers: remoteUsers
+                        })
+
+                    }, function (errorObject) {
+                        console.log('The read failed: ' + errorObject.code)
+                    });
+                }, function (errorObject) {
+                    console.log('The read failed: ' + errorObject.code)
                 })
             }
         })
@@ -66,8 +121,55 @@ class AddByAddressBookContainer extends Component {
     // Will be called when the Add button is called on a user.
     // Need to perform call to db to add a given user
     // Then remove their name from the friendsDataSource to remove row
-    addFriend (rowId) {
-        console.log("Adding Friend")
+    async addFriend (rowId) {
+        var username = this.state.friends[rowId].username;
+
+        // Get friend object through username.
+        var friend;
+        for (var i = 0; i < this.state.remoteUsers.length; i++) {
+            var curr = this.state.remoteUsers[i];
+            if (curr.username == username) {
+                friend = curr;
+                break;
+            }
+        }
+
+        // Extract and remove ID.
+        console.log(friend);
+        var friendId = friend.id;
+        delete friend.id;
+
+        try {
+            let userId = await AsyncStorage.getItem('userId')
+            userId = userId.replace(/"/g, '')
+            database.ref('userObjects')
+                .child('friends')
+                .child(userId)
+                .child('list')
+                .update({ [friendId]: friend }, (error) => {
+                    if (error) console.log('Error updating friends list', error);
+
+                    // Update list to include that this friends has been added.
+                    var newFriends = [];
+                    for (var i = 0; i < this.state.friends.length; i++) {
+                        var oldFriend = this.state.friends[i];
+                        var newFriend = {
+                            name: oldFriend.name,
+                            username: oldFriend.username,
+                            added: this.state.friends[i].username || this.state.friends[i].username === username
+                        };
+                        newFriends.push(newFriend)
+                    }
+
+                    this.setState({
+                        friends: newFriends,
+                        friendsDataSource: friendsDataSource.cloneWithRows(newFriends),
+                    })
+                })
+
+        } catch (error) {
+            console.log('Error retreiving user Id', error)
+        }
     }
 
     render () {
@@ -93,132 +195,4 @@ const mockAPICall = (cb) => {
 }
 
 var friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-
-// Mock Data
-const friends = [
-    {
-        name: 'Lachlan Dee',
-        username: 'ldee',
-        highLighted: false
-    },
-    {
-        name: 'Adam Villela',
-        username: 'avillela',
-        highLighted: false
-    },
-    {
-        name: 'Ben Paul',
-        username: 'bpaul',
-        highLighted: false
-    },
-    {
-        name: 'Brody Ricardi',
-        username: 'bricardi',
-        highLighted: false
-    },
-    {
-        name: 'Claire Gorinas',
-        username: 'cgorinas',
-        highLighted: false
-    },
-    {
-        name: 'Emily Thompson',
-        username: 'ethompson',
-        highLighted: false
-    },
-    {
-        name: 'Josh Grover',
-        username: 'jgrover',
-        highLighted: false
-    },
-    {
-        name: 'Jack Crisp',
-        username: 'jcrisp',
-        highLighted: false
-    },
-    {
-        name: 'Harry Mitchell',
-        username: 'hmitchell',
-        highLighted: false
-    },
-    {
-        name: 'Luke Wentworth',
-        username: 'lwentworth',
-        highLighted: false
-    },
-    {
-        name: 'Tom Deery',
-        username: 'tdeery',
-        highLighted: false
-    },
-    {
-        name: 'Kane Michelini',
-        username: 'kmichelini',
-        highLighted: false
-    },
-    {
-        name: 'Georgia Castricum',
-        username: 'gcastricum',
-        highLighted: false
-    },
-    {
-        name: 'Jake Musson',
-        username: 'jmusson',
-        highLighted: false
-    },
-    {
-        name: 'nathan',
-        username: 'nmalishev',
-        highLighted: false
-    },
-    {
-        name: 'Anthony LaSpina',
-        username: 'alaspina',
-        highLighted: false
-    },
-    {
-        name: 'tim',
-        username: 'timmyboy',
-        highLighted: false
-    },
-    {
-        name: 'remdogga',
-        username: 'remdogg',
-        highLighted: false
-    },
-    {
-        name: 'Nick Howell',
-        username: 'nhowell',
-        highLighted: false
-    },
-    {
-        name: 'Henry Mahoney',
-        username: 'hmahoney',
-        highLighted: false
-    },
-    {
-        name: 'Talia Rinaldo',
-        username: 'talia',
-        highLighted: false
-    },
-    {
-        name: 'Michael Wilson',
-        username: 'wilso',
-        highLighted: false
-    },
-    {
-        name: 'Lochie Brick',
-        username: 'lbrick',
-        highLighted: false
-    },
-    {
-        name: 'Rebecca Kirk',
-        username: 'rkirk',
-        highLighted: false
-    }
-]
-
-var sortedFriends = friends.sort((a,b) => {
-    return a.name.localeCompare(b.name);
-})
 
