@@ -2,12 +2,15 @@ import React from 'react'
 import {TouchableHighlight, Text, View, Image} from 'react-native'
 import {storyStyles as styles} from './StoryStyles'
 
-const StoryRow = ({username, postedTime}) => {
+const StoryRow = ({username, postedTime, url}) => {
   return (
     <TouchableHighlight>
       <View style={styles.storyRow}>
         <View style={styles.storyIcon}>
-          <Image source={require('../../../images/chat/cameraIconSmallChat.png')} style={styles.storyImage} />
+          <Image
+            style={{width: 30, height: 30, borderRadius: 4}}
+            source={{uri: url}}
+        />
         </View>
 
         <View>

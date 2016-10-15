@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Text, View, ListView } from 'react-native'
+import { Text, View, ListView, Image } from 'react-native'
 import { storyStyles as styles } from './StoryStyles'
 import StoryRow from './StoryRow'
 import timediff from 'timediff'
@@ -41,6 +41,7 @@ const createStoryRow = ({username, stories}, sectionId, rowId) => {
       <StoryRow
         username={username}
         postedTime={timeString}
+        url={stories[0].url}
         key={`${sectionId}-${rowId}`}
     />
   )
