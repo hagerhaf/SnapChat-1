@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Text, View, TouchableHighlight, Image, TextInput, TouchableOpacity } from 'react-native'
 // import Sketch from 'react-native-sketch'
+import Sketch from 'react-native-sketch'
 import { editStyles as styles } from './editStyles'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const Edit = ({
   backPressed,
@@ -13,37 +15,51 @@ const Edit = ({
   onTimerValueChange,
   onReset,
   onUpdate,
-  onSave
-  }) => (
+  onSave,
+  onPressedSaveToStory,
+  onStorySaving,
+  storySaved
+  }) => {
   // Render the image here.
-  <Image source={{uri: uri}} style={styles.container}>
 
+  function saveToStoryButton (storySaved) {
+    if (storySaved) { return <View /> }
+    else {
+      return (<TouchableOpacity onPress={() => onPressedSaveToStory(uri, timer)}>
+        <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon} />
+      </TouchableOpacity>
+        )
+    }
+  }
+  return (<Image source={{uri: uri}} style={styles.container}>
+    <Spinner visible={onStorySaving} />
     {/* Top Navigation */}
     <View style={styles.header}>
       {/* Back button */}
       <View style={styles.flex}>
-        <TouchableHighlight onPress={backPressed}>
+        <TouchableOpacity onPress={backPressed}>
           <Image source={require('../../../images/edit/back.png')} style={styles.backIcon} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View style={styles.flex} />
 
       {/* Editing buttons */}
       <View style={styles.triple}>
         {/* Add sticker */}
-        <TouchableHighlight>
+
+        <TouchableOpacity>
           <Image source={require('../../../images/edit/emoticon.png')} style={styles.icon} />
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         {/* Add text */}
-        <TouchableHighlight onPress={onTextPressed}>
+        <TouchableOpacity onPress={onTextPressed}>
           <Image source={require('../../../images/edit/text.png')} style={styles.textIcon} />
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         {/* Draw */}
-        <TouchableHighlight>
+        <TouchableOpacity>
           <Image source={require('../../../images/edit/draw.png')} style={styles.drawIcon} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
 
@@ -52,15 +68,15 @@ const Edit = ({
       style={textVisible ? styles.textShown : styles.textHidden}
     />
 
-    {/* <Sketch */}
-        {/* resizeMode="contain" */}
-        {/* strokeColor="#111111" */}
-        {/* strokeThickness={2} */}
-        {/* onReset={onReset} */}
-        {/* onUpdate={onUpdate} */}
-        {/* ref={(sketch) => { this.sketch = sketch; }} */}
-        {/* style={styles.sketch} */}
-    {/* /> */}
+    {/* <Sketch*/}
+    {/* resizeMode="contain"*/}
+    {/* strokeColor="#111111"*/}
+    {/* strokeThickness={2}*/}
+    {/* onReset={onReset}*/}
+    {/* onUpdate={onUpdate}*/}
+    {/* ref={(sketch) => { this.sketch = sketch; }}*/}
+    {/* style={styles.sketch}*/}
+    {/* />*/}
 
     {/* Bottom navigation */}
     <View style={styles.footer}>
@@ -68,30 +84,31 @@ const Edit = ({
         {/* Editing buttons */}
         <View style={styles.triple}>
           {/* Change time */}
-          <TouchableHighlight>
+          <TouchableOpacity>
             <Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon} />
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           {/* Save snap */}
-          <TouchableHighlight onPress={onSave}>
+          <TouchableOpacity onPress={onSave}>
             <Image source={require('../../../images/edit/save.png')} style={styles.icon} />
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           {/* Add to story */}
-          <TouchableHighlight>
-            <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon} />
-          </TouchableHighlight>
+          {saveToStoryButton(storySaved)}
+
         </View>
 
         {/* Send */}
         <View style={styles.flex} />
-          <TouchableHighlight onPress={onSendPressed}>
-            <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.sendIcon} />
-          </TouchableHighlight>
-        </View>
+
+        <TouchableOpacity onPress={() => onSendPressed(uri)}>
+          <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.sendIcon} />
+        </TouchableOpacity>
+      </View>
     </View>
   </Image>
-)
+    )
+}
 
 Edit.propTypes = {
   backPressed: PropTypes.func.isRequired,
@@ -103,7 +120,11 @@ Edit.propTypes = {
   onTimerValueChange: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired
+  onSave: PropTypes.func.isRequired,
+  onPressedSaveToStory: PropTypes.func.isRequired,
+  onStorySaving: PropTypes.bool.isRequired,
+  storySaved: PropTypes.bool.isRequired
 }
 
 export default Edit
+

@@ -1,0 +1,56 @@
+import React, {Component, PropTypes} from 'react'
+import ViewSnap from './ViewSnap'
+
+class ViewImage extends Component {
+  constructor (props) {
+    super(props)
+    // keeps a count on what snap we are on
+    this.state = {
+      snapCount: 0,
+      timer: parseInt(this.props.stories[0].storyInfo.timer)
+    }
+
+    this.back = this.back.bind(this)
+    this.countDown = this.countDown.bind(this)
+  }
+
+  back () {
+    this.props.navigator.pop()
+  }
+
+  countDown () {
+    if (this.state.snapCount + 1 < this.props.stories.length) {
+      setTimeout(() => {
+        if (this.state.timer - 1 < 0) {
+          this.setState({
+            snapCount: this.state.snapCount += 1,
+            timer: parseInt(this.props.stories[this.state.snapCount].storyInfo.timer)
+          })
+        } else {
+          this.setState({
+            timer: this.state.timer -= 1
+          })
+        }
+      }, 1000)
+    } else {
+      this.back()
+    }
+  }
+
+  render () {
+
+    let currentStory = this.props.stories[this.state.snapCount]
+
+    this.countDown()
+
+    return (
+      <ViewSnap url={currentStory.url} onBackPressed={this.back} countDown={this.state.timer} />
+    )
+  }
+}
+
+export default (ViewImage)
+
+ViewImage.propTypes = {
+  navigator: PropTypes.object.isRequired
+}

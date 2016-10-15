@@ -10,9 +10,12 @@ npm install -g react-native-cli
 ```
 
 Project is located in 'SnapChat' - index.ios.js is the entry point, everything else is in the 'App' folder.
+Important do NOT forget `react-native link`
+
 ```
 cd SnapChat
 npm install
+react-native link
 ```
 
 #Running the app

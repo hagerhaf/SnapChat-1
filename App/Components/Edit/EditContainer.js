@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { CameraRoll } from 'react-native'
 import Edit from './Edit'
 import SendContianer from '../Send/SendContainer'
+import {saveToStory} from '../Send/SendHelpers'
 
 class EditContainer extends Component {
   constructor (props) {
@@ -10,7 +11,9 @@ class EditContainer extends Component {
     this.state = {
       textVisible: false,
       timer: '3',
-      encodedSignature: null
+      encodedSignature: null,
+      onStorySaving: false,
+      storySaved: false
     }
 
     this.backPressed = this.backPressed.bind(this)
@@ -20,6 +23,7 @@ class EditContainer extends Component {
     this.onReset = this.onReset.bind(this)
     this.onSave = this.onSave.bind(this)
     this.onUpdate = this.onUpdate.bind(this)
+    this.onStorySave = this.onStorySave.bind(this)
   }
 
   onTimerValueChange (value) {
@@ -32,10 +36,14 @@ class EditContainer extends Component {
     this.props.navigator.pop()
   }
 
-  send () {
+  send (imageUri) {
     this.props.navigator.push({
       title: 'sendToFriends',
-      component: SendContianer
+      component: SendContianer,
+      passProps: {
+        imageUri,
+        timer: this.state.timer
+      }
     })
   }
 
@@ -68,23 +76,42 @@ class EditContainer extends Component {
    */
   onUpdate (base64Image) {
     this.setState({ encodedSignature: base64Image })
+
+  }
+
+  onStorySave (imageUri, timer) {
+    this.setState({
+      onStorySaving: true
+    })
+    saveToStory({imageUri, timer})
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          onStorySaving: false,
+          storySaved: true
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
-    return (
-      <Edit
-        backPressed={this.backPressed}
-        onSendPressed={this.send}
-        onTextPressed={this.textPressed}
-        textVisible={this.state.textVisible}
-        uri={this.props.uri}
-        timer={this.state.timer}
-        onTimerValueChange={this.onTimerValueChange}
-        onReset={this.onReset}
-        onUpdate={this.onUpdate}
-        onSave={this.onSave}
-      />
-    )
+    return <Edit
+      backPressed={this.backPressed}
+      onSendPressed={this.send}
+      onTextPressed={this.textPressed}
+      textVisible={this.state.textVisible}
+      uri={this.props.uri}
+      timer={this.state.timer}
+      onTimerValueChange={this.onTimerValueChange}
+      onReset={this.onReset}
+      onUpdate={this.onUpdate}
+      onSave={this.onSave}
+      onPressedSaveToStory={this.onStorySave}
+      onStorySaving={this.state.onStorySaving}
+      storySaved={this.state.storySaved}
+    />
   }
 }
 
