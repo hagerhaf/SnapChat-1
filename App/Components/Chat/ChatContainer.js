@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { ListView, View, ActivityIndicator } from 'react-native'
+import { ListView } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
 import database, { authentication } from '../FireBase/FireBase'
