@@ -24,4 +24,17 @@ function getSnapsCurrentUser (cb) {
   })
 }
 
+function getDownloadUrl (snap, cb) {
+  const downloadRef = firebase.storage().ref().child('userSnaps').child(firebase.auth().currentUser.uid)
+
+  const fromUser = Object.keys(snap)[0]
+  const key = Object.keys(snap[fromUser])[0]
+  const snapObject = snap[fromUser][key]
+
+  downloadRef.child(snapObject.imageName).getDownloadURL().then(function (url) {
+    cb(Object.assign({url: url}, {storyInfo: snapObject, fromUser: fromUser}))
+  })
+}
+
 export {getSnapsCurrentUser}
+export {getDownloadUrl}
