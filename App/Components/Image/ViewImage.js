@@ -20,9 +20,11 @@ class ViewImage extends Component {
   }
 
   countDown () {
-    if (this.state.snapCount + 1 < this.props.stories.length) {
+    if (this.state.snapCount < this.props.stories.length) {
       this.props.setTimeout(() => {
         if (this.state.timer - 1 < 0) {
+          if (this.state.snapCount + 1 === this.props.stories.length) { return this.back() }
+
           this.setState({
             snapCount: this.state.snapCount += 1,
             timer: parseInt(this.props.stories[this.state.snapCount].storyInfo.timer)
