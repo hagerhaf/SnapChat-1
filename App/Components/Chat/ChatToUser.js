@@ -27,6 +27,10 @@ class ChatToUser extends Component {
     this.fetchSentMessages(userId)
   }
 
+  componentWillUnmount () {
+    chatMessages = []
+  }
+
   fetchReceivedMessages (userId) {
     const getMessages = database.ref(`userObjects/messages/${userId}/${this.props.uid}`)
     getMessages.on('value', (snapshot) => {
@@ -123,6 +127,7 @@ class ChatToUser extends Component {
 }
 
 let chatMessages = []
+
 const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 export default ChatToUser
