@@ -10,10 +10,11 @@ class EditContainer extends Component {
 
     this.state = {
       textVisible: false,
-      timer: '3',
+      timer: 3,
       encodedSignature: null,
       onStorySaving: false,
-      storySaved: false
+      storySaved: false,
+      timerEdit: false
     }
 
     this.backPressed = this.backPressed.bind(this)
@@ -24,6 +25,7 @@ class EditContainer extends Component {
     this.onSave = this.onSave.bind(this)
     this.onUpdate = this.onUpdate.bind(this)
     this.onStorySave = this.onStorySave.bind(this)
+    this.timerEdit = this.timerEdit.bind(this)
   }
 
   onTimerValueChange (value) {
@@ -49,6 +51,12 @@ class EditContainer extends Component {
 
   textPressed () {
     this.setState({textVisible: !this.state.textVisible})
+  }
+
+  timerEdit () {
+    this.setState({
+      timerEdit: !this.state.timerEdit
+    })
   }
 
   /**
@@ -105,6 +113,8 @@ class EditContainer extends Component {
       uri={this.props.uri}
       timer={this.state.timer}
       onTimerValueChange={this.onTimerValueChange}
+      timerEdit={this.state.timerEdit}
+      onTimerEditPressed={this.timerEdit}
       onReset={this.onReset}
       onUpdate={this.onUpdate}
       onSave={this.onSave}

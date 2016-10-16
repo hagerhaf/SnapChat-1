@@ -4,6 +4,8 @@ import { Text, View, TouchableHighlight, Image, TextInput, TouchableOpacity } fr
 import Sketch from 'react-native-sketch'
 import { editStyles as styles } from './editStyles'
 import Spinner from 'react-native-loading-spinner-overlay'
+import Picker from 'react-native-wheel-picker'
+const PickerItem = Picker.Item
 
 const Edit = ({
   backPressed,
@@ -18,7 +20,9 @@ const Edit = ({
   onSave,
   onPressedSaveToStory,
   onStorySaving,
-  storySaved
+  storySaved,
+  timerEdit,
+  onTimerEditPressed
   }) => {
   // Render the image here.
 
@@ -31,6 +35,62 @@ const Edit = ({
         )
     }
   }
+
+  function displayEditTimerImage (timer) {
+    var image
+    switch (timer) {
+      case 1:
+        image = (<Image source={require('../../../images/edit/timer-1.png')} style={styles.timerIcon} />)
+        break
+      case 2:
+        image = (<Image source={require('../../../images/edit/timer-2.png')} style={styles.timerIcon} />)
+        break
+      case 3:
+        image = (<Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon} />)
+        break
+      case 4:
+        image = (<Image source={require('../../../images/edit/timer-4.png')} style={styles.timerIcon} />)
+        break
+      case 5:
+        image = (<Image source={require('../../../images/edit/timer-5.png')} style={styles.timerIcon} />)
+        break
+      case 6:
+        image = (<Image source={require('../../../images/edit/timer-6.png')} style={styles.timerIcon} />)
+        break
+      case 7:
+        image = (<Image source={require('../../../images/edit/timer-7.png')} style={styles.timerIcon} />)
+        break
+      case 8:
+        image = (<Image source={require('../../../images/edit/timer-8.png')} style={styles.timerIcon} />)
+        break
+      case 9:
+        image = (<Image source={require('../../../images/edit/timer-9.png')} style={styles.timerIcon} />)
+        break
+      default:
+        image = (<Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon} />)
+    }
+    return (
+      <TouchableOpacity onPress={onTimerEditPressed}>
+        {image}
+      </TouchableOpacity>
+    )
+  }
+
+  function displayPicker (isPicking) {
+    if(isPicking){
+      return (
+        <Picker style={{flex: 1}}
+        selectedValue={timer}
+        itemStyle={{color: 'white', fontSize: 26}}
+        onValueChange={(index) => onTimerValueChange(index)}>
+        {'123456789'.split('').map((value, i) => {
+          return <PickerItem label={value} value={i + 1} key={'timer' + value} />
+        })}
+      </Picker>
+      )
+    }
+  }
+
   return (<Image source={{uri: uri}} style={styles.container}>
     <Spinner visible={onStorySaving} />
     {/* Top Navigation */}
@@ -80,13 +140,14 @@ const Edit = ({
 
     {/* Bottom navigation */}
     <View style={styles.footer}>
+      {displayPicker(timerEdit)}
+      
       <View style={styles.header}>
         {/* Editing buttons */}
         <View style={styles.triple}>
+
           {/* Change time */}
-          <TouchableOpacity>
-            <Image source={require('../../../images/edit/timer-3.png')} style={styles.timerIcon} />
-          </TouchableOpacity>
+          {displayEditTimerImage(timer)}
 
           {/* Save snap */}
           <TouchableOpacity onPress={onSave}>
@@ -116,14 +177,16 @@ Edit.propTypes = {
   onTextPressed: PropTypes.func.isRequired,
   textVisible: PropTypes.bool.isRequired,
   uri: PropTypes.string.isRequired,
-  timer: PropTypes.string.isRequired,
+  timer: PropTypes.number.isRequired,
   onTimerValueChange: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onPressedSaveToStory: PropTypes.func.isRequired,
   onStorySaving: PropTypes.bool.isRequired,
-  storySaved: PropTypes.bool.isRequired
+  storySaved: PropTypes.bool.isRequired,
+  onTimerEditPressed: PropTypes.func.isRequired,
+  timerEdit: PropTypes.bool.isRequired
 }
 
 export default Edit

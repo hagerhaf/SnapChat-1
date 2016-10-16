@@ -3969,9 +3969,9 @@ react-native-swiper@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.1.tgz#6216d49c594e1247ae0dca23756b141fff4dccbe"
 
-react-native-timer:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-timer/-/react-native-timer-1.1.2.tgz#e4533c01e8e2c04ba316b9f9e86165d7266055b5"
+react-native-wheel-picker:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-wheel-picker/-/react-native-wheel-picker-1.1.0.tgz#3987b4dd50d98c1f72b27b524df47fb9065c44bd"
 
 react-native@^0.34.1:
   version "0.34.1"
