@@ -3458,7 +3458,7 @@ module-deps@^3.9.1:
     through2 "^1.0.0"
     xtend "^4.0.0"
 
-moment@^2.9.0, moment@2.x.x:
+moment@^2.15.1, moment@^2.9.0, moment@2.x.x:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.15.1.tgz#e979c2a29e22888e60f396f2220a6118f85cd94c"
 
@@ -3945,6 +3945,10 @@ react-native-fetch-blob@^0.9.6:
   dependencies:
     base-64 "0.1.0"
     glob "^7.0.6"
+
+react-native-keyboard-spacer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.3.0.tgz#09016c11f6b5cfbc3b96c63e6d049e77a3e0908b"
 
 react-native-loading-spinner-overlay@^0.3.0:
   version "0.3.0"
