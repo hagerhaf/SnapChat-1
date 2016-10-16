@@ -14,3 +14,14 @@ const database = firebaseApp.database()
 
 export default database
 export {authentication}
+
+function getSnapsCurrentUser (cb) {
+  console.log('getSnap')
+  const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
+
+  snapRef.on('child_added', (snapshot) => {
+    cb(snapshot.val())
+  })
+}
+
+export {getSnapsCurrentUser}
