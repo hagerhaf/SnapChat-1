@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, ListView, Image } from 'react-native'
-import * as firebase from 'firebase'
 import database, { authentication } from '../FireBase/FireBase'
 import { chatToUserStyles as styles } from './chatStyles'
+import { uniq } from 'lodash'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
-
-const chatMessages = []
 
 class ChatToUser extends Component {
   constructor (props) {
@@ -18,20 +16,49 @@ class ChatToUser extends Component {
 
     this.updateText = this.updateText.bind(this)
     this.sendMessage = this.sendMessage.bind(this)
+    this.fetchReceivedMessages  = this.fetchReceivedMessages.bind(this)
+    this.fetchSentMessages  = this.fetchSentMessages.bind(this)
+    this.sortByTimeStamp = this.sortByTimeStamp.bind(this)
   }
 
   componentDidMount () {
-    // see if we can bundle this together / clean it up somehow
     const userId = authentication.currentUser.uid
-    console.log(userId)
-    console.log(this.props.uid);
+    this.fetchReceivedMessages(userId)
+    this.fetchSentMessages(userId)
+  }
+
+  // TODO: Add sent and received attributes to chats
+  fetchReceivedMessages (userId) {
     const getMessages = database.ref(`userObjects/messages/${userId}/${this.props.uid}`)
     getMessages.on('value', (snapshot) => {
       snapshot.forEach(child => {
-        chatMessages.push(child.val())
+        const received = child.val()
+        received.type = 'received'
+        chatMessages.push(received)
+        chatMessages = this.sortByTimeStamp(chatMessages)
       })
       this.setState({ messages: messages.cloneWithRows(chatMessages) })
     })
+  }
+
+  fetchSentMessages (userId) {
+    const getSentMessages = database.ref(`userObjects/messages/${this.props.uid}/${userId}`)
+    getSentMessages.on('value', (snapshot) => {
+      snapshot.forEach(child => {
+        chatMessages.push(child.val())
+        chatMessages = this.sortByTimeStamp(chatMessages)
+      })
+      this.setState({ messages: messages.cloneWithRows(chatMessages) })
+    })
+  }
+
+  // hacky as fuck way to remove duplicate objects
+  sortByTimeStamp (messages) {
+    return messages.sort((left, right) => {
+      return new Date(left.timestamp).getTime() - new Date(right.timestamp).getTime()
+    }).map((message) => JSON.stringify(message))
+      .filter((message, i, arr) => arr.indexOf(message) === i)
+      .map((message) => JSON.parse(message))
   }
 
   updateText (text) {
@@ -43,11 +70,11 @@ class ChatToUser extends Component {
     const time = `${new Date()}`
     const message = {
       message: this.state.chatInput,
-      timestamp: time
+      timestamp: time,
+      type: 'sent'
     }
     const send = database.ref(`userObjects/messages/${this.props.uid}/${userId}`)
     send.push(message)
-    chatMessages.push(message)
     this.setState({ chatInput: '', messages: messages.cloneWithRows(chatMessages) })
   }
 
@@ -96,6 +123,7 @@ class ChatToUser extends Component {
   }
 }
 
+let chatMessages = []
 const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 export default ChatToUser
