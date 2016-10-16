@@ -16,8 +16,8 @@ class ChatToUser extends Component {
 
     this.updateText = this.updateText.bind(this)
     this.sendMessage = this.sendMessage.bind(this)
-    this.fetchReceivedMessages  = this.fetchReceivedMessages.bind(this)
-    this.fetchSentMessages  = this.fetchSentMessages.bind(this)
+    this.fetchReceivedMessages = this.fetchReceivedMessages.bind(this)
+    this.fetchSentMessages = this.fetchSentMessages.bind(this)
     this.sortByTimeStamp = this.sortByTimeStamp.bind(this)
     this.onSizeChange = this.onSizeChange.bind(this)
   }
@@ -32,8 +32,8 @@ class ChatToUser extends Component {
     chatMessages = []
   }
 
-  onSizeChange () { 
-    this.listView.scrollTo({y: this.listView.getMetrics().contentLength - this.listViewHeight}) 
+  onSizeChange () {
+    this.listView.scrollTo({y: this.listView.getMetrics().contentLength - this.listViewHeight})
   }
 
   fetchReceivedMessages (userId) {
@@ -90,10 +90,10 @@ class ChatToUser extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.chatToUserToolBar}>
-          <Text style={styles.chatToUserToolBarButton}> </Text>
+          <Text style={styles.chatToUserToolBarButton} />
           <Text style={[styles.chatToUserToolBarTitle, styles.chatText]}>{this.props.username}</Text>
           <Text style={[styles.chatToUserToolBarButton, styles.chatText]}
-                onPress={this.props.onBackPress}>
+            onPress={this.props.onBackPress}>
              Back
           </Text>
         </View>
@@ -101,25 +101,25 @@ class ChatToUser extends Component {
         <View style={styles.content}>
           <View style={styles.messages}>
             <ListView dataSource={this.state.messages}
-                      ref={ref => this.listView = ref}
-                      onLayout={event => this.listViewHeight = event.nativeEvent.layout.height }
-                      onContentSizeChange={this.onSizeChange}
-                      renderRow={renderUserMessage}
-                      enableEmptySections />
+              ref={ref => this.listView = ref}
+              onLayout={event => this.listViewHeight = event.nativeEvent.layout.height}
+              onContentSizeChange={this.onSizeChange}
+              renderRow={renderUserMessage}
+              enableEmptySections />
           </View>
           <View>
             <View style={styles.textInputBorder}>
 
               <TextInput style={styles.textInput}
-                         placeholder='Send a chat'
-                         selectionColor='#F0030A'
-                         value={this.state.chatInput}
-                         onChangeText={this.updateText}
-                         onSubmitEditing={this.sendMessage} />
+                placeholder="Send a chat"
+                selectionColor="#F0030A"
+                value={this.state.chatInput}
+                onChangeText={this.updateText}
+                onSubmitEditing={this.sendMessage} />
             </View>
 
             <View style={styles.sendToolBar}>
-            <Image source={require('../../../images/chat/gallery.png')} style={styles.toolBarImage} />
+              <Image source={require('../../../images/chat/gallery.png')} style={styles.toolBarImage} />
               <Image source={require('../../../images/chat/phone.png')} style={styles.toolBarImage} />
               <Image source={require('../../../images/chat/cameraIconSmallChat.png')} style={styles.toolBarImage} />
               <Image source={require('../../../images/chat/video.png')} style={styles.toolBarImage} />
@@ -145,7 +145,7 @@ const renderUserMessage = (userMessage) => {
   if (userMessage.type === 'sent') {
     return (
       <View style={styles.sentMessageContainer}>
-          <Text style={styles.messageThem}>{userMessage.message}</Text>
+        <Text style={styles.messageThem}>{userMessage.message}</Text>
       </View>
     )
   } else if (userMessage.type === 'received') {
