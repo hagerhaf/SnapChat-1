@@ -147,7 +147,7 @@ function findSelectedFriends (friends) {
 
 SendContainer.propTypes = {
   imageUri: PropTypes.string.isRequired,
-  timer: PropTypes.string.isRequired
+  timer: PropTypes.number.isRequired
 }
 
 export default SendContainer
