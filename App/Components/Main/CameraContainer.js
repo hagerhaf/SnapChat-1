@@ -38,7 +38,7 @@ class CameraContainer extends Component {
   getSnaps () {
     getSnapsCurrentUser((snaps) => {
       this.setState({
-        snapCount: this.state.snapCount += 1
+        snapCount: Object.keys(snaps).length
       })
     })
   }

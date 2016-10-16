@@ -3,7 +3,7 @@ import { ListView } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
 import deepCopy from 'deepcopy'
-import database, { authentication, getSnapsCurrentUser, getDownloadUrl } from '../FireBase/FireBase'
+import database, { authentication, getSnapsCurrentUser, getDownloadUrl, deleteSnap } from '../FireBase/FireBase'
 import ViewSnap from '../Image/ViewImage'
 
 class ChatContainer extends React.Component {
@@ -82,6 +82,13 @@ class ChatContainer extends React.Component {
       passProps: {
         stories: snaps
       }
+    })
+    /* delete snaps now */
+    console.log(snaps)
+    snaps.forEach((snap) => {
+      deleteSnap(snap, function (res) {
+        console.log(res)
+      })
     })
   }
 

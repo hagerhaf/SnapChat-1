@@ -19,7 +19,7 @@ function getSnapsCurrentUser (cb) {
   console.log('getSnap')
   const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
 
-  snapRef.on('child_added', (snapshot) => {
+  snapRef.on('child_changed', (snapshot) => {
     cb(snapshot.val())
   })
 }
@@ -36,5 +36,25 @@ function getDownloadUrl (snap, cb) {
   })
 }
 
+function deleteSnap (snap, cb) {
+  console.log('deleteSnap', snap)
+  const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
+
+  let snapshots = []
+  snapRef.on('child_added', (snapshot) => {
+    if (snap.fromUser === Object.keys(snapshot.val())[0]) {
+      snapshots.push({key: snapshot.key, val: snapshot.val()})
+    }
+  })
+  console.log(snapshots)
+  snapshots.forEach((snapshot) => {
+    snapRef.child(snapshot.key).remove((err) => {
+      if (err) cb(err)
+      else cb(null)
+    })
+  })
+}
+
 export {getSnapsCurrentUser}
 export {getDownloadUrl}
+export {deleteSnap}

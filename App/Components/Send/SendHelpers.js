@@ -1,9 +1,6 @@
 import * as firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 
-// keep a reference to original global variables
-const XMLHttp = window.XMLHttpRequest
-const Blob = window.blob
 
 export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUser) {
   /* shit needed for sending */
@@ -41,10 +38,6 @@ export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUs
         })
          .then(() => resolve('success'))
          .catch((err) => { reject(err) })
-
-    // re-assign global variables back to originals
-    window.XMLHttpRequest = XMLHttp
-    window.Blob = Blob
   })
 }
 
@@ -82,8 +75,5 @@ export function saveToStory ({imageUri, timer}) {
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
 
-    // reassign back to originals
-    window.XMLHttpRequest = XMLHttp
-    window.Blob = Blob
   })
 }
