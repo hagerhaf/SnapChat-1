@@ -6,6 +6,7 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import getFriends, { getStory } from './StoryHelpers'
 import deepCopy from 'deepcopy'
 import ViewImage from '../Image/ViewImage'
+import Map from '../Map/MapContainer'
 
 class StoriesContainer extends Component {
   constructor (props) {
@@ -74,6 +75,13 @@ class StoriesContainer extends Component {
           storiesLoading={this.state.storiesLoading}
           tabLabel="Stories"
         />
+
+        <Map
+          tabLabel="Where?"
+          stories={this.state.friendsStories}
+          onPressStory={this.pressStory}
+        />
+
         {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
         <DiscoverContainer tabLabel="Discover" />
       </ScrollableTabView>
