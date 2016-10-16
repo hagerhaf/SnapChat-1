@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AppRegistry, NavigatorIOS } from 'react-native'
 import Landing from './App/Components/Landing/Landing'
 import MainContainer from './App/Components/Main/MainContainer'
+import SplashScreen from './App/Components/SplashScreen/SplashScreen'
 import * as firebase from 'firebase'
 
 class SnapChat extends Component {
@@ -9,6 +10,7 @@ class SnapChat extends Component {
     super(props)
 
     this.state = {
+      checkingLogin: true,
       isLoggedIn: (firebase.auth().currentUser !== null)
     }
     this.onLogin = this.onLogin.bind(this)
@@ -21,7 +23,8 @@ class SnapChat extends Component {
   componentWillMount () {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       this.setState({
-        isLoggedIn: (firebaseUser !== null)
+        isLoggedIn: (firebaseUser !== null),
+        checkingLogin: false
       })
     })
   }
@@ -29,6 +32,9 @@ class SnapChat extends Component {
   render () {
     if (this.state.isLoggedIn) {
       return (<MainContainer />)
+    }
+    if (this.state.checkingLogin) {
+      return (<SplashScreen />)
     }
     return (
       <NavigatorIOS

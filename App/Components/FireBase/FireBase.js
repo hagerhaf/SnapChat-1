@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 const authentication = firebase.auth()
-var database = firebaseApp.database()
+const database = firebaseApp.database()
 
 export default database
-export { authentication }
+export {authentication}
