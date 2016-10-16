@@ -43,6 +43,7 @@ function inputFields (updatePhoneNumber) {
             </Text>
             <TextInput
                 style={styles.formInput}
+                keyboardType={'number-pad'}
                 onChangeText={updatePhoneNumber}
             />
         </View>

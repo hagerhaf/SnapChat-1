@@ -33,18 +33,24 @@ class AddByAddressBookContainer extends Component {
             if(err && err.type === 'permissionDenied'){
                 // x.x
             } else {
-                // Pull names from contact list.
-                var localNames = [];
+                // Pull numbers from contact list.
+                var localNumbers = [];
                 for (var i=0; i < contacts.length; i++) {
-                    var contact = contacts[i];
-                    localNames.push(contact.givenName + ' ' + contact.familyName)
+                    var numbers = contacts[i].phoneNumbers;
+                    for (var j = 0; j < numbers.length; j++) {
+                        // Strip spaces, brackets, etc.
+                        if (numbers[j]) {
+                            localNumbers.push(numbers[j].number.replace(/[^0-9]/gi, ''));
+                        }
+                    }
                 }
 
                 // Query fire base for all users.
                 var appScope = this;
                 var remoteUsers = [];
                 database.ref('users').once('value', function (snapshot) {
-                    var pairs = snapshot.val()
+                    var pairs = snapshot.val();
+                    // Store ID with user object.
                     for (var key in pairs) {
                         var val = pairs[key];
                         val['id'] = key;
@@ -52,11 +58,12 @@ class AddByAddressBookContainer extends Component {
                     }
 
                     // Query fire base for current users friends.
-                    var currFriends = []
-                    var userId = authentication.currentUser.uid
+                    var currFriends = [];
+                    var userId = authentication.currentUser.uid;
                     var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
                     friendsRef.on('value', function (snapshot) {
                         snapshot.forEach((child) => {
+                            // Store username of each current friend.
                             currFriends.push(
                                 child.val().username
                             )
@@ -66,14 +73,14 @@ class AddByAddressBookContainer extends Component {
                         var toDisplay = [];
                         for (var i = 0; i < remoteUsers.length; i++) {
                             var remoteUser = remoteUsers[i];
-                            console.log(typeof remoteUser.username);
-                            var name = remoteUser.firstname + ' ' + remoteUser.lastname;
+                            var number = remoteUser.phoneNumber;
 
-                            if (localNames.includes(name)) {
+                            // If user is a contact, display them.
+                            if (localNumbers.includes(number)) {
                                 toDisplay.push({
-                                    name: name,
+                                    name: remoteUser.firstname + ' ' + remoteUser.lastname,
                                     username: remoteUser.username,
-                                    added: currFriends.includes(remoteUser.username)
+                                    added: currFriends.includes(remoteUser.username) // Check if already friend.
                                 })
                             }
                         }
