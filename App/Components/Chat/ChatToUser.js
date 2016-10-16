@@ -27,7 +27,6 @@ class ChatToUser extends Component {
     this.fetchSentMessages(userId)
   }
 
-  // TODO: Add sent and received attributes to chats
   fetchReceivedMessages (userId) {
     const getMessages = database.ref(`userObjects/messages/${userId}/${this.props.uid}`)
     getMessages.on('value', (snapshot) => {
@@ -52,7 +51,7 @@ class ChatToUser extends Component {
     })
   }
 
-  // hacky as fuck way to remove duplicate objects
+  // ghetto way of making sure the list view doesn't render the messages twice
   sortByTimeStamp (messages) {
     return messages.sort((left, right) => {
       return new Date(left.timestamp).getTime() - new Date(right.timestamp).getTime()
@@ -128,20 +127,18 @@ const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 export default ChatToUser
 
-const renderUserMessage = (userMessage, i) => {
+const renderUserMessage = (userMessage) => {
   if (!userMessage) return null
-  if (userMessage.from) {
+  if (userMessage.type === 'sent') {
     return (
-      <View>
-        <Text style={styles.messageThem}>|
-          <Text style={styles.messageNormal}>{userMessage.message}</Text>
-        </Text>
+      <View style={styles.sentMessageContainer}>
+          <Text style={styles.messageThem}>{userMessage.message}</Text>
       </View>
     )
-  } else {
+  } else if (userMessage.type === 'received') {
     return (
-      <View>
-        <Text style={styles.messageMe}>|
+      <View style={styles.receivedMessageContainer}>
+        <Text style={styles.messageMe}>
           <Text style={styles.messageNormal}>{userMessage.message}</Text>
         </Text>
       </View>
