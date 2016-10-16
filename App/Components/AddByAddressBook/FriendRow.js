@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Text, View, TouchableWithoutFeedback, Image} from 'react-native'
+import {Text, View, TouchableWithoutFeedback, TouchableHighlight, Image} from 'react-native'
 import {myFriendsStyles as styles} from '../MyFriends/myFriendsStyles'
 
 const seperatorFriends = (sectionID, rowID, adjacentRowHighlighted) => {
@@ -16,7 +16,7 @@ seperatorFriends.propTypes = {
     adjacentRowHighlighted: PropTypes.bool.required
 }
 
-const renderFriendRow = ({name, username}, sectionId, rowId, highlightRow, onSelectFriend) => {
+const renderFriendRow = ({name, username, added}, sectionId, rowId, highlightRow, onSelectFriend) => {
     return (
         <View style={styles.userRowInfo}>
             <Image style={styles.friendImage} source={require('../../../images/friend_icon.png')} />
@@ -29,14 +29,16 @@ const renderFriendRow = ({name, username}, sectionId, rowId, highlightRow, onSel
                 </Text>
             </View>
             <TouchableWithoutFeedback
-                onPress={function () {
-                    onSelectFriend(rowId)
-                }}
                 key={rowId}
                 style={styles.addButtonLocation}
             >
                 <View style={styles.addButton}>
-                    <Text style={styles.addText}>+ Add</Text>
+                    {!added && <TouchableHighlight onPress={function () {
+                        onSelectFriend(rowId)
+                    }}>
+                        <Text style={styles.addText}>{'+ Add'}</Text>
+                    </TouchableHighlight>}
+                    {added && <Text style={styles.addText}>{'ADDED'}</Text>}
                 </View>
             </TouchableWithoutFeedback>
         </View>

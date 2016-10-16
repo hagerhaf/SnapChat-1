@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import RegisterName from './RegisterName'
 import RegisterBirthday from './RegisterBirthday'
 import RegisterEmail from './RegisterEmail'
+import RegisterPhoneNumber from './RegisterPhoneNumber'
 import RegisterPassword from './RegisterPassword'
 
 class RegisterContainer extends Component {
@@ -16,6 +17,7 @@ class RegisterContainer extends Component {
       lastname: '',
       username: '',
       email: '',
+      phoneNumber: '',
       birthday: new Date(),
       password: '',
       loading: false,
@@ -24,9 +26,11 @@ class RegisterContainer extends Component {
       isEmailValid: false,
       isUsernameInputValid: false,
       isPasswordInputValid: false,
+      isPhoneNumberInputValid: false,
       nameComplete: false,
       birthdayComplete: false,
-      usernameComplete: false
+      usernameComplete: false,
+      emailComplete: false,
     }
 
     this.backButtonPressed = this.backButtonPressed.bind(this)
@@ -36,9 +40,11 @@ class RegisterContainer extends Component {
     this.updateEmail = this.updateEmail.bind(this)
     this.updateUsername = this.updateUsername.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
+    this.updatePhoneNumber = this.updatePhoneNumber.bind(this)
 
     this.goToRegisterBirthday = this.goToRegisterBirthday.bind(this)
     this.goToRegisterUsername = this.goToRegisterUsername.bind(this)
+    this.goToRegisterPhoneNumber = this.goToRegisterPhoneNumber.bind(this)
     this.goToRegisterPassword = this.goToRegisterPassword.bind(this)
     this.finishRegistration = this.finishRegistration.bind(this)
   }
@@ -97,12 +103,24 @@ class RegisterContainer extends Component {
     }
   }
 
+  updatePhoneNumber (updatedPhoneNumber) {
+    if (updatedPhoneNumber) {
+      this.setState({phoneNumber: updatedPhoneNumber, isPhoneNumberInputValid: true})
+    } else {
+      this.setState({ password: updatedPhoneNumber, isPhoneNumberInputValid: false })
+    }
+  }
+
   goToRegisterBirthday () {
     this.setState({ nameComplete: true })
   }
 
   goToRegisterUsername () {
     this.setState({ birthdayComplete: true })
+  }
+
+  goToRegisterPhoneNumber() {
+    this.setState({ emailComplete: true })
   }
 
   goToRegisterPassword () {
@@ -135,13 +153,15 @@ class RegisterContainer extends Component {
   }
 
   updateUserDetails (user) {
-    const { firstname, lastname, username, email, birthday } = this.state
+    const { firstname, lastname, username, email, birthday, phoneNumber } = this.state
     const userId = user.uid
+    console.log(phoneNumber);
     firebase.database().ref('users/' + userId).set({
       username,
       email,
       firstname,
       lastname,
+      phoneNumber,
       birthday: JSON.stringify(birthday)
     })
   }
@@ -172,15 +192,24 @@ class RegisterContainer extends Component {
           hasValidInput={this.state.isBirthdayInputValid}
         />
       )
-    } else if (this.state.birthdayComplete && !this.state.usernameComplete) {
+    } else if (this.state.birthdayComplete && !this.state.emailComplete) {
       return (
-        <RegisterEmail
-          backButtonPressed={this.backButtonPressed}
-          updateEmail={this.updateEmail}
-          continueButtonPressed={this.goToRegisterPassword}
-          hasValidInput={this.state.isEmailValid}
-        />
+          <RegisterEmail
+              backButtonPressed={this.backButtonPressed}
+              updateEmail={this.updateEmail}
+              continueButtonPressed={this.goToRegisterPhoneNumber}
+              hasValidInput={this.state.isEmailValid}
+          />
       )
+    } else if (this.state.emailComplete && !this.state.usernameComplete) {
+        return (
+            <RegisterPhoneNumber
+                backButtonPressed={this.backButtonPressed}
+                updatePhoneNumber={this.updatePhoneNumber}
+                continueButtonPressed={this.goToRegisterPassword}
+                hasValidInput={this.state.isPhoneNumberInputValid}
+            />
+        )
     } else if (this.state.usernameComplete) {
       return (
         <RegisterPassword
