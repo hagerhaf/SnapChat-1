@@ -19,7 +19,8 @@ function getSnapsCurrentUser (cb) {
   console.log('getSnap')
   const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
 
-  snapRef.on('child_changed', (snapshot) => {
+  snapRef.on('value', (snapshot) => {
+    console.log(snapshot.val())
     cb(snapshot.val())
   })
 }

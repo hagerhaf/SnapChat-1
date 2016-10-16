@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { ListView } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
-import deepCopy from 'deepcopy'
+import deepcopy from 'deepcopy'
 import database, { authentication, getSnapsCurrentUser, getDownloadUrl, deleteSnap } from '../FireBase/FireBase'
 import ViewSnap from '../Image/ViewImage'
 
@@ -57,23 +57,34 @@ class ChatContainer extends React.Component {
 
   getSnaps () {
     getSnapsCurrentUser((snaps) => {
-      getDownloadUrl(snaps, (snapObject) => {
-        // want to go through friends and merge snapObject
-        let newFriends = this.state.friendsList.slice()
-        newFriends.map((friend) => {
-          if (friend.uid === snapObject.fromUser) {
-            if (friend.snaps) {
-              friend.snaps.push(snapObject)
-              return friend
-            } else {
-              return Object.assign(friend, {snaps: [snapObject]})
-            }
-          }
-        })
-        const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      if (snaps === null) {
         this.setState({
-          friendsList: newFriends,
-          dataSource: friendsDataSource.cloneWithRows(newFriends)
+          dataSource: friendsDataSource.cloneWithRows(this.state.friendsList)
+        })
+        console.log('end', this.state.friendsList)
+        return
+      }
+      Object.keys(snaps).forEach((snapKey) => {
+        getDownloadUrl(snaps[snapKey], (snapObject) => {
+          console.log('snap object', snapObject)
+          console.log('friends list', this.state.friendsList)
+        // want to go through friends and merge snapObject
+          let newFriends = deepcopy(this.state.friendsList)
+
+          newFriends.map((friend) => {
+            if (friend.uid === snapObject.fromUser) {
+              if (friend.snaps) {
+                friend.snaps.push(snapObject)
+                return friend
+              } else {
+                return Object.assign(friend, {snaps: [snapObject]})
+              }
+            }
+          })
+          this.setState({
+            dataSource: friendsDataSource.cloneWithRows(newFriends)
+          })
         })
       })
     })
@@ -90,8 +101,9 @@ class ChatContainer extends React.Component {
     /* delete snaps now */
     console.log(snaps)
     snaps.forEach((snap) => {
-      deleteSnap(snap, function (res) {
+      deleteSnap(snap, (res) => {
         console.log(res)
+        this.getSnaps()
       })
     })
   }

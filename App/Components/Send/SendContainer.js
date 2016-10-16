@@ -65,7 +65,7 @@ class SendContainer extends Component {
         this.setState({
           hasSent: false
         })
-      }, 1500)
+      }, 700)
     })
     .catch((err) => {
       if (err) console.log(err)
