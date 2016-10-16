@@ -1,12 +1,16 @@
 import * as firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 
-/* shit needed for sending */
-const polyfill = RNFetchBlob.polyfill
-window.XMLHttpRequest = polyfill.XMLHttpRequest
-window.Blob = polyfill.Blob
+// keep a reference to original global variables
+const XMLHttp = window.XMLHttpRequest
+const Blob = window.blob
 
 export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUser) {
+  /* shit needed for sending */
+  const polyfill = RNFetchBlob.polyfill
+  window.XMLHttpRequest = polyfill.XMLHttpRequest
+  window.Blob = polyfill.Blob
+
   return new Promise(function (resolve, reject) {
     /* db links */
     let dbUserRef = firebase.database().ref().child('snaps/' + toUser)
@@ -36,11 +40,19 @@ export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUs
           return dbUserRef.push(snapObject)
         })
          .then(() => resolve('success'))
-        .catch((err) => { reject(err) })
+         .catch((err) => { reject(err) })
+
+    // re-assign global variables back to originals
+    window.XMLHttpRequest = XMLHttp
+    window.Blob = Blob
   })
 }
 
 export function saveToStory ({imageUri, timer}) {
+  const polyfill = RNFetchBlob.polyfill
+  window.XMLHttpRequest = polyfill.XMLHttpRequest
+  window.Blob = polyfill.Blob
+
   return new Promise(function (resolve, reject) {
     let currentUid = firebase.auth().currentUser.uid
     // db ref
@@ -69,5 +81,9 @@ export function saveToStory ({imageUri, timer}) {
         })
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
+
+    // reassign back to originals
+    window.XMLHttpRequest = XMLHttp
+    window.Blob = Blob
   })
 }

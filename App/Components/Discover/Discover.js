@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ScrollView, WebView, TouchableOpacity, Text, Image } from 'react-native'
+import { View, ScrollView, WebView, TouchableOpacity, Text, Image, ActivityIndicator } from 'react-native'
 import { discoverStyles as styles } from './discoverStyles'
 import DiscoverItem from './DiscoverItem'
 
@@ -17,7 +17,6 @@ class Discover extends Component {
   }
 
   openWebView (url) {
-    console.log(url)
     this.setState({ webViewUri: url })
   }
 
@@ -26,7 +25,6 @@ class Discover extends Component {
   }
 
   onBack () {
-    console.log('pressed')
     this.setState({ webViewUri: '' })
   }
 
@@ -73,8 +71,8 @@ class Discover extends Component {
 
     return (
       <View style={styles.container}>
-        {this.props.children}
         <View style={styles.discoverItems}>
+          {this.props.loading && <ActivityIndicator animating size="large" style={{marginTop: 20}} />}
           <ScrollView
             showsVerticalScrollIndicator
             automaticallyAdjustContentInsets={false}
@@ -87,15 +85,6 @@ class Discover extends Component {
     )
   }
 }
-
-//
-// const Discover = ({ children, discoverData }) => (
-//
-// )
-//
-// const createThumbRow = (item, i) => (
-//
-// )
 
 Discover.propTypes = {
   children: PropTypes.object,

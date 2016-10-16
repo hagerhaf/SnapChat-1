@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 import Discover from './Discover'
-import Spinner from 'react-native-loading-spinner-overlay'
-import * as firebase from 'firebase'
 
 class DiscoverContainer extends Component {
   constructor (props) {
@@ -10,21 +8,21 @@ class DiscoverContainer extends Component {
 
     this.state = {
       discoverData: [],
-      loading: false
+      loading: true
     }
 
     this.getUserDOB = this.getUserDOB.bind(this)
     this.getDiscoverData = this.getDiscoverData.bind(this)
-    this.toggleSpinner = this.toggleSpinner.bind(this)
     this.calculateAge = this.calculateAge.bind(this)
   }
 
   async componentDidMount () {
-    this.toggleSpinner()
     await this.getUserDOB()
     await this.getDiscoverData().then((data) => {
-      this.toggleSpinner()
-      this.setState({ discoverData : data.articles })
+      this.setState({
+        discoverData: data.articles,
+        loading: false
+      })
     })
   }
 
@@ -35,10 +33,6 @@ class DiscoverContainer extends Component {
     } catch (error) {
       console.log('Error getting user object', error)
     }
-  }
-
-  toggleSpinner () {
-    return this.setState({ loading: !this.state.loading })
   }
 
   getDiscoverData (DOB = this.state.userDOB) {
@@ -73,13 +67,9 @@ class DiscoverContainer extends Component {
   }
 
   render () {
-    const spinner = this.state.loading
-      ? <Spinner visible overlayColor={'rgba(0,0,0,0.70)'} />
-      : null
     return (
-      <Discover discoverData={this.state.discoverData}>
-        {spinner}
-      </Discover>
+      <Discover discoverData={this.state.discoverData}
+                loading={this.state.loading} />
     )
   }
 }

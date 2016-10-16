@@ -20,6 +20,7 @@
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-contacts": "^0.5.1",
     "react-native-fetch-blob": "^0.9.6",
+    "react-native-fs": "^2.0.1-rc.2",
     "react-native-keyboard-spacer": "^0.3.0",
     "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-popup": "^0.5.2",

@@ -1,33 +1,34 @@
 import React, {Component} from 'react'
+import { ListView } from 'react-native'
 import Story from './Story'
 import DiscoverContainer from '../Discover/DiscoverContainer'
-import { ListView } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
-import getFriends, {getStory} from './StoryHelpers'
+import getFriends, { getStory } from './StoryHelpers'
 import deepCopy from 'deepcopy'
 import ViewImage from '../Image/ViewImage'
 
 class StoriesContainer extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
-      friendsStories: []
+      friendsStories: [],
+      storiesLoading: true
     }
 
     this.pressStory = this.pressStory.bind(this)
   }
 
   componentDidMount () {
-    var appThis = this
-    getFriends(function (friend) {
-      let newFriends = appThis.state.friendsStories.slice()
+    getFriends((friend) => {
+      let newFriends = this.state.friendsStories.slice()
       newFriends.push(friend)
-      appThis.setState({
-        friendsStories: newFriends
+      this.setState({
+        friendsStories: newFriends,
       })
 
-      getStory(friend, function (story) {
-        var newFriendsWStory = appThis.state.friendsStories.slice()
+      getStory(friend, (story) => {
+        var newFriendsWStory = this.state.friendsStories.slice()
         newFriendsWStory = newFriendsWStory.map((nfriend) => {
           if (nfriend.key === friend.key) {
             if (nfriend['stories']) {
@@ -38,15 +39,15 @@ class StoriesContainer extends Component {
           }
           return nfriend
         })
-        appThis.setState({
-          friendsStories: newFriendsWStory
+        this.setState({
+          friendsStories: newFriendsWStory,
+          storiesLoading: false
         })
       })
     })
   }
 
   pressStory (stories) {
-
     this.props.navigator.push({
       component: ViewImage,
       title: 'Story time',
@@ -70,7 +71,8 @@ class StoriesContainer extends Component {
         <Story
           stories={this.state.friendsStories}
           onPressStory={this.pressStory}
-          tabLabel="Stories"
+          storiesLoading={this.state.storiesLoading}
+          tabLabel='Stories'
         />
         {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
         <DiscoverContainer tabLabel="Discover" />

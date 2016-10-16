@@ -1,20 +1,18 @@
 import React, { PropTypes } from 'react'
-import { Text, View, ListView, Image } from 'react-native'
+import { Text, View, ListView, Image, ActivityIndicator } from 'react-native'
 import { storyStyles as styles } from './StoryStyles'
 import StoryRow from './StoryRow'
 import timediff from 'timediff'
 
-const Stories = ({stories, onPressStory}) => {
+const Stories = ({stories, onPressStory, storiesLoading}) => {
   var dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2
   })
   const newStories = dataSource.cloneWithRows(stories)
 
   const createStoryRow = ({username, stories}, sectionId, rowId) => {
-  // time dif
     if (stories) {
       let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHms'))
-
       return (
         <StoryRow
           username={username}
@@ -23,8 +21,8 @@ const Stories = ({stories, onPressStory}) => {
           stories={stories}
           key={`${sectionId}-${rowId}`}
           onPressStory={onPressStory}
-    />
-  )
+        />
+      )
     }
     return <View />
   }
@@ -35,11 +33,13 @@ const Stories = ({stories, onPressStory}) => {
       <Text style={styles.subheading}>
         RECENT UPDATES
       </Text>
-      <ListView
-        enableEmptySections
-        dataSource={newStories}
-        renderRow={createStoryRow}
-      />
+      {
+        storiesLoading
+          ? <ActivityIndicator animating size='large' style={{marginTop: 20}} />
+          : <ListView enableEmptySections
+                      dataSource={newStories}
+                      renderRow={createStoryRow} />
+      }
     </View>
   )
 }
