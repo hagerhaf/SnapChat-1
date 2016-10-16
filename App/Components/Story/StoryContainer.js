@@ -13,7 +13,7 @@ class StoriesContainer extends Component {
 
     this.state = {
       friendsStories: [],
-      storiesLoading: true
+      storiesLoading: false
     }
 
     this.pressStory = this.pressStory.bind(this)
@@ -24,7 +24,7 @@ class StoriesContainer extends Component {
       let newFriends = this.state.friendsStories.slice()
       newFriends.push(friend)
       this.setState({
-        friendsStories: newFriends,
+        friendsStories: newFriends
       })
 
       getStory(friend, (story) => {
@@ -72,7 +72,7 @@ class StoriesContainer extends Component {
           stories={this.state.friendsStories}
           onPressStory={this.pressStory}
           storiesLoading={this.state.storiesLoading}
-          tabLabel='Stories'
+          tabLabel="Stories"
         />
         {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
         <DiscoverContainer tabLabel="Discover" />

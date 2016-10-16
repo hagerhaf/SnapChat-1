@@ -12,7 +12,7 @@ class ChatContainer extends React.Component {
 
     const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      loading: true,
+      loading: false,
       friendsList: [],
       dataSource: friendsDataSource.cloneWithRows([])
     }
@@ -30,12 +30,16 @@ class ChatContainer extends React.Component {
   }
 
   getFriends () {
+    this.setState({
+      loading: true
+    })
     // copied over from myFriendsContainer
     const friends = []
     const component = this
     const userId = authentication.currentUser.uid
     const friendsRef = database.ref('userObjects/friends/' + userId + '/list')
     friendsRef.on('value', (snapshot) => {
+      if (snapshot.val() === null) return this.setState({loading: false})
       Object.keys(snapshot.val()).forEach((key) => {
         const friend = snapshot.val()[key]
         friend.uid = key
