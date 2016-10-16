@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { ListView } from 'react-native'
 import MyFriends from './MyFriends'
-import FriendRow, {seperatorFriends} from './FriendRow'
+import FriendRow, { seperatorFriends } from './FriendRow'
 import {} from './myFriendsUtils'
-import {filter} from 'lodash'
-import database, {authentication} from '../FireBase/FireBase'
+import { filter } from 'lodash'
+import database, { authentication } from '../FireBase/FireBase'
 
 class MyFriendsContainer extends Component {
   constructor (props) {

@@ -55,7 +55,6 @@ export const chatToUserStyles = StyleSheet.create({
   },
   content: {
     flex: 1
-    // flexDirection:'column-reverse'
   },
   textInput: {
     height: 40,
@@ -67,16 +66,33 @@ export const chatToUserStyles = StyleSheet.create({
     borderTopWidth: 1
   },
   messages: {
-    flex: 1
+    flex: 1,
+    padding: 10
+  },
+  sentMessageContainer: {
+    flex: 1,
+    alignSelf: 'stretch'
+  },
+  receivedMessageContainer: {
+    flex: 1,
+    alignSelf: 'stretch'
   },
   messageMe: {
-    color: 'red'
+    color: 'red',
+    alignSelf: 'flex-start'
   },
   messageThem: {
-    color: 'blue'
+    fontSize: 16,
+    margin: 3,
+    color: '#3c5fe2',
+    alignSelf: 'flex-end',
+    fontFamily: 'Avenir-Heavy'
   },
   messageNormal: {
-    color: 'black'
+    color: '#e26c3c',
+    fontSize: 16,
+    margin: 3,
+    fontFamily: 'Avenir-Heavy'
   },
   chatToUserToolBar: {
     backgroundColor: 'white',
