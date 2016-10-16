@@ -56,6 +56,14 @@ function deleteSnap (snap, cb) {
   })
 }
 
+function getCurrentUser (cb) {
+  const snapRef = firebase.database().ref().child('users').child(firebase.auth().currentUser.uid)
+  snapRef.on('value', function (user) {
+    cb(user.val())
+  })
+}
+
 export {getSnapsCurrentUser}
 export {getDownloadUrl}
 export {deleteSnap}
+export {getCurrentUser}

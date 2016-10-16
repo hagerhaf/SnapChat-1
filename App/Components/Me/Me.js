@@ -8,7 +8,9 @@ const Me = ({
   myFriendsPressed,
   cameraBackPressed,
   trophyCasePressed,
-  settingsPressed
+  settingsPressed,
+  fullname,
+  username
 }) => (
   <View style={styles.container}>
     {/* Header */}
@@ -36,10 +38,10 @@ const Me = ({
     <View style={styles.image}>
       <Image style={styles.barcodeImage} source={require('../../../images/barcodeImage.png')} />
       <Text style={styles.name}>
-        Ryan O'Kane
+        {fullname}
       </Text>
       <Text style={styles.username}>
-        ryanokane | 13,213
+        {username}
       </Text>
     </View>
     {/* Added Me Button */}
@@ -85,7 +87,9 @@ Me.propTypes = {
   myFriendsPressed: func,
   addFriendsPressed: func,
   trophyCasePressed: func,
-  settingsPressed: func
+  settingsPressed: func,
+  fullname: PropTypes.string,
+  username: PropTypes.string
 }
 
 export default Me
