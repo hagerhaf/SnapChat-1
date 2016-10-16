@@ -31,10 +31,8 @@
 		A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0B31D9E1E5C00F602D0 /* libRCTCamera.a */; };
 		A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0C31D9E1F1800F602D0 /* libRCTCameraRoll.a */; };
 		D07985F1E00A4B2D8C8CFB31 /* libRNSketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A8F61FCCAA45C893A8E097 /* libRNSketch.a */; };
-		D863F8991DB3BBC600A49D45 /* react-native-maps in Resources */ = {isa = PBXBuildFile; fileRef = D863F8981DB3BBC600A49D45 /* react-native-maps */; };
 		D89819A71DB3BF910076BBF1 /* AirMaps.xcodeproj in Frameworks */ = {isa = PBXBuildFile; fileRef = D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */; };
-		D89819A91DB3BFEE0076BBF1 /* AirGoogleMaps in Resources */ = {isa = PBXBuildFile; fileRef = D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */; };
-		D8E9808D1DB3BDE60050A03C /* AirMaps in Resources */ = {isa = PBXBuildFile; fileRef = D8E9808C1DB3BDE60050A03C /* AirMaps */; };
+		D89819D41DB442800076BBF1 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D89819A61DB3BF5A0076BBF1 /* libAirMaps.a */; };
 		F90BAD91908ED6B6FF680717 /* Pods_SnapChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A6C59C92A7A4A44C597308 /* Pods_SnapChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +170,13 @@
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
 		};
+		D89819C01DB442680076BBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D89819BC1DB442680076BBF1 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -209,10 +214,8 @@
 		A139A0AD1D9E1E5C00F602D0 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		D6A6C59C92A7A4A44C597308 /* Pods_SnapChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D863F8981DB3BBC600A49D45 /* react-native-maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-maps"; path = "../node_modules/react-native-maps"; sourceTree = "<group>"; };
 		D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
-		D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AirGoogleMaps; path = "../node_modules/react-native-maps/ios/AirGoogleMaps"; sourceTree = "<group>"; };
-		D8E9808C1DB3BDE60050A03C /* AirMaps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AirMaps; path = "node_modules/react-native-maps/ios/AirMaps"; sourceTree = "<group>"; };
+		D89819BC1DB442680076BBF1 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
 		F02C516FA00D4A47B137526C /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		F17C2643883C40098464F32F /* RNSketch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSketch.xcodeproj; path = "../node_modules/react-native-sketch/RNSketch.xcodeproj"; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89819D41DB442800076BBF1 /* libAirMaps.a in Frameworks */,
 				D89819A71DB3BF910076BBF1 /* AirMaps.xcodeproj in Frameworks */,
 				A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */,
 				A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */,
@@ -420,9 +424,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */,
-				D8E9808C1DB3BDE60050A03C /* AirMaps */,
-				D863F8981DB3BBC600A49D45 /* react-native-maps */,
+				D89819BC1DB442680076BBF1 /* AirMaps.xcodeproj */,
 				73B415311DB3204600E54AAB /* RNFS.xcodeproj */,
 				73B4152F1DB31F7500E54AAB /* react-native-fs */,
 				A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */,
@@ -496,6 +498,14 @@
 			isa = PBXGroup;
 			children = (
 				D89819A61DB3BF5A0076BBF1 /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D89819BD1DB442680076BBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D89819C11DB442680076BBF1 /* libAirMaps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -574,6 +584,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = D89819BD1DB442680076BBF1 /* Products */;
+					ProjectRef = D89819BC1DB442680076BBF1 /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = D89819A21DB3BF5A0076BBF1 /* Products */;
 					ProjectRef = D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */;
@@ -782,6 +796,13 @@
 			remoteRef = D89819A51DB3BF5A0076BBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D89819C11DB442680076BBF1 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = D89819C01DB442680076BBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -796,11 +817,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8E9808D1DB3BDE60050A03C /* AirMaps in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				D89819A91DB3BFEE0076BBF1 /* AirGoogleMaps in Resources */,
-				D863F8991DB3BBC600A49D45 /* react-native-maps in Resources */,
 				73B415301DB31F7500E54AAB /* react-native-fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
