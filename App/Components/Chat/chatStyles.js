@@ -104,7 +104,12 @@ export const chatToUserStyles = StyleSheet.create({
   },
   chatToUserToolBarButton: {
     width: 50,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'red',
+    fontSize: 18,
+    marginRight: 5,
+    fontFamily: 'Avenir'
   },
   chatToUserToolBarTitle: {
     flex: 1,

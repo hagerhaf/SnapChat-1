@@ -19,6 +19,7 @@ class ChatToUser extends Component {
     this.fetchReceivedMessages  = this.fetchReceivedMessages.bind(this)
     this.fetchSentMessages  = this.fetchSentMessages.bind(this)
     this.sortByTimeStamp = this.sortByTimeStamp.bind(this)
+    this.onSizeChange = this.onSizeChange.bind(this)
   }
 
   componentDidMount () {
@@ -29,6 +30,10 @@ class ChatToUser extends Component {
 
   componentWillUnmount () {
     chatMessages = []
+  }
+
+  onSizeChange () { 
+    this.listView.scrollTo({y: this.listView.getMetrics().contentLength - this.listViewHeight}) 
   }
 
   fetchReceivedMessages (userId) {
@@ -85,17 +90,20 @@ class ChatToUser extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.chatToUserToolBar}>
-          <Text style={styles.chatToUserToolBarButton}>DropDown</Text>
+          <Text style={styles.chatToUserToolBarButton}> </Text>
           <Text style={[styles.chatToUserToolBarTitle, styles.chatText]}>{this.props.username}</Text>
           <Text style={[styles.chatToUserToolBarButton, styles.chatText]}
                 onPress={this.props.onBackPress}>
-            Back
+             Back
           </Text>
         </View>
 
         <View style={styles.content}>
           <View style={styles.messages}>
             <ListView dataSource={this.state.messages}
+                      ref={ref => this.listView = ref}
+                      onLayout={event => this.listViewHeight = event.nativeEvent.layout.height }
+                      onContentSizeChange={this.onSizeChange}
                       renderRow={renderUserMessage}
                       enableEmptySections />
           </View>
