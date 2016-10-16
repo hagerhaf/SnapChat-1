@@ -3,6 +3,7 @@ import Camera from 'react-native-camera'
 import { mainStyles as styles } from './mainStyles'
 import EditContainer from '../Edit/EditContainer'
 import { Text, View, Image, TouchableHighlight, CameraRoll } from 'react-native'
+import {getSnapsCurrentUser} from '../FireBase/FireBase'
 
 const FLASH_LOOKUP = {'auto': 'on', 'on': 'off', 'off': 'auto'}
 
@@ -12,12 +13,14 @@ class CameraContainer extends Component {
 
     this.state = {
       frontCamera: false,
-      flash: 'auto'
+      flash: 'auto',
+      snapCount: 0
     }
 
     this.cameraTogglePressed = this.cameraTogglePressed.bind(this)
     this.flashTogglePressed = this.flashTogglePressed.bind(this)
     this.takePicture = this.takePicture.bind(this)
+    this.getSnaps = this.getSnaps.bind(this)
   }
 
   cameraTogglePressed () {
@@ -32,6 +35,14 @@ class CameraContainer extends Component {
     })
   }
 
+  getSnaps () {
+    getSnapsCurrentUser((snaps) => {
+      this.setState({
+        snapCount: this.state.snapCount += 1
+      })
+    })
+  }
+
   // Take photo and send to EditContainer.
   takePicture () {
     this.camera.capture()
@@ -42,6 +53,10 @@ class CameraContainer extends Component {
           passProps: { uri: data['path'] }
         }))
     .catch(err => console.log(err))
+  }
+
+  componentDidMount () {
+    this.getSnaps()
   }
 
   render () {
@@ -104,10 +119,11 @@ class CameraContainer extends Component {
             {/* Button navigation */}
             <View style={styles.header}>
               <TouchableHighlight>
-                <Image
-                  source={require('../../../images/main-camera/chatbubble.png')}
-                  style={styles.chatIcon}
-                />
+                <Text
+                  style={[styles.chatIcon, this.state.snapCount > 0 ? styles.active : null]}
+                >
+                  {this.state.snapCount}
+                </Text>
               </TouchableHighlight>
               <TouchableHighlight style={styles.flex}>
                 <Image

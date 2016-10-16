@@ -2,12 +2,15 @@ import React, { PropTypes } from 'react'
 import { ListView } from 'react-native'
 import ChatToUser from './ChatToUser'
 import Chat from './Chat'
-import database, { authentication } from '../FireBase/FireBase'
+import deepCopy from 'deepcopy'
+import database, { authentication, getSnapsCurrentUser, getDownloadUrl } from '../FireBase/FireBase'
+import ViewSnap from '../Image/ViewImage'
 
 class ChatContainer extends React.Component {
   constructor (props) {
     super(props)
 
+    const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       loading: true,
       friendsList: [],
@@ -17,10 +20,13 @@ class ChatContainer extends React.Component {
     this.openChat = this.openChat.bind(this)
     this.getFriends = this.getFriends.bind(this)
     this.backToChat = this.backToChat.bind(this)
+    this.getSnaps = this.getSnaps.bind(this)
+    this.openSnaps = this.openSnaps.bind(this)
   }
 
   componentDidMount () {
     this.getFriends()
+    this.getSnaps()
   }
 
   getFriends () {
@@ -36,12 +42,46 @@ class ChatContainer extends React.Component {
         friends.push(friend)
       })
       component.setState({
-        dataSource: friendsDataSource.cloneWithRows(friends),
+        dataSource: this.state.dataSource.cloneWithRows(friends),
         friendsList: friends,
         loading: false
       })
     }, (errorObject) => {
       console.log('The read failed: ' + errorObject.code)
+    })
+  }
+
+  getSnaps () {
+    getSnapsCurrentUser((snaps) => {
+      getDownloadUrl(snaps, (snapObject) => {
+        // want to go through friends and merge snapObject
+        let newFriends = this.state.friendsList.slice()
+        newFriends.map((friend) => {
+          if (friend.uid === snapObject.fromUser) {
+            if (friend.snaps) {
+              friend.snaps.push(snapObject)
+              return friend
+            } else {
+              return Object.assign(friend, {snaps: [snapObject]})
+            }
+          }
+        })
+        const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        this.setState({
+          friendsList: newFriends,
+          dataSource: friendsDataSource.cloneWithRows(newFriends)
+        })
+      })
+    })
+  }
+
+  openSnaps (snaps) {
+    this.props.navigator.push({
+      component: ViewSnap,
+      title: 'View snap',
+      passProps: {
+        stories: snaps
+      }
     })
   }
 
@@ -63,10 +103,13 @@ class ChatContainer extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     return (
-      <Chat friends={this.state.dataSource}
-            openChat={this.openChat}
-            loading={this.state.loading} />
+      <Chat
+        friends={this.state.dataSource}
+        openChat={this.openChat}
+        loading={this.state.loading}
+        openSnaps={this.openSnaps} />
     )
   }
 }
@@ -74,8 +117,5 @@ class ChatContainer extends React.Component {
 ChatContainer.propTypes = {
   navigator: PropTypes.object.isRequired
 }
-
-const friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-const messagesDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 export default ChatContainer

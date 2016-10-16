@@ -4,6 +4,9 @@ export const mainStyles = StyleSheet.create({
   container: {
     flex: 1
   },
+  active:{
+    color:'indianred'
+  },
   header: {
     height: 60,
     top: 2,
@@ -53,7 +56,9 @@ export const mainStyles = StyleSheet.create({
   chatIcon: {
     height: 30,
     width: 30,
-    marginLeft: 10
+    marginLeft: 15,
+    color: 'white',
+    fontSize: 25
   },
   captureIcon: {
     height: 75,
