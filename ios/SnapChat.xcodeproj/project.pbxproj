@@ -22,8 +22,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		73B414A11DB1DAF100E54AAB /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B414961DB1DA9D00E54AAB /* libRCTContacts.a */; };
+		16CFA4C530524FB8A9E75A36 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F892AB638F4F65BAB491D6 /* libRNFS.a */; };
+		73B415301DB31F7500E54AAB /* react-native-fs in Resources */ = {isa = PBXBuildFile; fileRef = 73B4152F1DB31F7500E54AAB /* react-native-fs */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8A9A995754E34F0082AD88DF /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 375ED051DFF94CE2B187BCE0 /* libRCTContacts.a */; };
+		8F568F96891A415296D93D34 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122CE2E054B49BF84E7A5BB /* libRNFetchBlob.a */; };
+		923DD5A6E26A43CCB57560D1 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02C516FA00D4A47B137526C /* libRNBackgroundTimer.a */; };
 		A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0B31D9E1E5C00F602D0 /* libRCTCamera.a */; };
 		A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0C31D9E1F1800F602D0 /* libRCTCameraRoll.a */; };
 		D07985F1E00A4B2D8C8CFB31 /* libRNSketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A8F61FCCAA45C893A8E097 /* libRNSketch.a */; };
@@ -100,12 +104,33 @@
 			remoteGlobalIDString = D03120661CD1FA5200897D5B;
 			remoteInfo = RNSketch;
 		};
-		73B414951DB1DA9D00E54AAB /* PBXContainerItemProxy */ = {
+		73B4151D1DB31DFF00E54AAB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 73B4148E1DB1DA9C00E54AAB /* RCTContacts.xcodeproj */;
+			containerPortal = 4193AABE50384F0ABB91E3B9 /* RNBackgroundTimer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNBackgroundTimer;
+		};
+		73B415231DB31DFF00E54AAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
 			remoteInfo = RCTContacts;
+		};
+		73B415281DB31DFF00E54AAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39E61C7E1EA449A9903EEE0C /* RNFetchBlob.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A15C300E1CD25C330074CB35;
+			remoteInfo = RNFetchBlob;
+		};
+		73B415351DB3204600E54AAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73B415311DB3204600E54AAB /* RNFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
+			remoteInfo = RNFS;
 		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -147,6 +172,7 @@
 		00E356EE1AD99517003FC87E /* SnapChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SnapChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapChatTests.m; sourceTree = "<group>"; };
+		0122CE2E054B49BF84E7A5BB /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		10A8F61FCCAA45C893A8E097 /* libRNSketch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSketch.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -158,11 +184,18 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SnapChat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SnapChat/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		73B4148E1DB1DA9C00E54AAB /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
+		375ED051DFF94CE2B187BCE0 /* libRCTContacts.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContacts.a; sourceTree = "<group>"; };
+		39E61C7E1EA449A9903EEE0C /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		4193AABE50384F0ABB91E3B9 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
+		66F892AB638F4F65BAB491D6 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
+		73B4152F1DB31F7500E54AAB /* react-native-fs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-fs"; path = "../node_modules/react-native-fs"; sourceTree = "<group>"; };
+		73B415311DB3204600E54AAB /* RNFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A139A0AD1D9E1E5C00F602D0 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
+		F02C516FA00D4A47B137526C /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		F17C2643883C40098464F32F /* RNSketch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSketch.xcodeproj; path = "../node_modules/react-native-sketch/RNSketch.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +226,10 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D07985F1E00A4B2D8C8CFB31 /* libRNSketch.a in Frameworks */,
+				16CFA4C530524FB8A9E75A36 /* libRNFS.a in Frameworks */,
+				8A9A995754E34F0082AD88DF /* libRCTContacts.a in Frameworks */,
+				8F568F96891A415296D93D34 /* libRNFetchBlob.a in Frameworks */,
+				923DD5A6E26A43CCB57560D1 /* libRNBackgroundTimer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,10 +339,34 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		73B4148F1DB1DA9C00E54AAB /* Products */ = {
+		73B4150E1DB31DFF00E54AAB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				73B414961DB1DA9D00E54AAB /* libRCTContacts.a */,
+				73B4151E1DB31DFF00E54AAB /* libRNBackgroundTimer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73B415201DB31DFF00E54AAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73B415241DB31DFF00E54AAB /* libRCTContacts.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73B415251DB31DFF00E54AAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73B415291DB31DFF00E54AAB /* libRNFetchBlob.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73B415321DB3204600E54AAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73B415361DB3204600E54AAB /* libRNFS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,7 +382,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				73B4148E1DB1DA9C00E54AAB /* RCTContacts.xcodeproj */,
+				73B415311DB3204600E54AAB /* RNFS.xcodeproj */,
+				73B4152F1DB31F7500E54AAB /* react-native-fs */,
 				A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */,
 				A139A0AD1D9E1E5C00F602D0 /* RCTCamera.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -335,6 +397,9 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				F17C2643883C40098464F32F /* RNSketch.xcodeproj */,
+				E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */,
+				39E61C7E1EA449A9903EEE0C /* RNFetchBlob.xcodeproj */,
+				4193AABE50384F0ABB91E3B9 /* RNBackgroundTimer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -468,8 +533,8 @@
 					ProjectRef = A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */;
 				},
 				{
-					ProductGroup = 73B4148F1DB1DA9C00E54AAB /* Products */;
-					ProjectRef = 73B4148E1DB1DA9C00E54AAB /* RCTContacts.xcodeproj */;
+					ProductGroup = 73B415201DB31DFF00E54AAB /* Products */;
+					ProjectRef = E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -506,6 +571,18 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 73B4150E1DB31DFF00E54AAB /* Products */;
+					ProjectRef = 4193AABE50384F0ABB91E3B9 /* RNBackgroundTimer.xcodeproj */;
+				},
+				{
+					ProductGroup = 73B415251DB31DFF00E54AAB /* Products */;
+					ProjectRef = 39E61C7E1EA449A9903EEE0C /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = 73B415321DB3204600E54AAB /* Products */;
+					ProjectRef = 73B415311DB3204600E54AAB /* RNFS.xcodeproj */;
 				},
 				{
 					ProductGroup = 738A027C1DAD9B2B009236DD /* Products */;
@@ -584,11 +661,32 @@
 			remoteRef = 738A028B1DAD9B2B009236DD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		73B414961DB1DA9D00E54AAB /* libRCTContacts.a */ = {
+		73B4151E1DB31DFF00E54AAB /* libRNBackgroundTimer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBackgroundTimer.a;
+			remoteRef = 73B4151D1DB31DFF00E54AAB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73B415241DB31DFF00E54AAB /* libRCTContacts.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRCTContacts.a;
-			remoteRef = 73B414951DB1DA9D00E54AAB /* PBXContainerItemProxy */;
+			remoteRef = 73B415231DB31DFF00E54AAB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73B415291DB31DFF00E54AAB /* libRNFetchBlob.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFetchBlob.a;
+			remoteRef = 73B415281DB31DFF00E54AAB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73B415361DB3204600E54AAB /* libRNFS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFS.a;
+			remoteRef = 73B415351DB3204600E54AAB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
@@ -635,6 +733,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				73B415301DB31F7500E54AAB /* react-native-fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +812,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SnapChat.app/SnapChat";
@@ -730,6 +833,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -749,6 +856,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-sketch/RNSketch",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = SnapChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -773,6 +884,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-sketch/RNSketch",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				INFOPLIST_FILE = SnapChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -827,6 +942,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-sketch/RNSketch",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -870,6 +989,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-sketch/RNSketch",
+					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-background-timer/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

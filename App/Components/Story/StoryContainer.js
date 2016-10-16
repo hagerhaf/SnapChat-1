@@ -3,10 +3,58 @@ import Story from './Story'
 import DiscoverContainer from '../Discover/DiscoverContainer'
 import { ListView } from 'react-native'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
+import getFriends, {getStory} from './StoryHelpers'
+import deepCopy from 'deepcopy'
+import ViewImage from '../Image/ViewImage'
 
 class StoriesContainer extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      friendsStories: []
+    }
+
+    this.pressStory = this.pressStory.bind(this)
+  }
+
+  componentDidMount () {
+    var appThis = this
+    getFriends(function (friend) {
+      let newFriends = appThis.state.friendsStories.slice()
+      newFriends.push(friend)
+      appThis.setState({
+        friendsStories: newFriends
+      })
+
+      getStory(friend, function (story) {
+        var newFriendsWStory = appThis.state.friendsStories.slice()
+        newFriendsWStory = newFriendsWStory.map((nfriend) => {
+          if (nfriend.key === friend.key) {
+            if (nfriend['stories']) {
+              nfriend['stories'].push(deepCopy(story))
+            } else {
+              nfriend['stories'] = [deepCopy(story)]
+            }
+          }
+          return nfriend
+        })
+        appThis.setState({
+          friendsStories: newFriendsWStory
+        })
+      })
+    })
+  }
+
+  pressStory (stories) {
+
+    this.props.navigator.push({
+      component: ViewImage,
+      title: 'Story time',
+      passProps: {
+        stories,
+        navigator: this.props.navigator
+      }
+    })
   }
 
   render () {
@@ -15,11 +63,15 @@ class StoriesContainer extends Component {
         style={{marginTop: 30}}
         renderTabBar={renderTab}
         tabBarTextStyle={{fontFamily: 'Avenir-Heavy', fontSize: 18}}
-        tabBarActiveTextColor='purple'
-        tabBarInactiveTextColor='gray'
+        tabBarActiveTextColor="purple"
+        tabBarInactiveTextColor="gray"
       >
         {/* Snaps container lists all your saved memories (photos you've taken) and adds to ability to resend */}
-        <Story stories={storyDataSource.cloneWithRows(stories)} tabLabel="Stories" />
+        <Story
+          stories={this.state.friendsStories}
+          onPressStory={this.pressStory}
+          tabLabel="Stories"
+        />
         {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
         <DiscoverContainer tabLabel="Discover" />
       </ScrollableTabView>
@@ -33,40 +85,3 @@ function renderTab () {
 
 export default StoriesContainer
 
-// / mock data
-var storyDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-var stories = [
-  {
-    username: 'nathan',
-    posted: '38m'
-  },
-  {
-    username: 'obama',
-    posted: '38m'
-  },
-  {
-    username: 'jesus',
-    posted: '38m'
-  },
-  {
-    username: 'will smith',
-    posted: '38m'
-  },
-  {
-    username: 'beibeir',
-    posted: '38m'
-  },
-  {
-    username: 'sidechick_01',
-    posted: '38m'
-  },
-  {
-    username: 'lachlan',
-    posted: '38m'
-  },
-  {
-    username: 'ryan',
-    posted: '38m'
-  }
-
-]

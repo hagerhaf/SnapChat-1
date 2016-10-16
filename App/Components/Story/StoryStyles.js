@@ -32,10 +32,6 @@ export const storyStyles = StyleSheet.create({
     paddingTop: 6,
     paddingLeft: 6
   },
-  storyImage: {
-    height: 27,
-    width: 27
-  },
   usernameHeading: {
     fontSize: 16,
     fontFamily: 'Avenir-Medium'
