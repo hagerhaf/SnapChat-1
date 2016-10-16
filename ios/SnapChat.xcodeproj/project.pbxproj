@@ -31,6 +31,11 @@
 		A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0B31D9E1E5C00F602D0 /* libRCTCamera.a */; };
 		A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A139A0C31D9E1F1800F602D0 /* libRCTCameraRoll.a */; };
 		D07985F1E00A4B2D8C8CFB31 /* libRNSketch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A8F61FCCAA45C893A8E097 /* libRNSketch.a */; };
+		D863F8991DB3BBC600A49D45 /* react-native-maps in Resources */ = {isa = PBXBuildFile; fileRef = D863F8981DB3BBC600A49D45 /* react-native-maps */; };
+		D89819A71DB3BF910076BBF1 /* AirMaps.xcodeproj in Frameworks */ = {isa = PBXBuildFile; fileRef = D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */; };
+		D89819A91DB3BFEE0076BBF1 /* AirGoogleMaps in Resources */ = {isa = PBXBuildFile; fileRef = D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */; };
+		D8E9808D1DB3BDE60050A03C /* AirMaps in Resources */ = {isa = PBXBuildFile; fileRef = D8E9808C1DB3BDE60050A03C /* AirMaps */; };
+		F90BAD91908ED6B6FF680717 /* Pods_SnapChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A6C59C92A7A4A44C597308 /* Pods_SnapChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +165,13 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		D89819A51DB3BF5A0076BBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +199,8 @@
 		375ED051DFF94CE2B187BCE0 /* libRCTContacts.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContacts.a; sourceTree = "<group>"; };
 		39E61C7E1EA449A9903EEE0C /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		4193AABE50384F0ABB91E3B9 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
+		41EAF4C19F276EB0A98B2599 /* Pods-SnapChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnapChat/Pods-SnapChat.debug.xcconfig"; sourceTree = "<group>"; };
+		4EDA1F717DD17F8B73C3DC08 /* Pods-SnapChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnapChat/Pods-SnapChat.release.xcconfig"; sourceTree = "<group>"; };
 		66F892AB638F4F65BAB491D6 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		73B4152F1DB31F7500E54AAB /* react-native-fs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-fs"; path = "../node_modules/react-native-fs"; sourceTree = "<group>"; };
 		73B415311DB3204600E54AAB /* RNFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
@@ -194,6 +208,11 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A139A0AD1D9E1E5C00F602D0 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		D6A6C59C92A7A4A44C597308 /* Pods_SnapChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D863F8981DB3BBC600A49D45 /* react-native-maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-maps"; path = "../node_modules/react-native-maps"; sourceTree = "<group>"; };
+		D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
+		D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AirGoogleMaps; path = "../node_modules/react-native-maps/ios/AirGoogleMaps"; sourceTree = "<group>"; };
+		D8E9808C1DB3BDE60050A03C /* AirMaps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AirMaps; path = "node_modules/react-native-maps/ios/AirMaps"; sourceTree = "<group>"; };
 		E3F0B777CDE6459CAC37EA31 /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
 		F02C516FA00D4A47B137526C /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		F17C2643883C40098464F32F /* RNSketch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSketch.xcodeproj; path = "../node_modules/react-native-sketch/RNSketch.xcodeproj"; sourceTree = "<group>"; };
@@ -212,7 +231,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73B414A11DB1DAF100E54AAB /* libRCTContacts.a in Frameworks */,
+				D89819A71DB3BF910076BBF1 /* AirMaps.xcodeproj in Frameworks */,
 				A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */,
 				A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -230,6 +249,7 @@
 				8A9A995754E34F0082AD88DF /* libRCTContacts.a in Frameworks */,
 				8F568F96891A415296D93D34 /* libRNFetchBlob.a in Frameworks */,
 				923DD5A6E26A43CCB57560D1 /* libRNBackgroundTimer.a in Frameworks */,
+				F90BAD91908ED6B6FF680717 /* Pods_SnapChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +313,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		02D3281AC91D22B1D067C3A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */,
+				D6A6C59C92A7A4A44C597308 /* Pods_SnapChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +358,15 @@
 				146834041AC3E56700842450 /* libReact.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		555760F62700287937DF7FAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				41EAF4C19F276EB0A98B2599 /* Pods-SnapChat.debug.xcconfig */,
+				4EDA1F717DD17F8B73C3DC08 /* Pods-SnapChat.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		738A027C1DAD9B2B009236DD /* Products */ = {
@@ -382,6 +420,9 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D89819A81DB3BFED0076BBF1 /* AirGoogleMaps */,
+				D8E9808C1DB3BDE60050A03C /* AirMaps */,
+				D863F8981DB3BBC600A49D45 /* react-native-maps */,
 				73B415311DB3204600E54AAB /* RNFS.xcodeproj */,
 				73B4152F1DB31F7500E54AAB /* react-native-fs */,
 				A139A0BE1D9E1F1800F602D0 /* RCTCameraRoll.xcodeproj */,
@@ -419,6 +460,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SnapChatTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				555760F62700287937DF7FAC /* Pods */,
+				02D3281AC91D22B1D067C3A0 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -449,6 +492,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D89819A21DB3BF5A0076BBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D89819A61DB3BF5A0076BBF1 /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,10 +525,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SnapChat" */;
 			buildPhases = (
+				D438DCA7642D78121E1644CD /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				71F8244F14BD06D6C762B6D6 /* [CP] Embed Pods Frameworks */,
+				2C8F2A3272F09830AA09CD22 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -520,6 +574,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = D89819A21DB3BF5A0076BBF1 /* Products */;
+					ProjectRef = D89819A11DB3BF5A0076BBF1 /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -717,6 +775,13 @@
 			remoteRef = A139A0C21D9E1F1800F602D0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D89819A61DB3BF5A0076BBF1 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = D89819A51DB3BF5A0076BBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -731,8 +796,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E9808D1DB3BDE60050A03C /* AirMaps in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				D89819A91DB3BFEE0076BBF1 /* AirGoogleMaps in Resources */,
+				D863F8991DB3BBC600A49D45 /* react-native-maps in Resources */,
 				73B415301DB31F7500E54AAB /* react-native-fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,6 +821,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		2C8F2A3272F09830AA09CD22 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SnapChat/Pods-SnapChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71F8244F14BD06D6C762B6D6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SnapChat/Pods-SnapChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D438DCA7642D78121E1644CD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -846,6 +959,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EAF4C19F276EB0A98B2599 /* Pods-SnapChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -875,6 +989,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EDA1F717DD17F8B73C3DC08 /* Pods-SnapChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
