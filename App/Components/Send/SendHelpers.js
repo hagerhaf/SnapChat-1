@@ -32,7 +32,8 @@ export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUs
           snapObject[fromUser][imageNameUrl] = {
             timer: timer,
             from: fromUser,
-            imageName: imageName
+            imageName: imageName,
+            date: Date.now()
           }
           return dbUserRef.push(snapObject)
         })

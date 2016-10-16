@@ -12,7 +12,7 @@ const Stories = ({stories, onPressStory, storiesLoading}) => {
 
   const createStoryRow = ({username, stories}, sectionId, rowId) => {
     if (stories) {
-      let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHms'))
+      let timeString = createTime(timediff(stories[0].storyInfo.date, new Date(), 'YDHmS'))
       return (
         <StoryRow
           username={username}

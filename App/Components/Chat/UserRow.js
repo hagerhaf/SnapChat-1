@@ -2,10 +2,14 @@ import React, { PropTypes } from 'react'
 import { Text, View, TouchableHighlight, Image } from 'react-native'
 import { chatStyles as styles, touchColor } from './chatStyles'
 import constants from '../../constants'
+import timediff from 'timediff'
 
 const UserRow = ({username, uid, lastReceived, openChat, snaps, openSnaps}) => {
   const imageStatus = snaps ? constants.IMAGE_RECEIVED : constants.IMAGE_RECEIVED_SEEN
-  console.log('imagestatus', imageStatus)
+  if(snaps){
+    console.log('a', snaps[0].storyInfo.date)
+    console.log(createTime(timediff(snaps[0].storyInfo.date, new Date(), 'YDHmS')))
+  }
   return (
     <TouchableHighlight underlayColor={touchColor}
       onPress={snaps ? () => openSnaps(snaps) : () => openChat(username, uid)}
@@ -16,7 +20,10 @@ const UserRow = ({username, uid, lastReceived, openChat, snaps, openSnaps}) => {
         </View>
         <View style={styles.userRowInfo}>
           <Text>{username}</Text>
-          <Text style={styles.lastReceived}>Last received: {lastReceived}</Text>
+          {snaps
+            ? <Text style={styles.lastReceived}>Received: {createTime(timediff(snaps[0].storyInfo.date, new Date(), 'YDHmS'))}</Text> 
+            : null}
+
         </View>
       </View>
     </TouchableHighlight>
@@ -82,3 +89,16 @@ const imageStatusToDisplay = receivedStatus => {
 }
 
 export default renderUserRow
+
+function createTime (timeDiffObject) {
+  let output = ''
+  if (timeDiffObject.years !== 0) return timeDiffObject.years + 'y'
+  if (timeDiffObject.days !== 0) return timeDiffObject.days + 'd'
+  if (timeDiffObject.hours !== 0) return timeDiffObject.hours + 'h'
+  if (timeDiffObject.minutes !== 0) return timeDiffObject.minutes + 'm'
+  if (output === '') {
+    output += timeDiffObject.seconds + 's'
+  }
+
+  return output
+}

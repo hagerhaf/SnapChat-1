@@ -62,13 +62,10 @@ class ChatContainer extends React.Component {
         this.setState({
           dataSource: friendsDataSource.cloneWithRows(this.state.friendsList)
         })
-        console.log('end', this.state.friendsList)
         return
       }
       Object.keys(snaps).forEach((snapKey) => {
         getDownloadUrl(snaps[snapKey], (snapObject) => {
-          console.log('snap object', snapObject)
-          console.log('friends list', this.state.friendsList)
         // want to go through friends and merge snapObject
           let newFriends = deepcopy(this.state.friendsList)
 
