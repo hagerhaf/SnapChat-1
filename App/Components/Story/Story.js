@@ -53,13 +53,13 @@ export default Stories
 
 function createTime (timeDiffObject) {
   let output = ''
-  output += timeDiffObject.years !== 0 ? timeDiffObject.years + 'yr ' : ''
-  output += timeDiffObject.days !== 0 ? timeDiffObject.days + 'day ' : ''
-  output += timeDiffObject.hours !== 0 ? timeDiffObject.hours + 'hr ' : ''
-  output += timeDiffObject.minutes !== 0 ? timeDiffObject.minutes + 'm ' : ''
+  if (timeDiffObject.years !== 0) return timeDiffObject.years + 'y'
+  if (timeDiffObject.days !== 0) return timeDiffObject.days + 'd'
+  if (timeDiffObject.hours !== 0) return timeDiffObject.hours + 'h'
+  if (timeDiffObject.minutes !== 0) return timeDiffObject.minutes + 'm'
 
   if (output === '') {
-    output += timeDiffObject.seconds + 's '
+    output += timeDiffObject.seconds + 's'
   }
 
   return output

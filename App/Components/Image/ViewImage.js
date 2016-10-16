@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import ViewSnap from './ViewSnap'
+import ReactTimeout from 'react-timeout'
 
 class ViewImage extends Component {
   constructor (props) {
@@ -20,7 +21,7 @@ class ViewImage extends Component {
 
   countDown () {
     if (this.state.snapCount + 1 < this.props.stories.length) {
-      setTimeout(() => {
+      this.props.setTimeout(() => {
         if (this.state.timer - 1 < 0) {
           this.setState({
             snapCount: this.state.snapCount += 1,
@@ -31,17 +32,22 @@ class ViewImage extends Component {
             timer: this.state.timer -= 1
           })
         }
-      }, 1000)
+      }, 999)
     } else {
       this.back()
     }
   }
 
-  render () {
-
-    let currentStory = this.props.stories[this.state.snapCount]
-
+  componentDidMount () {
     this.countDown()
+  }
+
+  componentWillUpdate () {
+    this.countDown()
+  }
+
+  render () {
+    let currentStory = this.props.stories[this.state.snapCount]
 
     return (
       <ViewSnap url={currentStory.url} onBackPressed={this.back} countDown={this.state.timer} />
@@ -49,7 +55,7 @@ class ViewImage extends Component {
   }
 }
 
-export default (ViewImage)
+export default ReactTimeout(ViewImage)
 
 ViewImage.propTypes = {
   navigator: PropTypes.object.isRequired
