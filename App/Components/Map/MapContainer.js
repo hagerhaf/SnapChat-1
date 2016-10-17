@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {View, Text, MapView, Image} from 'react-native'
+import {View, Text, MapView, Image, TouchableOpacity} from 'react-native'
 // import MapView from 'react-native-maps'
 import {mapStyles as styles} from './MapStyles'
 import deepcopy from 'deepcopy'
@@ -48,13 +48,16 @@ class MapContainer extends Component {
 
     friendsList.map((friend) => {
       if (friend.stories) {
-        if (friend.stories[0].storyInfo.coords) {
-          let newMarkers = deepcopy(this.state.markers)
-          newMarkers[friend.key] = friend
-          this.setState({
-            markers: newMarkers
-          })
-        }
+        // create an entry for each story
+        friend.stories.forEach((story) => {
+          if (story.storyInfo.coords) {
+            let newMarkers = deepcopy(this.state.markers)
+            newMarkers[story.url] = {story, username: friend.username, key: friend.key}
+            this.setState({
+              markers: newMarkers
+            })
+          }
+        })
       }
     })
   }
@@ -65,7 +68,18 @@ class MapContainer extends Component {
         latitude: coords.latitude,
         longitude: coords.longitude,
         view: <Image source={{uri: url, width: 35, height: 35}} />,
-        title: username
+        title: username,
+        rightCalloutView: (
+          <TouchableOpacity
+            onPress={() => {
+              alert('View image')
+            }}>
+            <Image
+              style={{width: 30, height: 30}}
+              source={require('../../../images/added_me.png')}
+            />
+          </TouchableOpacity>
+        )
       }
     )
   }
@@ -79,8 +93,8 @@ class MapContainer extends Component {
     const annotations = Object.keys(this.state.markers).map((key) => {
       let marker = this.state.markers[key]
       return this.createAnnotation(
-        {latitude: marker.stories[0].storyInfo.coords.latitude, longitude: marker.stories[0].storyInfo.coords.longitude},
-        marker.stories[0].url, marker.username
+        {latitude: marker.story.storyInfo.coords.latitude, longitude: marker.story.storyInfo.coords.longitude},
+        marker.story.url, marker.username
       )
     })
     return (
