@@ -57,8 +57,12 @@ export const mainStyles = StyleSheet.create({
     height: 30,
     width: 30,
     marginLeft: 15,
+  },
+  numSnaps: {
     color: 'white',
-    fontSize: 25
+    fontFamily: 'Avenir-Book',
+    fontSize: 24,
+    marginLeft: 22
   },
   captureIcon: {
     height: 75,

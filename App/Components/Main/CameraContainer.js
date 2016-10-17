@@ -126,11 +126,17 @@ class CameraContainer extends Component {
             {/* Button navigation */}
             <View style={styles.header}>
               <TouchableHighlight>
-                <Text
-                  style={[styles.chatIcon, this.state.snapCount > 0 ? styles.active : null]}
-                >
-                  {this.state.snapCount}
-                </Text>
+                <View style={{marginTop: -25}}>
+                  <Text
+                    style={[styles.numSnaps, this.state.snapCount > 0 ? styles.active : null]}
+                  >
+                    {this.state.snapCount}
+                  </Text>
+                  <Image
+                    source={require('../../../images/main-camera/chatbubble.png')}
+                    style={styles.chatIcon}
+                  />
+                </View>
               </TouchableHighlight>
               <TouchableHighlight style={styles.flex}>
                 <Image

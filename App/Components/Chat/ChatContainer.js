@@ -96,10 +96,8 @@ class ChatContainer extends React.Component {
       }
     })
     /* delete snaps now */
-    console.log(snaps)
     snaps.forEach((snap) => {
       deleteSnap(snap, (res) => {
-        console.log(res)
         this.getSnaps()
       })
     })
@@ -123,7 +121,6 @@ class ChatContainer extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <Chat
         friends={this.state.dataSource}
