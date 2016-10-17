@@ -14,7 +14,7 @@ class StoriesContainer extends Component {
 
     this.state = {
       friendsStories: [],
-      storiesLoading: false
+      storiesLoading: true
     }
 
     this.pressStory = this.pressStory.bind(this)

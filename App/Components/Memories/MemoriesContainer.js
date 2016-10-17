@@ -13,9 +13,8 @@ class MemoriesContainer extends Component {
 
   render () {
     return (
-      <Memories
-        navigator={this.props.navigator}
-        backButtonPressed={this.backButtonPressed} />
+      <Memories navigator={this.props.navigator}
+                backButtonPressed={this.backButtonPressed} />
     )
   }
 }

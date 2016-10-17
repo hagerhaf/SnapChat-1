@@ -1,7 +1,6 @@
 import * as firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 
-
 export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUser) {
   /* shit needed for sending */
   const polyfill = RNFetchBlob.polyfill
@@ -85,6 +84,20 @@ export function saveToStory ({imageUri, timer}) {
         })
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
-
   })
+}
+
+export const uploadImageToMemories = (imageUri, fromUser) => {
+  const polyfill = RNFetchBlob.polyfill
+  window.XMLHttpRequest = polyfill.XMLHttpRequest
+  window.Blob = polyfill.Blob
+
+  const storageRef = firebase.storage().ref().child('memories')
+  const randomImageNumber = Math.floor(Math.random() * 100000) + 1
+  const imageUrl = `${randomImageNumber}.jpg`
+
+  return Blob.build(RNFetchBlob.wrap(imageUri), { type: 'image/jpeg' })
+    .then((blob) => storageRef.child(`${fromUser}/${imageUrl}`).put(blob, { type: 'image/jpeg' }))
+    .then(() => storageRef.child(fromUser).child(imageUrl).getDownloadURL())
+    .catch(error => console.log('error sending message to chat', error))
 }

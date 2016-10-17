@@ -1,41 +1,52 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, View, TouchableHighlight } from 'react-native'
 import { memoriesStyles as styles } from './memoriesStyles'
+import SendMemoryContainer from './SendMemoryContainer'
 
 class SendMemory extends Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      sendingToFriends: false
+    }
+
     this.backButtonPressed = this.backButtonPressed.bind(this)
+    this.sendToFriends = this.sendToFriends.bind(this)
+  }
+
+  sendToFriends () {
+    this.setState({ sendingToFriends: true })
   }
 
   backButtonPressed () {
     this.props.navigator.pop()
   }
 
-  // TODO: add methods to delete, send and upload images
-
   render () {
+    if (this.state.sendingToFriends) {
+      return <SendMemoryContainer navigator={this.props.navigator}
+                                  imageUri={this.props.uri}
+                                  ref={ref => this.sendTo = ref} />
+    }
+
     return (
       <View style={styles.selectedImageContainer}>
         <View style={styles.backArrowContainer}>
           <TouchableHighlight onPress={this.backButtonPressed}>
-            <Image
-              style={styles.backArrow}
-              source={require('../../../images/back_arrow_white.png')} />
+            <Image source={require('../../../images/back_arrow_white.png')}
+                   style={styles.backArrow} />
           </TouchableHighlight>
         </View>
 
-        <Image style={styles.selectedImage} source={{uri: this.props.uri}} />
+        <Image source={{uri: this.props.uri}}
+               style={styles.selectedImage} />
 
         <View style={styles.selectedImageFooter}>
-          <View style={styles.footerMenu}>
-            <View style={styles.utilIcons}>
-              <Image style={styles.icon} source={require('../../../images/trash.png')} />
-              <Image style={styles.icon} source={require('../../../images/upload.png')} />
-            </View>
-            <Image style={styles.sendIcon} source={require('../../../images/send.png')} />
-          </View>
+          <TouchableHighlight onPress={this.sendToFriends}>
+            <Image source={require('../../../images/send.png')}
+                   style={styles.sendIcon} />
+          </TouchableHighlight>
         </View>
       </View>
     )

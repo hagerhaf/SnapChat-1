@@ -23,3 +23,4 @@ ViewSnap.propTypes = {
   url: PropTypes.string.isRequired,
   onBackPressed: PropTypes.func.isRequired
 }
+
