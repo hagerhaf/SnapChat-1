@@ -23,12 +23,14 @@ class ChatToUser extends Component {
   }
 
   componentDidMount () {
+    mounted = true
     const userId = authentication.currentUser.uid
     this.fetchReceivedMessages(userId)
     this.fetchSentMessages(userId)
   }
 
   componentWillUnmount () {
+    mounted = false
     chatMessages = []
   }
 
@@ -45,7 +47,9 @@ class ChatToUser extends Component {
         chatMessages.push(received)
         chatMessages = this.sortByTimeStamp(chatMessages)
       })
-      this.setState({ messages: messages.cloneWithRows(chatMessages) })
+      if (mounted) {
+        this.setState({ messages: messages.cloneWithRows(chatMessages) })
+      }
     })
   }
 
@@ -56,7 +60,7 @@ class ChatToUser extends Component {
         chatMessages.push(child.val())
         chatMessages = this.sortByTimeStamp(chatMessages)
       })
-      this.setState({ messages: messages.cloneWithRows(chatMessages) })
+        this.setState({ messages: messages.cloneWithRows(chatMessages) })
     })
   }
 
@@ -135,7 +139,6 @@ class ChatToUser extends Component {
 }
 
 let chatMessages = []
-
 const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
 export default ChatToUser
@@ -144,7 +147,7 @@ const renderUserMessage = (userMessage) => {
   if (!userMessage) return null
   if (userMessage.type === 'sent') {
     if (userMessage.format === 'image') {
-      return <Image source={{uri: userMessage.message}} style={{height: 250, width: 250}} />
+      return <Image source={{uri: userMessage.message}} style={{height: 220, width: 220, margin: 10}} />
     }
     return (
       <View>
@@ -153,7 +156,7 @@ const renderUserMessage = (userMessage) => {
     )
   } else if (userMessage.type === 'received') {
     if (userMessage.format === 'image') {
-      return <Image source={{uri: userMessage.message}} style={{height: 250, width: 250}} />
+      return <Image source={{uri: userMessage.message}} style={{height: 220, width: 220, margin: 10}} />
     }
     return (
       <View style={styles.receivedMessageContainer}>

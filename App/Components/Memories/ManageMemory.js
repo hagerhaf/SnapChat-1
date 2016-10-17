@@ -15,12 +15,10 @@ class SendMemory extends Component {
     this.sendToFriends = this.sendToFriends.bind(this)
   }
 
+  // TODO: Add delete message
+
   sendToFriends () {
     this.setState({ sendingToFriends: true })
-  }
-
-  sendPhotoToChat () {
-    this.ref.sendMemoryToChat()
   }
 
   backButtonPressed () {
@@ -29,7 +27,8 @@ class SendMemory extends Component {
 
   render () {
     if (this.state.sendingToFriends) {
-      return <SendMemoryContainer imageUri={this.props.uri}
+      return <SendMemoryContainer navigator={this.props.navigator}
+                                  imageUri={this.props.uri}
                                   ref={ref => this.sendTo = ref} />
     }
 
@@ -50,7 +49,6 @@ class SendMemory extends Component {
 
             <View style={styles.utilIcons}>
               <Image style={styles.icon} source={require('../../../images/trash.png')} />
-              <Image style={styles.icon} source={require('../../../images/upload.png')} />
             </View>
 
           </View>
