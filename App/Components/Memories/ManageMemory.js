@@ -15,8 +15,6 @@ class SendMemory extends Component {
     this.sendToFriends = this.sendToFriends.bind(this)
   }
 
-  // TODO: Add delete message
-
   sendToFriends () {
     this.setState({ sendingToFriends: true })
   }
@@ -36,27 +34,19 @@ class SendMemory extends Component {
       <View style={styles.selectedImageContainer}>
         <View style={styles.backArrowContainer}>
           <TouchableHighlight onPress={this.backButtonPressed}>
-            <Image
-              style={styles.backArrow}
-              source={require('../../../images/back_arrow_white.png')} />
+            <Image source={require('../../../images/back_arrow_white.png')}
+                   style={styles.backArrow} />
           </TouchableHighlight>
         </View>
 
-        <Image style={styles.selectedImage} source={{uri: this.props.uri}} />
+        <Image source={{uri: this.props.uri}}
+               style={styles.selectedImage} />
 
         <View style={styles.selectedImageFooter}>
-          <View style={styles.footerMenu}>
-
-            <View style={styles.utilIcons}>
-              <Image style={styles.icon} source={require('../../../images/trash.png')} />
-            </View>
-
-          </View>
-
           <TouchableHighlight onPress={this.sendToFriends}>
-            <Image style={styles.sendIcon} source={require('../../../images/send.png')} />
+            <Image source={require('../../../images/send.png')}
+                   style={styles.sendIcon} />
           </TouchableHighlight>
-
         </View>
       </View>
     )
