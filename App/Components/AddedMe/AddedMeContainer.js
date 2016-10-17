@@ -19,7 +19,6 @@ class AddedMeContainer extends Component {
   }
 
   componentDidMount () {
-    var appScope = this;
     var userId = authentication.currentUser.uid;
 
     // Query fire base for all users.
@@ -49,7 +48,7 @@ class AddedMeContainer extends Component {
         }
 
         // Get all the users who added the current user.
-        var toDisplay = []
+        var toDisplay = [];
         for (var i = 0; i < remoteUsers.length; i++) {
           var remoteUser = remoteUsers[i];
           if (addedMeIds.includes(remoteUser.id)) {
@@ -109,8 +108,9 @@ class AddedMeContainer extends Component {
             friend = snapshot.val()[i];
           }
 
-          userId = authentication.currentUser.uid
-          userId = userId.replace(/"/g, '')
+          // Create friendship in database.
+          var userId = authentication.currentUser.uid;
+          userId = userId.replace(/"/g, '');
           database.ref('userObjects')
               .child('friends')
               .child(userId)

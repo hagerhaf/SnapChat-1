@@ -25,28 +25,6 @@ const AddedMe = ({backButtonPressed, friends, renderMyFriendsRow, onSelectFriend
   </View>
 )
 
-// const UserRow = ({username, method}) => {
-//   return (
-//     <View style={styles.userRowInfo}>
-//       <Image style={styles.addedMeImg} source={require('../../../images/added_me.png')} />
-//       <View style={styles.userNameField}>
-//         <Text style={styles.username}>
-//           {username}
-//         </Text>
-//         <Text style={styles.method}>
-//           {method}
-//         </Text>
-//       </View>
-//     </View>
-//   )
-// }
-//
-// const createUserRow = (userObject, i) => {
-//   return (
-//     <UserRow key={i} username={userObject.username} method={userObject.method} />
-//   )
-// }
-
 const func = PropTypes.func.isRequired
 
 AddedMe.propTypes = {
