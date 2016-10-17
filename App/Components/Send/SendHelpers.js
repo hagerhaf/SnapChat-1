@@ -1,7 +1,6 @@
 import * as firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 
-
 export default function uploadImageToFirebase ({imageUri, timer}, fromUser, toUser) {
   /* shit needed for sending */
   const polyfill = RNFetchBlob.polyfill
@@ -66,15 +65,24 @@ export function saveToStory ({imageUri, timer}) {
         .then((snapshot) => {
           let snapObject = {}
           let imageNameUrl = imageName.replace('.jpg', '')
-          snapObject[imageNameUrl] = {
-            timer,
-            date: Date.now(),
-            imageName
-          }
-          return dbSnapStoryRef.push(snapObject)
+          navigator.geolocation.getCurrentPosition(
+            ({coords, timestamp}) => {
+              snapObject[imageNameUrl] = {
+                timer,
+                date: Date.now(),
+                imageName,
+                coords: {
+                  latitue: coords.latitude,
+                  longiture: coords.longitude
+                }
+              }
+              return dbSnapStoryRef.push(snapObject)
+            },
+          (err) => console.log(err),
+          {}
+        )
         })
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
-
   })
 }
