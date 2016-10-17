@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react'
-import {View, Text, ListView} from 'react-native'
+import { ListView } from 'react-native'
 import SendToFriends from './SendToFriends'
-import SendRow, {seperatorFriends} from './SendRow'
-import database, {authentication} from '../FireBase/FireBase'
+import SendRow, { seperatorFriends } from './SendRow'
+import database, { authentication } from '../FireBase/FireBase'
 import { uploadImageToMemories } from '../Send/SendHelpers'
 
 class SendMemoryContainer extends Component {
   constructor (props) {
     super(props)
+
     let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
@@ -48,12 +49,20 @@ class SendMemoryContainer extends Component {
         this.state.friends.forEach((friend) => {
           if (friend.highLighted) {
             const time = `${new Date()}`
-            const message = { message: url, timestamp: time, type: 'sent', format: 'image'}
+            const message = {message: url, timestamp: time, type: 'sent', format: 'image'}
             const send = database.ref(`userObjects/messages/${friend.key}/${userId}`)
             send.push(message)
           }
         })
-        this.setState({ isSending: false })
+      })
+      .then(() => {
+        this.setState({
+          isSending: false,
+          hasSent: true
+        })
+        setTimeout(() => {
+          this.props.navigator.popToTop()
+        }, 850)
       })
   }
 
@@ -115,7 +124,7 @@ function findSelectedFriends (friends) {
 
 SendMemoryContainer.propTypes = {
   imageUri: PropTypes.string.isRequired,
-
+  navigator: PropTypes.object.isRequired
 }
 
 export default SendMemoryContainer

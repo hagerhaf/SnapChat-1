@@ -1,13 +1,14 @@
-import React, {Component, PropTypes} from 'react'
-import {View, Text, ListView} from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { ListView } from 'react-native'
 import SendToFriends from './SendToFriends'
-import SendRow, {seperatorFriends} from './SendRow'
-import database, {authentication} from '../FireBase/FireBase'
+import SendRow, { seperatorFriends } from './SendRow'
+import database, { authentication } from '../FireBase/FireBase'
 import sendSnapToUser from './SendHelpers'
 
 class SendContainer extends Component {
   constructor (props) {
     super(props)
+
     let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
@@ -41,17 +42,6 @@ class SendContainer extends Component {
     })
   }
 
-  sendMemoryToChat () {
-    this.setState({ isSending: true })
-    const userId = authentication.currentUser.uid
-    uploadImageToMemories(this.props.imageUri, userId)
-      .then((success) => {
-
-        // for each friend, send a chat message
-
-      })
-  }
-
   send () {
     this.setState({
       isSending: true
@@ -69,12 +59,8 @@ class SendContainer extends Component {
         hasSent: true,
         sendError: false
       })
-
       setTimeout(() => {
         this.props.navigator.popToTop()
-        this.setState({
-          hasSent: false
-        })
       }, 700)
     })
     .catch((err) => {
@@ -157,7 +143,8 @@ function findSelectedFriends (friends) {
 
 SendContainer.propTypes = {
   imageUri: PropTypes.string.isRequired,
-  timer: PropTypes.number.isRequired
+  timer: PropTypes.number.isRequired,
+  navigator: PropTypes.object.isRequired
 }
 
 export default SendContainer

@@ -2,12 +2,9 @@ import React, {PropTypes} from 'react'
 import {Text, View, TouchableWithoutFeedback, Image} from 'react-native'
 import {sendStyles as styles} from './SendStyles'
 
-const seperatorFriends = (sectionID, rowID, adjacentRowHighlighted) => {
-  return (<View
-    key={`sep-${sectionID}-${rowID}`}
-    style={styles.seperator}
-      />
-  )
+const seperatorFriends = (sectionID, rowID) => {
+  return <View style={styles.seperator}
+               key={`sep-${sectionID}-${rowID}`} />
 }
 
 seperatorFriends.propTypes = {

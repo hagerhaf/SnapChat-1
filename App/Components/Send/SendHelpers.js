@@ -74,7 +74,6 @@ export function saveToStory ({imageUri, timer}) {
         })
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
-
   })
 }
 
@@ -84,13 +83,11 @@ export const uploadImageToMemories = (imageUri, fromUser) => {
   window.Blob = polyfill.Blob
 
   const storageRef = firebase.storage().ref().child('memories')
-  const randomImageNumber = Math.floor(Math.random() * 10000) + 1
+  const randomImageNumber = Math.floor(Math.random() * 100000) + 1
   const imageUrl = `${randomImageNumber}.jpg`
 
   return Blob.build(RNFetchBlob.wrap(imageUri), { type: 'image/jpeg' })
-    .then((blob) => storageRef.child(`${fromUser}/${imageUrl}`)
-      .put(blob, { type: 'image/jpeg' }))
-    .then(() => {
-      return storageRef.child(fromUser).child(imageUrl).getDownloadURL()
-    })
+    .then((blob) => storageRef.child(`${fromUser}/${imageUrl}`).put(blob, { type: 'image/jpeg' }))
+    .then(() => storageRef.child(fromUser).child(imageUrl).getDownloadURL())
+    .catch(error => console.log('error sending message to chat', error))
 }
