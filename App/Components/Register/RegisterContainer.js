@@ -7,6 +7,8 @@ import RegisterBirthday from './RegisterBirthday'
 import RegisterEmail from './RegisterEmail'
 import RegisterPhoneNumber from './RegisterPhoneNumber'
 import RegisterPassword from './RegisterPassword'
+import LoginContainer from '../Login/LoginContainer'
+import database, { authentication } from '../FireBase/FireBase'
 
 class RegisterContainer extends Component {
   constructor (props) {
@@ -132,6 +134,7 @@ class RegisterContainer extends Component {
     const { email, password } = this.state
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        console.log(user.uid)
         this.saveUser(user)
         this.updateUserDetails(user)
         this.toggleSpinner()
@@ -144,9 +147,17 @@ class RegisterContainer extends Component {
   }
 
   async saveUser (user) {
+
+    var userObj = {};
+    var userRef = database.ref('users/' + user.uid);
+    userRef.on('value', function (snapshot) {
+      userObj = snapshot.val();
+    });
+    console.log(userObj);
+
     try {
       await AsyncStorage.setItem('userId', JSON.stringify(user.uid))
-      await AsyncStorage.setItem('user', JSON.stringify(user))
+      await AsyncStorage.setItem('user', JSON.stringify(userObj))
     } catch (error) {
       console.log('Error saving user to local storage: ', error)
     }
