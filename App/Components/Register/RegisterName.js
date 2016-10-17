@@ -67,7 +67,7 @@ function inputFields (updateFirstname, updateLastname, updateUsername) {
 
 function signupButton (hasValidInput, signupButtonPressed) {
   return (
-    <TouchableHighligh style={styles.signupButtonContainer}
+    <TouchableHighlight style={styles.signupButtonContainer}
                       onPress={hasValidInput ? signupButtonPressed : () => {}}
                       underlayColor='#F5F5F5'>
       <View style={hasValidInput
