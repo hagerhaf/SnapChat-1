@@ -66,12 +66,22 @@ export function saveToStory ({imageUri, timer}) {
         .then((snapshot) => {
           let snapObject = {}
           let imageNameUrl = imageName.replace('.jpg', '')
-          snapObject[imageNameUrl] = {
-            timer,
-            date: Date.now(),
-            imageName
-          }
-          return dbSnapStoryRef.push(snapObject)
+          navigator.geolocation.getCurrentPosition(
+            ({coords, timestamp}) => {
+              snapObject[imageNameUrl] = {
+                timer,
+                date: Date.now(),
+                imageName,
+                coords: {
+                  latitude: coords.latitude,
+                  longitude: coords.longitude
+                }
+              }
+              return dbSnapStoryRef.push(snapObject)
+            },
+          (err) => console.log(err),
+          {}
+        )
         })
         .then((snapshot) => { resolve('success') })
         .catch((err) => { reject(err) })
