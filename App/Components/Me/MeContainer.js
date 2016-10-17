@@ -3,7 +3,6 @@ import Me from './Me'
 import AddedMeContainer from '../AddedMe/AddedMeContainer'
 import AddFriendsContainer from '../AddFriends/AddFriendsContainer'
 import MyFriendsContainer from '../MyFriends/MyFriendsContainer'
-import TrophyCaseContainer from '../TrophyCase/TrophyCaseContainer'
 import SettingsContainer from '../Settings/SettingsContainer'
 import {getCurrentUser} from '../FireBase/FireBase'
 
@@ -71,14 +70,13 @@ class MeContainer extends Component {
 
   render () {
     return (
-      <Me
-        addedMePressed={this.addedMePressed}
-        cameraBackPressed={this.cameraBackPressed}
-        myFriendsPressed={this.myFriendsPressed}
-        addFriendsPressed={this.addFriendsPressed}
-        settingsPressed={this.settingsPressed}
-        fullname={this.state.firstname +' '+ this.state.lastname}
-        username={this.state.username} />
+      <Me addedMePressed={this.addedMePressed}
+          cameraBackPressed={this.cameraBackPressed}
+          myFriendsPressed={this.myFriendsPressed}
+          addFriendsPressed={this.addFriendsPressed}
+          settingsPressed={this.settingsPressed}
+          fullname={this.state.firstname + ' ' + this.state.lastname}
+          username={this.state.username} />
     )
   }
 }

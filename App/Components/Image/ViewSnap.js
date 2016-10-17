@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
-import {Image, View, Text, TouchableWithoutFeedback} from 'react-native'
-import {viewStyles as styles} from './ViewStyles'
+import React, { PropTypes } from 'react'
+import { Image, View, Text, TouchableWithoutFeedback } from 'react-native'
+import { viewStyles as styles } from './ViewStyles'
 
 export default function ViewSnap ({url, onBackPressed, countDown}) {
   return (
@@ -23,4 +23,3 @@ ViewSnap.propTypes = {
   url: PropTypes.string.isRequired,
   onBackPressed: PropTypes.func.isRequired
 }
-

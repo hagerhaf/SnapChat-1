@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import ViewSnap from './ViewSnap'
 import ReactTimeout from 'react-timeout'
 
 class ViewImage extends Component {
   constructor (props) {
     super(props)
-    // keeps a count on what snap we are on
+
     this.state = {
       snapCount: 0,
       timer: parseInt(this.props.stories[0].storyInfo.timer)
@@ -52,7 +52,9 @@ class ViewImage extends Component {
     let currentStory = this.props.stories[this.state.snapCount]
 
     return (
-      <ViewSnap url={currentStory.url} onBackPressed={this.back} countDown={this.state.timer} />
+      <ViewSnap url={currentStory.url}
+                onBackPressed={this.back}
+                countDown={this.state.timer} />
     )
   }
 }

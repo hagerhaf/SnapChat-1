@@ -36,37 +36,33 @@ RegisterPhoneNumber.propTypes = {
 export default RegisterPhoneNumber
 
 function inputFields (updatePhoneNumber) {
-    return (
-        <View>
-            <Text style={styles.inputLabel}>
-                Friends use your phone number to add you on Snapchat.
-            </Text>
-            <TextInput
-                style={styles.formInput}
-                keyboardType={'number-pad'}
-                onChangeText={updatePhoneNumber}
-            />
-        </View>
-    )
+  return (
+    <View>
+      <Text style={styles.inputLabel}>
+          Friends use your phone number to add you on Snapchat.
+      </Text>
+      <TextInput style={styles.formInput}
+                 keyboardType={'number-pad'}
+                 onChangeText={updatePhoneNumber} />
+    </View>
+  )
 }
 
 function continueButton (hasValidInput, continueButtonPressed) {
-    return (
-        <TouchableHighlight
-            style={styles.signupButtonContainer}
-            onPress={hasValidInput ? continueButtonPressed : () => {}} // TODO: can prob provide error msg
-            underlayColor='#F5F5F5'
-        >
-            <View style={hasValidInput
-                ? styles.signupButtonActivated
-                : styles.signupButtonDeactivated}>
-                <Text style={hasValidInput
-                    ? styles.signupButtonActivatedText
-                    : styles.signupButtonDeactivatedText}
-                >
-                    Continue
-                </Text>
-            </View>
-        </TouchableHighlight>
-    )
+  return (
+    <TouchableHighlight style={styles.signupButtonContainer}
+                        onPress={hasValidInput ? continueButtonPressed : () => {}}
+                        underlayColor='#F5F5F5'>
+        <View style={hasValidInput
+            ? styles.signupButtonActivated
+            : styles.signupButtonDeactivated}>
+            <Text style={hasValidInput
+                ? styles.signupButtonActivatedText
+                : styles.signupButtonDeactivatedText}
+            >
+                Continue
+            </Text>
+        </View>
+    </TouchableHighlight>
+  )
 }

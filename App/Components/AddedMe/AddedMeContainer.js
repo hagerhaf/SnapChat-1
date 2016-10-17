@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {View, Text, ListView, AsyncStorage} from 'react-native'
-import FriendRow, {seperatorFriends} from './FriendRow'
+import { View, Text, ListView, AsyncStorage } from 'react-native'
+import FriendRow, { seperatorFriends } from './FriendRow'
 import AddedMe from './AddedMe'
 import database, {authentication} from '../FireBase/FireBase'
 
@@ -95,7 +95,6 @@ class AddedMeContainer extends Component {
   }
 
   async addFriend (username) {
-
     // Get user object.
     database.ref('users')
         .orderByChild('username')
@@ -122,13 +121,13 @@ class AddedMeContainer extends Component {
   }
 
   render () {
-    return <AddedMe
-        friends={this.state.friendsDataSource}
-        onSelectFriend={this.addFriend}
-        backButtonPressed={this.backButtonPressed}
-        renderMyFriendsRow={FriendRow}
-        seperatorFriends={seperatorFriends}
-     />
+    return (
+      <AddedMe friends={this.state.friendsDataSource}
+                      onSelectFriend={this.addFriend}
+                      backButtonPressed={this.backButtonPressed}
+                      renderMyFriendsRow={FriendRow}
+                      seperatorFriends={seperatorFriends} />
+    )
   }
 }
 

@@ -8,7 +8,8 @@ const DiscoverItem = ({ title, image, open, url }) => (
       <Text style={styles.itemTitle}>
         {title}
       </Text>
-      <Image style={styles.itemImage} source={{uri: image}} />
+      <Image style={styles.itemImage}
+              source={{uri: image}} />
     </View>
   </TouchableHighlight>
 )

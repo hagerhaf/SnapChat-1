@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
-import {View, Text, ListView, ScrollView, Image, TouchableOpacity, ActivityIndicator} from 'react-native'
-import {sendStyles as styles} from './SendStyles'
+import React, { PropTypes } from 'react'
+import { View, Text, ListView, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { sendStyles as styles } from './SendStyles'
 
 const SendToFriends = ({
   friends,
@@ -17,12 +17,11 @@ const SendToFriends = ({
   function isSendingFunction (isSending, success, failure) {
     if (isSending) {
       return (
-        <ActivityIndicator
-          animating
-          style={[styles.centering, {height: 35}]}
-          size="large"
-          color="white"
-      />)
+        <ActivityIndicator animating
+                           style={[styles.centering, {height: 35}]}
+                           size="large"
+                           color="white" />
+      )
     }
     if (success) {
       return (

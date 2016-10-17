@@ -59,12 +59,12 @@ class SettingsContainer extends Component {
   }
 
   render () {
-    return <Settings
-      myAccountData={this.state.myAccountData}
-      accountActionsData={this.state.accountActionsData}
-      backButtonPressed={this.backButtonPressed}
-      logoutPressed={this.logout}
-        />
+    return (
+      <Settings myAccountData={this.state.myAccountData}
+                accountActionsData={this.state.accountActionsData}
+                backButtonPressed={this.backButtonPressed}
+                logoutPressed={this.logout} />
+    )
   }
 }
 

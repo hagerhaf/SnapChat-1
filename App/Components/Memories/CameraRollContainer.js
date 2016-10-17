@@ -48,10 +48,9 @@ class CameraRollContainer extends Component {
       <ScrollView style={styles.imageRollContainer}>
         <View style={styles.imageRollImageGrid}>
           { this.state.images.map(image =>
-            <TouchableHighlight
-              key={image.uri}
-              style={styles.cameraRollImageGrid}
-              onPress={() => this.selectImage(image.uri)} >
+            <TouchableHighlight key={image.uri}
+                                style={styles.cameraRollImageGrid}
+                                onPress={() => this.selectImage(image.uri)} >
               <Image style={styles.cameraRollImage} source={{ uri: image.uri }} />
             </TouchableHighlight>
             )

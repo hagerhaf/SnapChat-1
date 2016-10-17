@@ -41,24 +41,30 @@ class SwipeableUI extends Component {
                 ref={ref => this.horizontalSWiper = ref}
                 loop={false}
                 index={1} >
+
           {/* LEFT */}
           <ChatContainer navigator={this.props.navigator} />
+
           <Swiper horizontal={false}
                   ref={ref => this.verticleSwiper = ref}
                   loop={false}
                   showsPagination={false}
                   index={1}>
+
             {/* UP */}
             <MeContainer navigator={this.props.navigator} />
+
             {/* CENTER */}
             <CameraContainer navigator={this.props.navigator}
                              mePressed={this.mePressed}
                              memoriesPressed={this.memoriesPressed}
                              chatPressed={this.chatPressed}
                              storiesPressed={this.storiesPressed} />
+
             {/* DOWN */}
             <MemoriesContainer navigator={this.props.navigator} />
           </Swiper>
+
           {/* RIGHT */}
           <StoriesContainer navigator={this.props.navigator} />
         </Swiper>
@@ -66,12 +72,6 @@ class SwipeableUI extends Component {
     )
   }
 }
-
-// const SwipeableUI = ({
-//   navigator
-// }) =>
-//
-// const
 
 SwipeableUI.propTypes = {
   navigator: PropTypes.object.isRequired

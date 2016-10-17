@@ -5,7 +5,7 @@ import MainContainer from './App/Components/Main/MainContainer'
 import SplashScreen from './App/Components/SplashScreen/SplashScreen'
 import * as firebase from 'firebase'
 
-console.ignoredYellowBox = ['Warning: setState'];
+console.ignoredYellowBox = ['Warning: setState']
 
 class SnapChat extends Component {
   constructor (props) {
@@ -15,11 +15,12 @@ class SnapChat extends Component {
       checkingLogin: true,
       isLoggedIn: (firebase.auth().currentUser !== null)
     }
+
     this.onLogin = this.onLogin.bind(this)
   }
 
   onLogin () {
-    this.setState({isLoggedIn: true})
+    this.setState({ isLoggedIn: true })
   }
 
   componentWillMount () {
@@ -33,17 +34,19 @@ class SnapChat extends Component {
 
   render () {
     if (this.state.isLoggedIn) {
-      return (<MainContainer />)
+      return <MainContainer />
     }
     if (this.state.checkingLogin) {
-      return (<SplashScreen />)
+      return <SplashScreen />
     }
     return (
-      <NavigatorIOS
-        navigationBarHidden
-        style={{flex: 1}}
-        initialRoute={{title: 'Landing', component: Landing, passProps: { loginSuccess: this.onLogin }}}
-      />
+      <NavigatorIOS style={{flex: 1}}
+                    navigationBarHidden
+                    initialRoute={{
+                      title: 'Landing',
+                      component: Landing,
+                      passProps: { loginSuccess: this.onLogin }
+                    }} />
     )
   }
 }

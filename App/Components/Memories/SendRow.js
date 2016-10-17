@@ -15,18 +15,13 @@ seperatorFriends.propTypes = {
 
 const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
   return (
-    <TouchableWithoutFeedback
-      onPress={function () {
-        onSelectFriend(rowId)
-      }}
-      key={rowId}
-        >
+    <TouchableWithoutFeedback key={rowId}
+                              onPress={() => onSelectFriend(rowId)}>
       <View style={!highLighted ? styles.userRow : styles.userRowHighlighted}>
         <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
         <View style={styles.ImagePosition}>
-          <Image
-            source={requireCheckBox(highLighted)}
-            style={styles.imageIcon} />
+          <Image source={requireCheckBox(highLighted)}
+                 style={styles.imageIcon} />
         </View>
       </View>
     </TouchableWithoutFeedback>

@@ -23,20 +23,16 @@ class MyFriendsContainer extends Component {
     this.sortFriends = this.sortFriends.bind(this)
   }
 
-  // Function called when component is first loaded
-  // Will call function to retrieve friends from fire base then load into friendsDataSource
   componentDidMount () {
     this.retrieveFriends()
   }
 
-  // Retrieves a list of friends from the fire base depending on the logged in UserID
   retrieveFriends () {
-      // Retrieve UserID and create a reference point in fire base
     var friends = []
-    var appScope = this      // Can't use 'this.state' inside on() as the scope refers to the promise
+    var appScope = this
     var userId = authentication.currentUser.uid
     var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
-      // Iterate through results and push to array
+    // Iterate through results and push to array
     friendsRef.on('value', function (snapshot) {
       snapshot.forEach((child) => {
         friends.push({
@@ -46,8 +42,6 @@ class MyFriendsContainer extends Component {
           birthday: child.val().birthday
         })
       })
-          // Update state so ListView reflects the users friends
-          // Note: Must occur inside on() as it is asynchronous and wont update properly outside
       appScope.setState({
         friendsDataSource: friendsDataSource.cloneWithRows(appScope.sortFriends(friends)),
         rawData: appScope.sortFriends(friends)
@@ -60,7 +54,6 @@ class MyFriendsContainer extends Component {
   backButtonPressed () {
     this.props.navigator.pop()
   }
-
   // Called with every key change in the search bar. Will then continue to call filter on original data
   setSearchText (event) {
     let searchText = event.nativeEvent.text
@@ -99,14 +92,12 @@ class MyFriendsContainer extends Component {
 
   render () {
     return (
-      <MyFriends
-        backButtonPressed={this.backButtonPressed}
-        friends={this.state.friendsDataSource}
-        onSelectFriend={this.selectFriend}
-        renderMyFriendsRow={FriendRow}
-        seperatorFriends={seperatorFriends}
-        setSearchText={this.setSearchText}
-      />
+      <MyFriends backButtonPressed={this.backButtonPressed}
+                 friends={this.state.friendsDataSource}
+                 onSelectFriend={this.selectFriend}
+                 renderMyFriendsRow={FriendRow}
+                seperatorFriends={seperatorFriends}
+                setSearchText={this.setSearchText} />
     )
   }
 }

@@ -4,10 +4,11 @@ import { trophyCaseStyles as styles } from './trophyCaseStyles'
 
 const TrophyCase = ({backButtonPressed}) => (
   <View style={styles.container}>
-    {/* Header */}
     <View style={styles.header}>
-      <TouchableHighlight onPress={backButtonPressed} underlayColor='#F5F5F5'>
-        <Image style={styles.backArrow} source={require('../../../images/back_arrow.png')} />
+      <TouchableHighlight onPress={backButtonPressed}
+                          underlayColor='#F5F5F5'>
+        <Image style={styles.backArrow}
+               source={require('../../../images/back_arrow.png')} />
       </TouchableHighlight>
       <Text style={styles.headerTitle}>
         Trophy Case

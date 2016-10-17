@@ -30,13 +30,11 @@ class Discover extends Component {
 
   createThumbRow (item, i) {
     return (
-      <DiscoverItem
-        key={i}
-        title={item.title}
-        image={item.urlToImage}
-        open={this.openWebView}
-        url={item.url}
-      />
+      <DiscoverItem key={i}
+                    title={item.title}
+                    image={item.urlToImage}
+                    open={this.openWebView}
+                    url={item.url} />
     )
   }
 
@@ -59,25 +57,20 @@ class Discover extends Component {
               </View>
             </TouchableOpacity>
           </View>
-          <WebView
-            ref={(webWiew) => this.webWiew = webWiew}
-            style={{flex: 1}}
-            source={{uri: this.state.webViewUri}}
-            onNavigationStateChange={this.onNavigationStateChange.bind(this)}
-          />
+          <WebView ref={(webWiew) => this.webWiew = webWiew}
+                   style={{flex: 1}}
+                   source={{uri: this.state.webViewUri}}
+                   onNavigationStateChange={this.onNavigationStateChange.bind(this)} />
         </View>
       )
     }
-
     return (
       <View style={styles.container}>
         <View style={styles.discoverItems}>
           {this.props.loading && <ActivityIndicator animating size="large" style={{marginTop: 20}} />}
-          <ScrollView
-            showsVerticalScrollIndicator
-            automaticallyAdjustContentInsets={false}
-            horizontal={false}
-          >
+          <ScrollView showsVerticalScrollIndicator
+                      automaticallyAdjustContentInsets={false}
+                      horizontal={false}>
             {this.props.discoverData.map(this.createThumbRow)}
           </ScrollView>
         </View>

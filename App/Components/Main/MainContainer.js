@@ -8,12 +8,10 @@ class MainContainer extends Component {
   }
   render () {
     return (
-      <NavigatorIOS
-        title='SwipeableUI'
-        navigationBarHidden
-        style={{flex: 1}}
-        initialRoute={{component: SwipeableUI, title: 'SwipeableUI'}}
-      />
+      <NavigatorIOS title='SwipeableUI'
+                    navigationBarHidden
+                    style={{flex: 1}}
+                    initialRoute={{component: SwipeableUI, title: 'SwipeableUI'}} />
     )
   }
 }

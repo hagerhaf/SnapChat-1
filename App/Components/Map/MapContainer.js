@@ -1,9 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import {View, Text, MapView, Image, TouchableOpacity} from 'react-native'
-// import MapView from 'react-native-maps'
-import {mapStyles as styles} from './MapStyles'
+import React, { Component } from 'react'
+import { MapView, Image, TouchableOpacity} from 'react-native'
+import { mapStyles as styles } from './MapStyles'
 import deepcopy from 'deepcopy'
-import getFriends, { getStory } from '../Story/StoryHelpers'
 
 class MapContainer extends Component {
   constructor (props) {
@@ -90,8 +88,6 @@ class MapContainer extends Component {
   }
 
   render () {
-    console.log('state we got boiz', this.state)
-    console.log('props we got boiz', this.props)
     const annotations = Object.keys(this.state.markers).map((key) => {
       console.log('for images' + key)
       let marker = this.state.markers[key]
@@ -101,18 +97,12 @@ class MapContainer extends Component {
       )
     })
     return (
-      <MapView
-        style={styles.container}
-        followUserLocation
-        showsUserLocation
-        annotations={annotations}
-  />
+      <MapView style={styles.container}
+               followUserLocation
+               showsUserLocation
+               annotations={annotations} />
     )
   }
-}
-
-MapContainer.propTypes = {
-
 }
 
 export default MapContainer

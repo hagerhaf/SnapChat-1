@@ -13,7 +13,9 @@ const RegisterEmail = ({
     {backArrow(backButtonPressed)}
 
     <View style={styles.registerHeaderWrapper}>
-      <Text style={styles.registerHeader}>Enter you email</Text>
+      <Text style={styles.registerHeader}>
+        Enter you email
+      </Text>
     </View>
 
     <View style={styles.formContainer}>
@@ -41,21 +43,17 @@ function inputFields (updateEmail) {
       <Text style={styles.inputLabel}>
         Friends use your email to add you on Snapchat.
       </Text>
-      <TextInput
-        style={styles.formInput}
-        onChangeText={updateEmail}
-      />
+      <TextInput style={styles.formInput}
+                 onChangeText={updateEmail} />
     </View>
   )
 }
 
 function continueButton (hasValidInput, continueButtonPressed) {
   return (
-    <TouchableHighlight
-      style={styles.signupButtonContainer}
-      onPress={hasValidInput ? continueButtonPressed : () => {}} // TODO: can prob provide error msg
-      underlayColor='#F5F5F5'
-    >
+    <TouchableHighlight style={styles.signupButtonContainer}
+                        onPress={hasValidInput ? continueButtonPressed : () => {}}
+                        underlayColor='#F5F5F5'>
       <View style={hasValidInput
         ? styles.signupButtonActivated
         : styles.signupButtonDeactivated}>

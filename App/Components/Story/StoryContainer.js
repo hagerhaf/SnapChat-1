@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { ListView } from 'react-native'
 import Story from './Story'
 import DiscoverContainer from '../Discover/DiscoverContainer'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
@@ -61,29 +60,23 @@ class StoriesContainer extends Component {
 
   render () {
     return (
-      <ScrollableTabView
-        style={{marginTop: 30}}
-        renderTabBar={renderTab}
-        tabBarTextStyle={{fontFamily: 'Avenir-Heavy', fontSize: 18}}
-        tabBarActiveTextColor="purple"
-        tabBarInactiveTextColor="gray"
-      >
-        {/* Snaps container lists all your saved memories (photos you've taken) and adds to ability to resend */}
-        <Story
-          stories={this.state.friendsStories}
-          onPressStory={this.pressStory}
-          storiesLoading={this.state.storiesLoading}
-          tabLabel="Stories"
-        />
+      <ScrollableTabView style={{marginTop: 30}}
+                         renderTabBar={renderTab}
+                         tabBarTextStyle={{fontFamily: 'Avenir-Heavy', fontSize: 18}}
+                         tabBarActiveTextColor='purple'
+                         tabBarInactiveTextColor='gray'>
 
-        <Map
-          tabLabel="Where?"
-          stories={this.state.friendsStories}
-          onPressStory={this.pressStory}
-        />
+        <Story stories={this.state.friendsStories}
+               onPressStory={this.pressStory}
+               storiesLoading={this.state.storiesLoading}
+               tabLabel='Stories' />
 
-        {/* Lets you look through camera roll to send ppl snaps, upload or delete */}
-        <DiscoverContainer tabLabel="Discover" />
+        <Map tabLabel='Where?'
+             stories={this.state.friendsStories}
+             onPressStory={this.pressStory} />
+
+           <DiscoverContainer tabLabel='Discover' />
+
       </ScrollableTabView>
     )
   }
@@ -94,4 +87,3 @@ function renderTab () {
 }
 
 export default StoriesContainer
-

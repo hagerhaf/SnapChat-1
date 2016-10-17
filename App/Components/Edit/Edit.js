@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Text, View, TouchableHighlight, Image, TextInput, TouchableOpacity } from 'react-native'
-// import Sketch from 'react-native-sketch'
-import Sketch from 'react-native-sketch'
+import { View, Image, TextInput, TouchableOpacity } from 'react-native'
 import { editStyles as styles } from './editStyles'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Picker from 'react-native-wheel-picker'
@@ -23,19 +21,18 @@ const Edit = ({
   storySaved,
   timerEdit,
   onTimerEditPressed
-  }) => {
-  // Render the image here.
-
+}) => {
   function saveToStoryButton (storySaved) {
     if (storySaved) { return <View /> }
     else {
-      return (<TouchableOpacity onPress={() => onPressedSaveToStory(uri, timer)}>
-        <Image source={require('../../../images/edit/add-to-story.png')} style={styles.icon} />
-      </TouchableOpacity>
-        )
+      return (
+        <TouchableOpacity onPress={() => onPressedSaveToStory(uri, timer)}>
+          <Image source={require('../../../images/edit/add-to-story.png')}
+                  style={styles.icon} />
+        </TouchableOpacity>
+      )
     }
   }
-
   function displayEditTimerImage (timer) {
     var image
     switch (timer) {
@@ -80,25 +77,30 @@ const Edit = ({
     if(isPicking){
       return (
         <Picker style={{flex: 1}}
-        selectedValue={timer}
-        itemStyle={{color: 'white', fontSize: 26}}
-        onValueChange={(index) => onTimerValueChange(index)}>
-        {'123456789'.split('').map((value, i) => {
-          return <PickerItem label={value} value={i + 1} key={'timer' + value} />
-        })}
-      </Picker>
+                selectedValue={timer}
+                itemStyle={{color: 'white', fontSize: 26}}
+                onValueChange={(index) => onTimerValueChange(index)}>
+          {
+            '123456789'.split('').map((value, i) => {
+              return <PickerItem label={value} value={i + 1} key={'timer' + value} />
+            })
+          }
+        </Picker>
       )
     }
   }
 
-  return (<Image source={{uri: uri}} style={styles.container}>
+  return (
+    <Image source={{uri: uri}}
+           style={styles.container}>
     <Spinner visible={onStorySaving} />
     {/* Top Navigation */}
     <View style={styles.header}>
       {/* Back button */}
       <View style={styles.flex}>
         <TouchableOpacity onPress={backPressed}>
-          <Image source={require('../../../images/edit/back.png')} style={styles.backIcon} />
+          <Image source={require('../../../images/edit/back.png')}
+                style={styles.backIcon} />
         </TouchableOpacity>
       </View>
       <View style={styles.flex} />
@@ -108,17 +110,20 @@ const Edit = ({
         {/* Add sticker */}
 
         <TouchableOpacity>
-          <Image source={require('../../../images/edit/emoticon.png')} style={styles.icon} />
+          <Image source={require('../../../images/edit/emoticon.png')}
+                 style={styles.icon} />
         </TouchableOpacity>
 
         {/* Add text */}
         <TouchableOpacity onPress={onTextPressed}>
-          <Image source={require('../../../images/edit/text.png')} style={styles.textIcon} />
+          <Image source={require('../../../images/edit/text.png')}
+                 style={styles.textIcon} />
         </TouchableOpacity>
 
         {/* Draw */}
         <TouchableOpacity>
-          <Image source={require('../../../images/edit/draw.png')} style={styles.drawIcon} />
+          <Image source={require('../../../images/edit/draw.png')}
+                 style={styles.drawIcon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -128,20 +133,10 @@ const Edit = ({
       style={textVisible ? styles.textShown : styles.textHidden}
     />
 
-    {/* <Sketch*/}
-    {/* resizeMode="contain"*/}
-    {/* strokeColor="#111111"*/}
-    {/* strokeThickness={2}*/}
-    {/* onReset={onReset}*/}
-    {/* onUpdate={onUpdate}*/}
-    {/* ref={(sketch) => { this.sketch = sketch; }}*/}
-    {/* style={styles.sketch}*/}
-    {/* />*/}
-
     {/* Bottom navigation */}
     <View style={styles.footer}>
       {displayPicker(timerEdit)}
-      
+
       <View style={styles.header}>
         {/* Editing buttons */}
         <View style={styles.triple}>
@@ -151,7 +146,8 @@ const Edit = ({
 
           {/* Save snap */}
           <TouchableOpacity onPress={onSave}>
-            <Image source={require('../../../images/edit/save.png')} style={styles.icon} />
+            <Image source={require('../../../images/edit/save.png')}
+                   style={styles.icon} />
           </TouchableOpacity>
 
           {/* Add to story */}
@@ -163,12 +159,13 @@ const Edit = ({
         <View style={styles.flex} />
 
         <TouchableOpacity onPress={() => onSendPressed(uri)}>
-          <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.sendIcon} />
+          <Image source={require('../../../images/sendTo/sendArrow.png')}
+                 style={styles.sendIcon} />
         </TouchableOpacity>
       </View>
     </View>
-  </Image>
-    )
+    </Image>
+  )
 }
 
 Edit.propTypes = {
@@ -190,4 +187,3 @@ Edit.propTypes = {
 }
 
 export default Edit
-

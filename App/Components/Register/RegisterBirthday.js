@@ -17,11 +17,10 @@ const RegisterBirthday = ({
         When's your birthday?
       </Text>
     </View>
-    <DatePickerIOS
-      date={birthday}
-      onDateChange={updateBirthday}
-      mode={'date'}
-      timeZoneOffsetInMinutes={-1 * new Date().getTimezoneOffset()} />
+    <DatePickerIOS date={birthday}
+                   onDateChange={updateBirthday}
+                   mode={'date'}
+                   timeZoneOffsetInMinutes={-1 * new Date().getTimezoneOffset()} />
     {continueButton(hasValidInput, continueButtonPressed)}
   </View>
 )
@@ -39,10 +38,9 @@ export default RegisterBirthday
 
 function continueButton (hasValidInput, continueButtonPressed) {
   return (
-    <TouchableHighlight
-      style={styles.signupButtonContainer}
-      onPress={hasValidInput ? continueButtonPressed : () => {}}
-      underlayColor='#F5F5F5'>
+    <TouchableHighlight style={styles.signupButtonContainer}
+                        onPress={hasValidInput ? continueButtonPressed : () => {}}
+                        underlayColor='#F5F5F5'>
       <View style={hasValidInput
                      ? styles.signupButtonActivated
                      : styles.signupButtonDeactivated}>

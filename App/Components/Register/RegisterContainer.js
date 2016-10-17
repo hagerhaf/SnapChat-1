@@ -147,14 +147,11 @@ class RegisterContainer extends Component {
   }
 
   async saveUser (user) {
-
     var userObj = {};
     var userRef = database.ref('users/' + user.uid);
     userRef.on('value', function (snapshot) {
       userObj = snapshot.val();
     });
-    console.log(userObj);
-
     try {
       await AsyncStorage.setItem('userId', JSON.stringify(user.uid))
       await AsyncStorage.setItem('user', JSON.stringify(userObj))
@@ -184,51 +181,41 @@ class RegisterContainer extends Component {
 
     if (!this.state.nameComplete) {
       return (
-        <RegisterName
-          backButtonPressed={this.backButtonPressed}
-          signupButtonPressed={this.goToRegisterBirthday}
-          updateFirstname={this.updateFirstname}
-          updateLastname={this.updateLastname}
-          updateUsername={this.updateUsername}
-          hasValidInput={this.state.isNameInputValid}
-        />
+        <RegisterName backButtonPressed={this.backButtonPressed}
+                      signupButtonPressed={this.goToRegisterBirthday}
+                      updateFirstname={this.updateFirstname}
+                      updateLastname={this.updateLastname}
+                      updateUsername={this.updateUsername}
+                      hasValidInput={this.state.isNameInputValid} />
       )
     } else if (this.state.nameComplete && !this.state.birthdayComplete) {
       return (
-        <RegisterBirthday
-          backButtonPressed={this.backButtonPressed}
-          birthday={this.state.birthday}
-          updateBirthday={this.updateBirthday}
-          continueButtonPressed={this.goToRegisterUsername}
-          hasValidInput={this.state.isBirthdayInputValid}
-        />
+        <RegisterBirthday backButtonPressed={this.backButtonPressed}
+                          birthday={this.state.birthday}
+                          updateBirthday={this.updateBirthday}
+                          continueButtonPressed={this.goToRegisterUsername}
+                          hasValidInput={this.state.isBirthdayInputValid} />
       )
     } else if (this.state.birthdayComplete && !this.state.emailComplete) {
       return (
-          <RegisterEmail
-              backButtonPressed={this.backButtonPressed}
-              updateEmail={this.updateEmail}
-              continueButtonPressed={this.goToRegisterPhoneNumber}
-              hasValidInput={this.state.isEmailValid}
-          />
+          <RegisterEmail backButtonPressed={this.backButtonPressed}
+                         updateEmail={this.updateEmail}
+                         continueButtonPressed={this.goToRegisterPhoneNumber}
+                         hasValidInput={this.state.isEmailValid} />
       )
     } else if (this.state.emailComplete && !this.state.usernameComplete) {
         return (
-            <RegisterPhoneNumber
-                backButtonPressed={this.backButtonPressed}
-                updatePhoneNumber={this.updatePhoneNumber}
-                continueButtonPressed={this.goToRegisterPassword}
-                hasValidInput={this.state.isPhoneNumberInputValid}
-            />
+            <RegisterPhoneNumber backButtonPressed={this.backButtonPressed}
+                                 updatePhoneNumber={this.updatePhoneNumber}
+                                 continueButtonPressed={this.goToRegisterPassword}
+                                 hasValidInput={this.state.isPhoneNumberInputValid} />
         )
     } else if (this.state.usernameComplete) {
       return (
-        <RegisterPassword
-          backButtonPressed={this.backButtonPressed}
-          updatePassword={this.updatePassword}
-          finishButtonPressed={this.finishRegistration}
-          hasValidInput={this.state.isPasswordInputValid}
-        >
+        <RegisterPassword backButtonPressed={this.backButtonPressed}
+                          updatePassword={this.updatePassword}
+                          finishButtonPressed={this.finishRegistration}
+                          hasValidInput={this.state.isPasswordInputValid}>
           {spinner}
         </RegisterPassword>
       )

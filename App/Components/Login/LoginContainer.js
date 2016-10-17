@@ -105,15 +105,16 @@ class LoginContainer extends Component {
       ? <Spinner visible overlayColor={'rgba(0,0,0,0.70)'} />
       : null
     return (
-      <Login
-        errorMessage={this.state.errorMessage}
-        backButtonPressed={this.backButtonPressed}
-        loginButtonPressed={this.loginButtonPressed}
-        updateUsername={this.updateUsername}
-        updatePassword={this.updatePassword}
-        hasValidInput={this.state.isInputValid}
-        errorState={this.state.errorState} >
+      <Login errorMessage={this.state.errorMessage}
+             backButtonPressed={this.backButtonPressed}
+             loginButtonPressed={this.loginButtonPressed}
+             updateUsername={this.updateUsername}
+             updatePassword={this.updatePassword}
+             hasValidInput={this.state.isInputValid}
+             errorState={this.state.errorState} >
+
         {spinner}
+
       </Login>
     )
   }

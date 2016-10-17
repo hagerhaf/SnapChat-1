@@ -63,7 +63,6 @@ class ChatToUser extends Component {
     })
   }
 
-  // ghetto way of making sure the list view doesn't render the messages twice
   sortByTimeStamp (messages) {
     return messages.sort((left, right) => {
       return new Date(left.timestamp).getTime() - new Date(right.timestamp).getTime()

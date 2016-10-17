@@ -105,23 +105,23 @@ class EditContainer extends Component {
   }
 
   render () {
-    return <Edit
-      backPressed={this.backPressed}
-      onSendPressed={this.send}
-      onTextPressed={this.textPressed}
-      textVisible={this.state.textVisible}
-      uri={this.props.uri}
-      timer={this.state.timer}
-      onTimerValueChange={this.onTimerValueChange}
-      timerEdit={this.state.timerEdit}
-      onTimerEditPressed={this.timerEdit}
-      onReset={this.onReset}
-      onUpdate={this.onUpdate}
-      onSave={this.onSave}
-      onPressedSaveToStory={this.onStorySave}
-      onStorySaving={this.state.onStorySaving}
-      storySaved={this.state.storySaved}
-    />
+    return (
+      <Edit backPressed={this.backPressed}
+            onSendPressed={this.send}
+            onTextPressed={this.textPressed}
+            textVisible={this.state.textVisible}
+            uri={this.props.uri}
+            timer={this.state.timer}
+            onTimerValueChange={this.onTimerValueChange}
+            timerEdit={this.state.timerEdit}
+            onTimerEditPressed={this.timerEdit}
+            onReset={this.onReset}
+            onUpdate={this.onUpdate}
+            onSave={this.onSave}
+            onPressedSaveToStory={this.onStorySave}
+            onStorySaving={this.state.onStorySaving}
+            storySaved={this.state.storySaved} />
+    )
   }
 }
 

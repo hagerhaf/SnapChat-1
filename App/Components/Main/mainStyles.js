@@ -4,8 +4,8 @@ export const mainStyles = StyleSheet.create({
   container: {
     flex: 1
   },
-  active:{
-    color:'indianred'
+  active: {
+    color: 'indianred'
   },
   header: {
     height: 60,

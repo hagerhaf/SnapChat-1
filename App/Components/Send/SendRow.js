@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
-import {Text, View, TouchableWithoutFeedback, Image} from 'react-native'
-import {sendStyles as styles} from './SendStyles'
+import React, { PropTypes } from 'react'
+import { Text, View, TouchableWithoutFeedback, Image } from 'react-native'
+import { sendStyles as styles } from './SendStyles'
 
 const seperatorFriends = (sectionID, rowID) => {
   return <View style={styles.seperator}
@@ -15,18 +15,13 @@ seperatorFriends.propTypes = {
 
 const renderSendRow = ({name, highLighted}, sectionId, rowId, highlightRow, onSelectFriend) => {
   return (
-    <TouchableWithoutFeedback
-      onPress={function () {
-        onSelectFriend(rowId)
-      }}
-      key={rowId}
-        >
+    <TouchableWithoutFeedback onPress={() => onSelectFriend(rowId)}
+                              key={rowId}>
       <View style={!highLighted ? styles.userRow : styles.userRowHighlighted}>
         <Text style={highLighted ? styles.highlighted : styles.nonHighlighted}>{name}</Text>
         <View style={styles.ImagePosition}>
-          <Image
-            source={requireCheckBox(highLighted)}
-            style={styles.imageIcon} />
+          <Image source={requireCheckBox(highLighted)}
+                 style={styles.imageIcon} />
         </View>
       </View>
     </TouchableWithoutFeedback>

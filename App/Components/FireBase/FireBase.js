@@ -16,11 +16,9 @@ export default database
 export {authentication}
 
 function getSnapsCurrentUser (cb) {
-  console.log('getSnap')
   const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
 
   snapRef.on('value', (snapshot) => {
-    console.log(snapshot.val())
     cb(snapshot.val())
   })
 }
@@ -38,7 +36,6 @@ function getDownloadUrl (snap, cb) {
 }
 
 function deleteSnap (snap, cb) {
-  console.log('deleteSnap', snap)
   const snapRef = firebase.database().ref().child('snaps').child(firebase.auth().currentUser.uid)
 
   let snapshots = []
@@ -47,7 +44,6 @@ function deleteSnap (snap, cb) {
       snapshots.push({key: snapshot.key, val: snapshot.val()})
     }
   })
-  console.log(snapshots)
   snapshots.forEach((snapshot) => {
     snapRef.child(snapshot.key).remove((err) => {
       if (err) cb(err)

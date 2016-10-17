@@ -14,30 +14,14 @@ export function getStory (friend, cb) {
 
   const storageRef = firebase.storage().ref()
   const snapStoryRef = storageRef.child('stories').child(friend.key)
-
+  
   // get each the stories for each friend
   dbRef.child(friend.key).on('child_added', (snapshot) => {
     Object.keys(snapshot.val()).forEach((key) => {
       let storyInfo = snapshot.val()[key]
-
       snapStoryRef.child(storyInfo.imageName).getDownloadURL().then(function (url) {
         cb({url, storyInfo})
       })
     })
   })
-
-
-
-  // see if they have any snaps
-
-  // snapStoryRef.getDownloadURL().then(function (url) {
-  //   cb(null, url)
-  //   console.log(url)
-  // })
-  // .catch((err) => {
-  //   cb(err)
-  //   console.log(err)
-  // })
-
-  // return
 }

@@ -37,7 +37,6 @@ class CameraContainer extends Component {
 
   getSnaps () {
     getSnapsCurrentUser((snaps) => {
-      console.log(snaps)
       if (snaps === null) {
         this.setState({
           snapCount: 0
@@ -86,12 +85,12 @@ class CameraContainer extends Component {
       <View style={styles.container}>
         {/* Camera view must be camera to allow for it to take up entire screen. */}
         <Camera ref={(cam) => { this.camera = cam }}
-          style={styles.preview}
-          captureTarget={Camera.constants.CaptureTarget.disk}
-          aspect={Camera.constants.Aspect.fill}
-          flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
+                style={styles.preview}
+                captureTarget={Camera.constants.CaptureTarget.disk}
+                aspect={Camera.constants.Aspect.fill}
+                flashMode={this.state.flash === 'auto' ? Camera.constants.FlashMode.auto :
                   (this.state.flash === 'on' ? Camera.constants.FlashMode.on : Camera.constants.FlashMode.off)}
-          type={this.state.frontCamera ? 'front' : 'back'}
+                type={this.state.frontCamera ? 'front' : 'back'}
         >
           {/* Header */}
           <View style={styles.header}>

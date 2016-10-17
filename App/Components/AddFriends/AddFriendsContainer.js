@@ -31,11 +31,11 @@ class AddFriendsContainer extends Component {
   }
 
   render () {
-    return <AddFriends
-        backButtonPressed={this.backButtonPressed}
-        addByUsernamePressed={this.addByUsernamePressed}
-        addByAddressBookPressed={this.addByAddressBookPressed}
-    />
+    return (
+      <AddFriends backButtonPressed={this.backButtonPressed}
+                  addByUsernamePressed={this.addByUsernamePressed}
+                  addByAddressBookPressed={this.addByAddressBookPressed} />
+    )
   }
 }
 

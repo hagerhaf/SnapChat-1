@@ -4,16 +4,22 @@ import { chatStyles as styles, touchColor } from './chatStyles'
 import constants from '../../constants'
 import timediff from 'timediff'
 
-const UserRow = ({username, uid, lastReceived, openChat, snaps, openSnaps}) => {
+const UserRow = ({
+  username,
+  uid,
+  lastReceived,
+  openChat,
+  snaps,
+  openSnaps
+}) => {
   const imageStatus = snaps ? constants.IMAGE_RECEIVED : constants.IMAGE_RECEIVED_SEEN
-  if(snaps){
+  if (snaps) {
     console.log('a', snaps[0].storyInfo.date)
     console.log(createTime(timediff(snaps[0].storyInfo.date, new Date(), 'YDHmS')))
   }
   return (
-    <TouchableHighlight underlayColor={touchColor}
-      onPress={snaps ? () => openSnaps(snaps) : () => openChat(username, uid)}
-    >
+    <TouchableHighlight onPress={snaps ? () => openSnaps(snaps) : () => openChat(username, uid)}
+                        underlayColor={touchColor}>
       <View style={styles.userRow}>
         <View style={styles.imageIcon}>
           {imageStatusToDisplay(imageStatus)}
@@ -21,9 +27,8 @@ const UserRow = ({username, uid, lastReceived, openChat, snaps, openSnaps}) => {
         <View style={styles.userRowInfo}>
           <Text>{username}</Text>
           {snaps
-            ? <Text style={styles.lastReceived}>Received: {createTime(timediff(snaps[0].storyInfo.date, new Date(), 'YDHmS'))}</Text> 
+            ? <Text style={styles.lastReceived}>Received: {createTime(timediff(snaps[0].storyInfo.date, new Date(), 'YDHmS'))}</Text>
             : null}
-
         </View>
       </View>
     </TouchableHighlight>
@@ -42,12 +47,12 @@ UserRow.propTypes = {
 const renderUserRow = (userObject, i, openChat, openSnaps) => {
   return (
     <UserRow key={userObject.uid}
-      username={userObject.username}
-      uid={userObject.uid}
-      lastReceived={userObject.lastReceived}
-      openChat={openChat}
-      snaps={userObject.snaps}
-      openSnaps={openSnaps} />
+             username={userObject.username}
+             uid={userObject.uid}
+             lastReceived={userObject.lastReceived}
+             openChat={openChat}
+             snaps={userObject.snaps}
+             openSnaps={openSnaps} />
   )
 }
 

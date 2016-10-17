@@ -13,17 +13,13 @@ class SendSnaps extends Component {
     this.props.navigator.pop()
   }
 
-  // TODO: add methods to delete, send and upload images
-
   render () {
-    // TODO: check if there are saved, if not render a default message instead
     return (
       <View style={styles.selectedImageContainer}>
         <View style={styles.backArrowContainer}>
           <TouchableHighlight onPress={this.backButtonPressed}>
-            <Image
-              style={styles.backArrow}
-              source={require('../../../images/back_arrow_white.png')} />
+            <Image style={styles.backArrow}
+                   source={require('../../../images/back_arrow_white.png')} />
           </TouchableHighlight>
 
           <Image style={[styles.selectedImage, {marginTop: 50}]} source={{uri: this.props.image}} />

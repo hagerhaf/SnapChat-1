@@ -17,28 +17,30 @@ const SendToFriends = ({
   function isSendingFunction (isSending, success, failure) {
     if (isSending) {
       return (
-        <ActivityIndicator
-          animating
-          style={[styles.centering, {height: 35}]}
-          size="large"
-          color="white"
-      />)
+        <ActivityIndicator animating
+                           style={[styles.centering, {height: 35}]}
+                           size="large"
+                           color="white"/>
+     )
     }
     if (success) {
       return (
-        <Image source={require('../../../images/sendTo/sendSuccess.png')} style={styles.imageIconSend} />
+        <Image style={styles.imageIconSend}
+               source={require('../../../images/sendTo/sendSuccess.png')} />
       )
     }
     if (failure) {
       return (
         <TouchableOpacity onPress={onSendPressed}>
-          <Image source={require('../../../images/sendTo/failCross.png')} style={styles.imageIconSend} />
+          <Image style={styles.imageIconSend}
+                 source={require('../../../images/sendTo/failCross.png')} />
         </TouchableOpacity>
       )
     }
     return (
       <TouchableOpacity onPress={onSendPressed}>
-        <Image source={require('../../../images/sendTo/sendArrow.png')} style={styles.imageIconSend} />
+        <Image style={styles.imageIconSend}
+               source={require('../../../images/sendTo/sendArrow.png')} />
       </TouchableOpacity>
     )
   }
@@ -83,18 +85,15 @@ const SendToFriends = ({
         </TouchableOpacity>
         {displayText(isSending, hasSent, sendError)}
       </View>
-      <ListView
-        enableEmptySections
-        dataSource={friends}
-        renderRow={function (data, sectionId, rowId, highlightRow) {
-          return renderSendUserRow(data, sectionId, rowId, highlightRow, onSelectFriend)
-        }}
-        renderSeparator={seperatorFriends}
-        renderSectionHeader={function () {
-          return <Text style={styles.subHeading}> Friends </Text>
-        }}
-
-      />
+      <ListView enableEmptySections
+                dataSource={friends}
+                renderRow={(data, sectionId, rowId, highlightRow) => {
+                  return renderSendUserRow(data, sectionId, rowId, highlightRow, onSelectFriend)
+                }}
+                renderSeparator={seperatorFriends}
+                renderSectionHeader={() => {
+                  return <Text style={styles.subHeading}> Friends </Text>
+                }} />
       <View style={[styles.heading, styles.headingBottom, headingResults(hasSent, sendError)]} >
         <View style={styles.listToSend}>
           <ScrollView horizontal >

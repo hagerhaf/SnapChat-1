@@ -7,12 +7,9 @@ const StoryRow = ({username, postedTime, url, stories, onPressStory}) => {
     <TouchableHighlight onPress={() => onPressStory(stories)}>
       <View style={styles.storyRow}>
         <View style={styles.storyIcon}>
-          <Image
-            style={{width: 30, height: 30, borderRadius: 4}}
-            source={{uri: url}}
-        />
+          <Image style={{width: 30, height: 30, borderRadius: 4}}
+                 source={{uri: url}} />
         </View>
-
         <View>
           <Text style={styles.usernameHeading}>{username}</Text>
           <Text style={styles.agoSubHeading}>{postedTime} ago</Text>

@@ -115,18 +115,16 @@ class SendContainer extends Component {
 
   render () {
     return (
-      <SendToFriends
-        friends={this.state.friendsDataSource}
-        onSelectFriend={this.selectFriend}
-        renderSendUserRow={SendRow}
-        seperatorFriends={seperatorFriends}
-        selectedFriends={findSelectedFriends(this.state.friends)}
-        onBackPress={this.pressBack}
-        onSendPressed={this.send}
-        isSending={this.state.isSending}
-        hasSent={this.state.hasSent}
-        sendError={this.state.sendError}
-      />
+      <SendToFriends friends={this.state.friendsDataSource}
+                     onSelectFriend={this.selectFriend}
+                    renderSendUserRow={SendRow}
+                    seperatorFriends={seperatorFriends}
+                    selectedFriends={findSelectedFriends(this.state.friends)}
+                    onBackPress={this.pressBack}
+                    onSendPressed={this.send}
+                    isSending={this.state.isSending}
+                    hasSent={this.state.hasSent}
+                    sendError={this.state.sendError} />
     )
   }
 }

@@ -64,17 +64,13 @@ function inputFields (updateUsername, updatePassword) {
       <Text style={styles.inputLabel}>
         Email
       </Text>
-      <TextInput
-        style={styles.formInput}
-        onChangeText={updateUsername}
-      />
+      <TextInput style={styles.formInput}
+                 onChangeText={updateUsername} />
       <Text style={styles.inputLabel}>
         Password
       </Text>
-      <TextInput
-        style={styles.formInput}
-        onChangeText={updatePassword}
-      />
+      <TextInput style={styles.formInput}
+                 onChangeText={updatePassword} />
     </View>
   )
 }
@@ -86,11 +82,9 @@ function loginButton (hasValidInput, loginButtonPressed, errorState) {
   }
   return (
     <View>
-      <TouchableHighlight
-        style={styles.loginButtonContainer}
-        onPress={hasValidInput ? loginButtonPressed : () => {}}
-        underlayColor='#F5F5F5'
-      >
+      <TouchableHighlight style={styles.loginButtonContainer}
+                          onPress={hasValidInput ? loginButtonPressed : () => {}}
+                          underlayColor='#F5F5F5'>
         <View style={hasValidInput
           ? styles.loginButtonActivated
           : styles.loginButtonDeactivated}>
