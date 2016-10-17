@@ -81,6 +81,18 @@ export const chatToUserStyles = StyleSheet.create({
     color: 'red',
     alignSelf: 'flex-start'
   },
+  imageSentContainer: {
+    flex: 1,
+    alignSelf: 'stretch'
+  },
+  chatImageSent: {
+    alignSelf: 'flex-end'
+  },
+  chatImage: {
+    height: 220,
+    width: 220,
+    margin: 10
+  },
   messageThem: {
     fontSize: 16,
     margin: 3,

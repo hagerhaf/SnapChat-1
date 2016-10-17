@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, ListView, Image } from 'react-native'
 import database, { authentication } from '../FireBase/FireBase'
 import { chatToUserStyles as styles } from './chatStyles'
-import { uniq } from 'lodash'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 
 class ChatToUser extends Component {
@@ -60,7 +59,7 @@ class ChatToUser extends Component {
         chatMessages.push(child.val())
         chatMessages = this.sortByTimeStamp(chatMessages)
       })
-        this.setState({ messages: messages.cloneWithRows(chatMessages) })
+      this.setState({ messages: messages.cloneWithRows(chatMessages) })
     })
   }
 
@@ -105,21 +104,21 @@ class ChatToUser extends Component {
         <View style={styles.content}>
           <View style={styles.messages}>
             <ListView dataSource={this.state.messages}
-              ref={ref => this.listView = ref}
-              onLayout={event => this.listViewHeight = event.nativeEvent.layout.height}
-              onContentSizeChange={this.onSizeChange}
-              renderRow={renderUserMessage}
-              enableEmptySections />
+                      ref={ref => this.listView = ref}
+                      onLayout={event => this.listViewHeight = event.nativeEvent.layout.height}
+                      onContentSizeChange={this.onSizeChange}
+                      renderRow={renderUserMessage}
+                      enableEmptySections />
           </View>
           <View>
             <View style={styles.textInputBorder}>
 
               <TextInput style={styles.textInput}
-                placeholder="Send a chat"
-                selectionColor="#F0030A"
-                value={this.state.chatInput}
-                onChangeText={this.updateText}
-                onSubmitEditing={this.sendMessage} />
+                         placeholder="Send a chat"
+                         selectionColor="#F0030A"
+                         value={this.state.chatInput}
+                         onChangeText={this.updateText}
+                         onSubmitEditing={this.sendMessage} />
             </View>
 
             <View style={styles.sendToolBar}>
@@ -138,6 +137,7 @@ class ChatToUser extends Component {
   }
 }
 
+let mounted = false
 let chatMessages = []
 const messages = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
@@ -147,7 +147,11 @@ const renderUserMessage = (userMessage) => {
   if (!userMessage) return null
   if (userMessage.type === 'sent') {
     if (userMessage.format === 'image') {
-      return <Image source={{uri: userMessage.message}} style={{height: 220, width: 220, margin: 10}} />
+      return (
+        <View style={styles.imageSentContainer}>
+          <Image source={{uri: userMessage.message}} style={[styles.chatImage, styles.chatImageSent]} />
+        </View>
+      )
     }
     return (
       <View>
@@ -156,7 +160,7 @@ const renderUserMessage = (userMessage) => {
     )
   } else if (userMessage.type === 'received') {
     if (userMessage.format === 'image') {
-      return <Image source={{uri: userMessage.message}} style={{height: 220, width: 220, margin: 10}} />
+      return <Image source={{uri: userMessage.message}} style={styles.chatImage} />
     }
     return (
       <View style={styles.receivedMessageContainer}>
