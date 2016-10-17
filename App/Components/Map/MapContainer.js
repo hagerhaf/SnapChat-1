@@ -44,14 +44,14 @@ class MapContainer extends Component {
   }
 
   createMarkers (friendsList) {
-
+    console.log('friendslist', friendsList)
     friendsList.map((friend) => {
       if (friend.stories) {
         // create an entry for each story
         friend.stories.forEach((story) => {
           if (story.storyInfo.coords) {
             let newMarkers = deepcopy(this.state.markers)
-            newMarkers[story.url] = {story, username: friend.username, key: friend.key}
+            newMarkers[story.storyInfo.imageName] = {story, username: friend.username, key: friend.key}
             this.setState({
               markers: newMarkers
             })
@@ -89,6 +89,7 @@ class MapContainer extends Component {
 
   render () {
     const annotations = Object.keys(this.state.markers).map((key) => {
+      console.log('for images' + key)
       let marker = this.state.markers[key]
       return this.createAnnotation(
         {latitude: marker.story.storyInfo.coords.latitude, longitude: marker.story.storyInfo.coords.longitude},
