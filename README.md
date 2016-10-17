@@ -1,21 +1,37 @@
-# snapchat
+# SnapChat - Mobile Computing Systems Programming
 
+# Technologies
+Mobile Client - React Native v0.34.1 (EcmaScript 2016/2017, JSX)
+[https://facebook.github.io/react-native/](https://facebook.github.io/react-native/)
 
-#Installation for mac
-Requires node and the react-native CLI to be installed globally. Also requires Xcode for the IOS emulator.
+Backend Service - Firebase (Real-time backend as a service)
+[https://firebase.google.com/](https://firebase.google.com/)
+
+# Project System Requirements
+OSX/MacOS installed with Xcode v8.0 or greater
+
+#Installation
+Requires nodejs and the react-native CLI to be installed globally.
 
 ```
 brew install node
 npm install -g react-native-cli
 ```
 
+You can verify you have successfully installed the following by running react-native -v in the terminal aftwards.
+
+# Running Locally
+
 Project is located in 'SnapChat' - index.ios.js is the entry point, everything else is in the 'App' folder.
-Important do NOT forget `react-native link`
 
 ```
 cd SnapChat
-npm install
-react-native link
+```
+
+You will need to first all the javascript dependencies via NPM, and after that link that to the native IOS modules that are used within the project. This can be acheived by running the following command:
+
+```
+npm install && react-native link
 ```
 
 #Running the app
