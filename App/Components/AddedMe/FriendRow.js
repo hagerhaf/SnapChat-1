@@ -34,7 +34,7 @@ const renderFriendRow = ({name, username, added}, sectionId, rowId, highlightRow
             >
                 <View style={styles.addButton}>
                     {!added && <TouchableHighlight onPress={function () {
-                        onSelectFriend(rowId)
+                        onSelectFriend(username)
                     }}>
                         <Text style={styles.addText}>{'+ Add'}</Text>
                     </TouchableHighlight>}
