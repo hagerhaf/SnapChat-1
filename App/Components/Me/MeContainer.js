@@ -20,7 +20,6 @@ class MeContainer extends Component {
     this.addFriendsPressed = this.addFriendsPressed.bind(this)
     this.myFriendsPressed = this.myFriendsPressed.bind(this)
     this.cameraBackPressed = this.cameraBackPressed.bind(this)
-    this.trophyCasePressed = this.trophyCasePressed.bind(this)
     this.settingsPressed = this.settingsPressed.bind(this)
   }
 
@@ -52,13 +51,6 @@ class MeContainer extends Component {
     this.props.navigator.pop()
   }
 
-  trophyCasePressed () {
-    this.props.navigator.push({
-      title: 'TrophyCaseContainer',
-      component: TrophyCaseContainer
-    })
-  }
-
   settingsPressed () {
     this.props.navigator.push({
       title: 'SettingsContainer',
@@ -84,7 +76,6 @@ class MeContainer extends Component {
         cameraBackPressed={this.cameraBackPressed}
         myFriendsPressed={this.myFriendsPressed}
         addFriendsPressed={this.addFriendsPressed}
-        trophyCasePressed={this.trophyCasePressed}
         settingsPressed={this.settingsPressed}
         fullname={this.state.firstname +' '+ this.state.lastname}
         username={this.state.username} />

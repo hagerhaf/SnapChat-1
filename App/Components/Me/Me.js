@@ -7,7 +7,6 @@ const Me = ({
   addFriendsPressed,
   myFriendsPressed,
   cameraBackPressed,
-  trophyCasePressed,
   settingsPressed,
   fullname,
   username
@@ -19,12 +18,6 @@ const Me = ({
         <Image
           source={require('../../../images/upload.png')}
           style={styles.uploadButton}
-        />
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.flex} onPress={trophyCasePressed}>
-        <Image
-          source={require('../../../images/trophy-icon.png')}
-          style={styles.trophyButton}
         />
       </TouchableHighlight>
       <TouchableHighlight onPress={settingsPressed}>
@@ -86,7 +79,6 @@ Me.propTypes = {
   cameraBackPressed: func,
   myFriendsPressed: func,
   addFriendsPressed: func,
-  trophyCasePressed: func,
   settingsPressed: func,
   fullname: PropTypes.string,
   username: PropTypes.string

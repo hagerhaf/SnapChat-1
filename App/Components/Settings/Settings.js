@@ -5,9 +5,6 @@ import { settingsStyles as styles } from './settingsStyles'
 const Settings = ({
   backButtonPressed,
   myAccountData,
-  additionalServicesData,
-  whoCanData,
-  moreInformationData,
   accountActionsData
 }) => (
   <View style={styles.container}>
@@ -26,18 +23,6 @@ const Settings = ({
       </Text>
       {myAccountData.map((e, i) => createSectionRow(e, i))}
       <Text style={styles.sectionTitle}>
-        ADDITIONAL SERVICES
-      </Text>
-      {additionalServicesData.map((e, i) => createSectionRow(e, i))}
-      <Text style={styles.sectionTitle}>
-        WHO CAN..
-      </Text>
-      {whoCanData.map((e, i) => createSectionRow(e, i))}
-      <Text style={styles.sectionTitle}>
-        MORE INFORMATION
-      </Text>
-      {moreInformationData.map((e, i) => createSectionRow(e, i))}
-      <Text style={styles.sectionTitle}>
         ACCOUNT ACTIONS
       </Text>
       {accountActionsData.map((e, i) => createSectionRow(e, i))}
@@ -45,21 +30,22 @@ const Settings = ({
   </View>
 )
 
-const SectionRow = ({field, func}) => {
+const SectionRow = ({field, func, val}) => {
   return (
     <View style={styles.listField}>
-      <TouchableHighlight onPress={func}>
+      <TouchableHighlight onPress={func} style={styles.left}>
         <Text>
           {field}
         </Text>
       </TouchableHighlight>
+      <Text style={styles.right}>{val}</Text>
     </View>
   )
 }
 
 const createSectionRow = (settingsObject, i) => {
   return (
-    <SectionRow key={i} field={settingsObject.field} func={settingsObject.func} />
+    <SectionRow key={i} field={settingsObject.field} func={settingsObject.func} val={settingsObject.val} />
   )
 }
 

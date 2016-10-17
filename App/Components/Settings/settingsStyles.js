@@ -34,9 +34,18 @@ export const settingsStyles = StyleSheet.create({
   },
   listField: {
     borderBottomColor: '#e8e8e8',
+    flexDirection: 'row',
     borderBottomWidth: 1,
     backgroundColor: 'white',
     padding: 15,
     marginLeft: 5
+  },
+  left: {
+    marginLeft: 20,
+    flex: 1
+  },
+  right: {
+    marginRight: 20,
+    flex: 1
   }
 })
