@@ -44,7 +44,6 @@ class MapContainer extends Component {
   }
 
   createMarkers (friendsList) {
-    console.log('stories recieved', friendsList)
 
     friendsList.map((friend) => {
       if (friend.stories) {
@@ -62,7 +61,7 @@ class MapContainer extends Component {
     })
   }
 
-  createAnnotation (coords, url, username) {
+  createAnnotation (coords, url, username, storyObject) {
     return (
       {
         latitude: coords.latitude,
@@ -72,7 +71,7 @@ class MapContainer extends Component {
         rightCalloutView: (
           <TouchableOpacity
             onPress={() => {
-              alert('View image')
+              this.props.onPressStory([storyObject.story])
             }}>
             <Image
               style={{width: 30, height: 30}}
@@ -89,12 +88,11 @@ class MapContainer extends Component {
   }
 
   render () {
-    console.log(this.state)
     const annotations = Object.keys(this.state.markers).map((key) => {
       let marker = this.state.markers[key]
       return this.createAnnotation(
         {latitude: marker.story.storyInfo.coords.latitude, longitude: marker.story.storyInfo.coords.longitude},
-        marker.story.url, marker.username
+        marker.story.url, marker.username, this.state.markers[key]
       )
     })
     return (
