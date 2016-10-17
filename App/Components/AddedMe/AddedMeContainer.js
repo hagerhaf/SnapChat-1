@@ -10,9 +10,9 @@ class AddedMeContainer extends Component {
 
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
-      friends: null,
+      friends: [],
       searchText: "",
-      rawData: null
+      remoteUsers: null
     }
 
     this.backButtonPressed = this.backButtonPressed.bind(this)
@@ -95,8 +95,30 @@ class AddedMeContainer extends Component {
     this.props.navigator.pop()
   }
 
-  addFriend (rowId) {
-    console.log('adding' + rowId);
+  async addFriend (username) {
+
+    // Get user object.
+    database.ref('users')
+        .orderByChild('username')
+        .equalTo(username)
+        .once('value', (snapshot) => {
+          var friendId;
+          var friend;
+          for (var i in snapshot.val()) {
+            friendId = i;
+            friend = snapshot.val()[i];
+          }
+
+          userId = authentication.currentUser.uid
+          userId = userId.replace(/"/g, '')
+          database.ref('userObjects')
+              .child('friends')
+              .child(userId)
+              .child('list')
+              .update({ [friendId]: friend }, (error) => {
+                if (error) console.log('Error updating friends list', error)
+              })
+        });
   }
 
   render () {
