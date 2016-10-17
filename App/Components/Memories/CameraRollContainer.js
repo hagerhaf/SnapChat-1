@@ -33,10 +33,6 @@ class CameraRollContainer extends Component {
   }
 
   selectImage (uri) {
-    // this gets a base-64 version of the image. turns out its low quality though
-    // NativeModules.ReadImageData.readImage(uri, (image) => {
-    //   console.log(image)
-    // })
     this.setState({
       selected: uri
     })

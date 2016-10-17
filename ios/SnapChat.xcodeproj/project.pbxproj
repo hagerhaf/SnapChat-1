@@ -212,7 +212,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73B414A11DB1DAF100E54AAB /* libRCTContacts.a in Frameworks */,
 				A139A0C41D9E1F1E00F602D0 /* libRCTCameraRoll.a in Frameworks */,
 				A139A0BD1D9E1EF100F602D0 /* libRCTCamera.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,

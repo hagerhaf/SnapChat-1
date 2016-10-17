@@ -3,16 +3,15 @@ import {View, Text, ListView} from 'react-native'
 import SendToFriends from './SendToFriends'
 import SendRow, {seperatorFriends} from './SendRow'
 import database, {authentication} from '../FireBase/FireBase'
-import sendSnapToUser from './SendHelpers'
+import { uploadImageToMemories } from '../Send/SendHelpers'
 
-class SendContainer extends Component {
+class SendMemoryContainer extends Component {
   constructor (props) {
     super(props)
     let friendsDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       friendsDataSource: friendsDataSource.cloneWithRows([]),
       friends: [],
-      imageUri: this.props.imageUri,
       isSending: false,
       hasSent: false,
       sendError: false
@@ -20,7 +19,7 @@ class SendContainer extends Component {
 
     this.selectFriend = this.selectFriend.bind(this)
     this.pressBack = this.pressBack.bind(this)
-    this.send = this.send.bind(this)
+    this.sendMemoryToChat = this.sendMemoryToChat.bind(this)
   }
 
   componentDidMount () {
@@ -45,63 +44,24 @@ class SendContainer extends Component {
     this.setState({ isSending: true })
     const userId = authentication.currentUser.uid
     uploadImageToMemories(this.props.imageUri, userId)
-      .then((success) => {
-
-        // for each friend, send a chat message
-
+      .then((url) => {
+        this.state.friends.forEach((friend) => {
+          if (friend.highLighted) {
+            const time = `${new Date()}`
+            const message = { message: url, timestamp: time, type: 'sent', format: 'image'}
+            const send = database.ref(`userObjects/messages/${friend.key}/${userId}`)
+            send.push(message)
+          }
+        })
+        this.setState({ isSending: false })
       })
   }
 
-  send () {
-    this.setState({
-      isSending: true
-    })
-    Promise.all(
-    this.state.friends.map((friendObject) => {
-      if (friendObject.highLighted) {
-        return sendSnapToUser({imageUri: this.props.imageUri, timer: this.props.timer}, authentication.currentUser.uid, friendObject.key)
-      }
-    })
-    )
-    .then((res) => {
-      this.setState({
-        isSending: false,
-        hasSent: true,
-        sendError: false
-      })
-
-      setTimeout(() => {
-        this.props.navigator.popToTop()
-        this.setState({
-          hasSent: false
-        })
-      }, 700)
-    })
-    .catch((err) => {
-      if (err) console.log(err)
-      this.setState({
-        isSending: false,
-        hasSent: true,
-        sendError: true
-      })
-
-      setTimeout(() => {
-        this.setState({
-          hasSent: false,
-          sendError: false
-        })
-      }, 2500)
-    })
-  }
-
-  // Retrieves a list of friends from the fire base depending on the logged in UserID
   retrieveFriends () {
-    // Retrieve UserID and create a reference point in fire base
     var friends = []
-    var appScope = this      // Can't use 'this.state' inside on() as the scope refers to the promise
+    var appScope = this
     var userId = authentication.currentUser.uid
     var friendsRef = database.ref('userObjects/friends/' + userId + '/list')
-    // Iterate through results and push to array
     friendsRef.on('value', function (snapshot) {
       snapshot.forEach((child) => {
         friends.push({
@@ -112,8 +72,6 @@ class SendContainer extends Component {
           key: child.key
         })
       })
-      // Update state so ListView reflects the users friends
-      // Note: Must occur inside on() as it is asynchronous and wont update properly outside
       appScope.setState({
         friendsDataSource: appScope.state.friendsDataSource.cloneWithRows(friends),
         friends: friends
@@ -136,7 +94,7 @@ class SendContainer extends Component {
         seperatorFriends={seperatorFriends}
         selectedFriends={findSelectedFriends(this.state.friends)}
         onBackPress={this.pressBack}
-        onSendPressed={this.send}
+        onSendPressed={this.sendMemoryToChat}
         isSending={this.state.isSending}
         hasSent={this.state.hasSent}
         sendError={this.state.sendError}
@@ -155,9 +113,9 @@ function findSelectedFriends (friends) {
   }
 }
 
-SendContainer.propTypes = {
+SendMemoryContainer.propTypes = {
   imageUri: PropTypes.string.isRequired,
-  timer: PropTypes.number.isRequired
+
 }
 
-export default SendContainer
+export default SendMemoryContainer

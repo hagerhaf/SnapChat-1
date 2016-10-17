@@ -143,12 +143,18 @@ export default ChatToUser
 const renderUserMessage = (userMessage) => {
   if (!userMessage) return null
   if (userMessage.type === 'sent') {
+    if (userMessage.format === 'image') {
+      return <Image source={{uri: userMessage.message}} style={{height: 250, width: 250}} />
+    }
     return (
-      <View style={styles.sentMessageContainer}>
+      <View>
         <Text style={styles.messageThem}>{userMessage.message}</Text>
       </View>
     )
   } else if (userMessage.type === 'received') {
+    if (userMessage.format === 'image') {
+      return <Image source={{uri: userMessage.message}} style={{height: 250, width: 250}} />
+    }
     return (
       <View style={styles.receivedMessageContainer}>
         <Text style={styles.messageMe}>

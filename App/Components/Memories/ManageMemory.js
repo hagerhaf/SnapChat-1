@@ -1,19 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, View, TouchableHighlight } from 'react-native'
 import { memoriesStyles as styles } from './memoriesStyles'
-import SendContainer from '../Send/SendContainer'
+import SendMemoryContainer from './SendMemoryContainer'
 
 class SendMemory extends Component {
   constructor (props) {
     super(props)
 
-    console.log(props)
+    this.state = {
+      sendingToFriends: false
+    }
+
     this.backButtonPressed = this.backButtonPressed.bind(this)
     this.sendToFriends = this.sendToFriends.bind(this)
   }
 
   sendToFriends () {
+    this.setState({ sendingToFriends: true })
+  }
 
+  sendPhotoToChat () {
+    this.ref.sendMemoryToChat()
   }
 
   backButtonPressed () {
@@ -21,6 +28,11 @@ class SendMemory extends Component {
   }
 
   render () {
+    if (this.state.sendingToFriends) {
+      return <SendMemoryContainer imageUri={this.props.uri}
+                                  ref={ref => this.sendTo = ref} />
+    }
+
     return (
       <View style={styles.selectedImageContainer}>
         <View style={styles.backArrowContainer}>
@@ -35,16 +47,18 @@ class SendMemory extends Component {
 
         <View style={styles.selectedImageFooter}>
           <View style={styles.footerMenu}>
+
             <View style={styles.utilIcons}>
               <Image style={styles.icon} source={require('../../../images/trash.png')} />
               <Image style={styles.icon} source={require('../../../images/upload.png')} />
             </View>
 
-            <TouchableHighlight onPress={this.sendToFriends}>
-              <Image style={styles.sendIcon} source={require('../../../images/send.png')} />
-            </TouchableHighlight>
-
           </View>
+
+          <TouchableHighlight onPress={this.sendToFriends}>
+            <Image style={styles.sendIcon} source={require('../../../images/send.png')} />
+          </TouchableHighlight>
+
         </View>
       </View>
     )
