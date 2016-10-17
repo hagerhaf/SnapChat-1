@@ -5,6 +5,8 @@ import MainContainer from './App/Components/Main/MainContainer'
 import SplashScreen from './App/Components/SplashScreen/SplashScreen'
 import * as firebase from 'firebase'
 
+console.ignoredYellowBox = ['Warning: setState'];
+
 class SnapChat extends Component {
   constructor (props) {
     super(props)
