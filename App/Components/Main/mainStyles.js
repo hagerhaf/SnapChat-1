@@ -73,7 +73,8 @@ export const mainStyles = StyleSheet.create({
   memoriesIcon: {
     height: 25,
     width: 25,
-    marginTop: -5,
+    marginTop: 5,
+    marginLeft: -3.7,
     alignSelf: 'center'
   },
   storiesIcon: {

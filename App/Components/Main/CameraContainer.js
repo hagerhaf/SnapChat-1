@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import Camera from 'react-native-camera'
 import { mainStyles as styles } from './mainStyles'
 import EditContainer from '../Edit/EditContainer'
-import { Text, View, Image, TouchableHighlight, CameraRoll } from 'react-native'
-import {getSnapsCurrentUser} from '../FireBase/FireBase'
+import { Text, View, Image, TouchableHighlight } from 'react-native'
+import { getSnapsCurrentUser } from '../FireBase/FireBase'
 
 const FLASH_LOOKUP = {'auto': 'on', 'on': 'off', 'off': 'auto'}
 
@@ -101,7 +101,7 @@ class CameraContainer extends Component {
                 style={styles.flashIcon}
               />
             </TouchableHighlight>
-            <TouchableHighlight>
+            <TouchableHighlight onPress={this.props.mePressed}>
               <Image
                 source={require('../../../images/main-camera/ghost-top-logo.png')}
                 style={styles.ghostIcon}
@@ -125,7 +125,7 @@ class CameraContainer extends Component {
             </TouchableHighlight>
             {/* Button navigation */}
             <View style={styles.header}>
-              <TouchableHighlight>
+              <TouchableHighlight onPress={this.props.chatPressed}>
                 <View style={{marginTop: -25}}>
                   <Text
                     style={[styles.numSnaps, this.state.snapCount > 0 ? styles.active : null]}
@@ -138,13 +138,13 @@ class CameraContainer extends Component {
                   />
                 </View>
               </TouchableHighlight>
-              <TouchableHighlight style={styles.flex}>
+              <TouchableHighlight style={styles.flex} onPress={this.props.memoriesPressed}>
                 <Image
                   source={require('../../../images/main-camera/capture-circle.png')}
                   style={styles.memoriesIcon}
                 />
               </TouchableHighlight>
-              <TouchableHighlight>
+              <TouchableHighlight onPress={this.props.storiesPressed}>
                 <Image
                   source={require('../../../images/main-camera/stories-icon.png')}
                   style={styles.storiesIcon}
@@ -159,7 +159,11 @@ class CameraContainer extends Component {
 }
 
 CameraContainer.propTypes = {
-  navigator: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired,
+  chatPressed: PropTypes.func.isRequired,
+  storiesPressed: PropTypes.func.isRequired,
+  mePressed: PropTypes.func.isRequired,
+  memoriesPressed: PropTypes.func.isRequired
 }
 
 export default CameraContainer
